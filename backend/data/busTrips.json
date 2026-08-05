@@ -1,0 +1,42 @@
+[
+  {
+    "tripId": "CX001",
+    "departure": "Ha Noi",
+    "destination": "Hai Phong",
+    "departureTime": "2026-08-10 08:00",
+    "licensePlate": "30A-12345",
+    "totalSeats": 40
+  },
+  {
+    "tripId": "CX002",
+    "departure": "Ha Noi",
+    "destination": "Nam Dinh",
+    "departureTime": "2026-08-10 09:30",
+    "licensePlate": "29B-56789",
+    "totalSeats": 35
+  },
+  {
+    "tripId": "CX003",
+    "departure": "Ha Noi",
+    "destination": "Ninh Binh",
+    "departureTime": "2026-08-10 13:00",
+    "licensePlate": "30C-99999",
+    "totalSeats": 45
+  },
+  {
+    "tripId": "CX004",
+    "departure": "Hai Phong",
+    "destination": "Ha Noi",
+    "departureTime": "2026-08-11 07:00",
+    "licensePlate": "15A-88888",
+    "totalSeats": 40
+  },
+  {
+    "tripId": "CX005",
+    "departure": "Hai Phong",
+    "destination": "Quang Ninh",
+    "departureTime": "2026-08-11 15:00",
+    "licensePlate": "15B-66666",
+    "totalSeats": 30
+  }
+]

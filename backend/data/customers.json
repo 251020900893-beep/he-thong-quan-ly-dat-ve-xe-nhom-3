@@ -1,0 +1,37 @@
+[
+  {
+    "id": "KH001",
+    "fullName": "Nguyen Van A",
+    "phone": "0901234567",
+    "email": "a@gmail.com",
+    "customerType": "VIP"
+  },
+  {
+    "id": "KH002",
+    "fullName": "Tran Thi B",
+    "phone": "0912345678",
+    "email": "b@gmail.com",
+    "customerType": "Member"
+  },
+  {
+    "id": "KH003",
+    "fullName": "Le Van C",
+    "phone": "0923456789",
+    "email": "c@gmail.com",
+    "customerType": "Thuong"
+  },
+  {
+    "id": "KH004",
+    "fullName": "Pham Thi D",
+    "phone": "0934567890",
+    "email": "d@gmail.com",
+    "customerType": "VIP"
+  },
+  {
+    "id": "KH005",
+    "fullName": "Hoang Van E",
+    "phone": "0945678901",
+    "email": "e@gmail.com",
+    "customerType": "Thuong"
+  }
+]
