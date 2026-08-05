@@ -1,19 +1,29 @@
 package com.example.hethongquanlydatvexe.utils;
 
-public class Constants {
-    private Constants() {}
+public final class Constants {
 
-    public static final String CUSTOMER_NORMAL = "NORMAL";
-    public static final String CUSTOMER_MEMBER = "MEMBER";
+    private Constants() {
+    }
+
+    // Loại khách hàng
+    public static final String CUSTOMER_THUONG = "Thuong";
+    public static final String CUSTOMER_THANH_VIEN = "ThanhVien";
     public static final String CUSTOMER_VIP = "VIP";
 
-    public static final String SEAT_NORMAL = "NORMAL";
+    // Loại ghế
+    public static final String SEAT_THUONG = "Thuong";
     public static final String SEAT_VIP = "VIP";
 
-    public static final String SEAT_AVAILABLE = "AVAILABLE";
-    public static final String SEAT_BOOKED = "BOOKED";
+    // Trạng thái ghế
+    public static final String SEAT_CON_TRONG = "ConTrong";
+    public static final String SEAT_DA_DAT = "DaDat";
 
-    public static final String PAYMENT_UNPAID = "UNPAID";
-    public static final String PAYMENT_PAID = "PAID";
-    public static final String PAYMENT_FAILED = "FAILED";
+    // Phương thức thanh toán
+    public static final String PAYMENT_TIEN_MAT = "TienMat";
+    public static final String PAYMENT_CHUYEN_KHOAN = "ChuyenKhoan";
+
+    // Trạng thái thanh toán
+    public static final String PAYMENT_CHUA_THANH_TOAN = "ChuaThanhToan";
+    public static final String PAYMENT_DA_THANH_TOAN = "DaThanhToan";
+    public static final String PAYMENT_THANH_TOAN_LOI = "ThanhToanLoi";
 }

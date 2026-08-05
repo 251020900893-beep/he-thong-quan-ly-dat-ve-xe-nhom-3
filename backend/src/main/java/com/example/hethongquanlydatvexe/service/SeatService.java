@@ -3,6 +3,7 @@ package com.example.hethongquanlydatvexe.service;
 import com.example.hethongquanlydatvexe.model.Seat;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
+import com.example.hethongquanlydatvexe.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,20 +11,11 @@ import java.util.NoSuchElementException;
 
 public class SeatService {
 
-    private static final String STATUS_AVAILABLE = "ConTrong";
-    private static final String STATUS_BOOKED = "DaDat";
-
-    private static final String TYPE_NORMAL = "Thuong";
-    private static final String TYPE_VIP = "VIP";
-
     private final SeatRepository seatRepository;
     private final BusTripRepository busTripRepository;
 
     public SeatService() {
-        this(
-                new SeatRepository(),
-                new BusTripRepository()
-        );
+        this(new SeatRepository(), new BusTripRepository());
     }
 
     public SeatService(
@@ -53,14 +45,11 @@ public class SeatService {
     public Seat findSeatById(String seatId) {
         validateText(seatId, "Mã ghế");
 
-        Seat seat = seatRepository.findById(
-                seatId.trim()
-        );
+        Seat seat = seatRepository.findById(seatId.trim());
 
         if (seat == null) {
             throw new NoSuchElementException(
-                    "Không tìm thấy ghế có mã: "
-                            + seatId
+                    "Không tìm thấy ghế có mã: " + seatId
             );
         }
 
@@ -69,22 +58,15 @@ public class SeatService {
 
     public List<Seat> getSeatsByTrip(String tripId) {
         validateTripExists(tripId);
-
-        return seatRepository.findByTripId(
-                tripId.trim()
-        );
+        return seatRepository.findByTripId(tripId.trim());
     }
 
-    public List<Seat> getAvailableSeatsByTrip(
-            String tripId
-    ) {
+    public List<Seat> getAvailableSeatsByTrip(String tripId) {
         validateTripExists(tripId);
 
         List<Seat> result = new ArrayList<>();
 
-        for (Seat seat
-                : seatRepository.findByTripId(tripId.trim())) {
-
+        for (Seat seat : seatRepository.findByTripId(tripId.trim())) {
             if (isAvailableStatus(seat.getStatus())) {
                 result.add(seat);
             }
@@ -93,16 +75,12 @@ public class SeatService {
         return result;
     }
 
-    public List<Seat> getBookedSeatsByTrip(
-            String tripId
-    ) {
+    public List<Seat> getBookedSeatsByTrip(String tripId) {
         validateTripExists(tripId);
 
         List<Seat> result = new ArrayList<>();
 
-        for (Seat seat
-                : seatRepository.findByTripId(tripId.trim())) {
-
+        for (Seat seat : seatRepository.findByTripId(tripId.trim())) {
             if (isBookedStatus(seat.getStatus())) {
                 result.add(seat);
             }
@@ -113,26 +91,15 @@ public class SeatService {
 
     public int countSeatsByTrip(String tripId) {
         validateTripExists(tripId);
-
-        return seatRepository.countByTripId(
-                tripId.trim()
-        );
+        return seatRepository.countByTripId(tripId.trim());
     }
 
-    public int countAvailableSeatsByTrip(
-            String tripId
-    ) {
-        return getAvailableSeatsByTrip(
-                tripId
-        ).size();
+    public int countAvailableSeatsByTrip(String tripId) {
+        return getAvailableSeatsByTrip(tripId).size();
     }
 
-    public int countBookedSeatsByTrip(
-            String tripId
-    ) {
-        return getBookedSeatsByTrip(
-                tripId
-        ).size();
+    public int countBookedSeatsByTrip(String tripId) {
+        return getBookedSeatsByTrip(tripId).size();
     }
 
     public boolean seatExists(String seatId) {
@@ -140,18 +107,14 @@ public class SeatService {
             return false;
         }
 
-        return seatRepository.exists(
-                seatId.trim()
-        );
+        return seatRepository.exists(seatId.trim());
     }
 
     public boolean seatExistsInTrip(
             String tripId,
             String seatNumber
     ) {
-        if (isBlank(tripId)
-                || isBlank(seatNumber)) {
-
+        if (isBlank(tripId) || isBlank(seatNumber)) {
             return false;
         }
 
@@ -166,16 +129,12 @@ public class SeatService {
             String seatNumber
     ) {
         validateTripExists(tripId);
-        validateText(
-                seatNumber,
-                "Số ghế"
-        );
+        validateText(seatNumber, "Số ghế");
 
-        Seat seat =
-                seatRepository.findByTripIdAndSeatNumber(
-                        tripId.trim(),
-                        seatNumber.trim()
-                );
+        Seat seat = seatRepository.findByTripIdAndSeatNumber(
+                tripId.trim(),
+                seatNumber.trim()
+        );
 
         if (seat == null) {
             throw new NoSuchElementException(
@@ -192,13 +151,8 @@ public class SeatService {
             String tripId,
             String seatNumber
     ) {
-        Seat seat = findSeatInTrip(
-                tripId,
-                seatNumber
-        );
-
         return isAvailableStatus(
-                seat.getStatus()
+                findSeatInTrip(tripId, seatNumber).getStatus()
         );
     }
 
@@ -206,10 +160,7 @@ public class SeatService {
             String tripId,
             String seatNumber
     ) {
-        Seat seat = findSeatInTrip(
-                tripId,
-                seatNumber
-        );
+        Seat seat = findSeatInTrip(tripId, seatNumber);
 
         if (!isAvailableStatus(seat.getStatus())) {
             throw new IllegalStateException(
@@ -225,21 +176,15 @@ public class SeatService {
     public Seat createSeat(Seat seat) {
         validateSeat(seat);
 
-        if (!busTripRepository.exists(
-                seat.getTripId()
-        )) {
+        if (!busTripRepository.exists(seat.getTripId())) {
             throw new NoSuchElementException(
-                    "Chuyến xe không tồn tại: "
-                            + seat.getTripId()
+                    "Chuyến xe không tồn tại: " + seat.getTripId()
             );
         }
 
-        if (seatRepository.exists(
-                seat.getSeatId()
-        )) {
+        if (seatRepository.exists(seat.getSeatId())) {
             throw new IllegalArgumentException(
-                    "Mã ghế đã tồn tại: "
-                            + seat.getSeatId()
+                    "Mã ghế đã tồn tại: " + seat.getSeatId()
             );
         }
 
@@ -254,16 +199,12 @@ public class SeatService {
             );
         }
 
-        seat.setStatus(
-                normalizeSeatStatus(
-                        seat.getStatus()
-                )
+        seat.setSeatType(
+                normalizeSeatType(seat.getSeatType())
         );
 
-        seat.setSeatType(
-                normalizeSeatType(
-                        seat.getSeatType()
-                )
+        seat.setStatus(
+                normalizeSeatStatus(seat.getStatus())
         );
 
         seatRepository.save(seat);
@@ -274,21 +215,23 @@ public class SeatService {
     public Seat updateSeat(Seat seat) {
         validateSeat(seat);
 
-        Seat currentSeat =
-                findSeatById(
-                        seat.getSeatId()
+        Seat currentSeat = findSeatById(seat.getSeatId());
+
+        if (!busTripRepository.exists(seat.getTripId())) {
+            throw new NoSuchElementException(
+                    "Chuyến xe không tồn tại: " + seat.getTripId()
+            );
+        }
+
+        Seat duplicatedSeat =
+                seatRepository.findByTripIdAndSeatNumber(
+                        seat.getTripId(),
+                        seat.getSeatNumber()
                 );
 
-        Seat seatInTrip =
-                seatRepository
-                        .findByTripIdAndSeatNumber(
-                                seat.getTripId(),
-                                seat.getSeatNumber()
-                        );
-
-        if (seatInTrip != null
+        if (duplicatedSeat != null
                 && !sameText(
-                seatInTrip.getSeatId(),
+                duplicatedSeat.getSeatId(),
                 currentSeat.getSeatId()
         )) {
             throw new IllegalArgumentException(
@@ -298,25 +241,19 @@ public class SeatService {
             );
         }
 
-        seat.setStatus(
-                normalizeSeatStatus(
-                        seat.getStatus()
-                )
-        );
-
         seat.setSeatType(
-                normalizeSeatType(
-                        seat.getSeatType()
-                )
+                normalizeSeatType(seat.getSeatType())
         );
 
-        boolean updated =
-                seatRepository.update(seat);
+        seat.setStatus(
+                normalizeSeatStatus(seat.getStatus())
+        );
+
+        boolean updated = seatRepository.update(seat);
 
         if (!updated) {
             throw new IllegalStateException(
-                    "Không thể cập nhật ghế: "
-                            + seat.getSeatId()
+                    "Không thể cập nhật ghế: " + seat.getSeatId()
             );
         }
 
@@ -327,25 +264,20 @@ public class SeatService {
             String tripId,
             String seatNumber
     ) {
-        Seat seat = validateSelectedSeat(
-                tripId,
-                seatNumber
-        );
+        Seat seat = validateSelectedSeat(tripId, seatNumber);
 
-        boolean updated =
-                seatRepository.updateStatus(
-                        seat.getSeatId(),
-                        STATUS_BOOKED
-                );
+        boolean updated = seatRepository.updateStatus(
+                seat.getSeatId(),
+                Constants.SEAT_DA_DAT
+        );
 
         if (!updated) {
             throw new IllegalStateException(
-                    "Không thể cập nhật trạng thái ghế "
-                            + seatNumber
+                    "Không thể cập nhật trạng thái ghế " + seatNumber
             );
         }
 
-        seat.setStatus(STATUS_BOOKED);
+        seat.setStatus(Constants.SEAT_DA_DAT);
 
         return seat;
     }
@@ -354,51 +286,38 @@ public class SeatService {
             String tripId,
             String seatNumber
     ) {
-        Seat seat = findSeatInTrip(
-                tripId,
-                seatNumber
-        );
+        Seat seat = findSeatInTrip(tripId, seatNumber);
 
         if (isAvailableStatus(seat.getStatus())) {
             return seat;
         }
 
-        boolean updated =
-                seatRepository.updateStatus(
-                        seat.getSeatId(),
-                        STATUS_AVAILABLE
-                );
+        boolean updated = seatRepository.updateStatus(
+                seat.getSeatId(),
+                Constants.SEAT_CON_TRONG
+        );
 
         if (!updated) {
             throw new IllegalStateException(
-                    "Không thể cập nhật trạng thái ghế "
-                            + seatNumber
+                    "Không thể cập nhật trạng thái ghế " + seatNumber
             );
         }
 
-        seat.setStatus(STATUS_AVAILABLE);
+        seat.setStatus(Constants.SEAT_CON_TRONG);
 
         return seat;
     }
 
     public boolean deleteSeat(String seatId) {
-        validateText(
-                seatId,
-                "Mã ghế"
-        );
+        validateText(seatId, "Mã ghế");
 
-        if (!seatRepository.exists(
-                seatId.trim()
-        )) {
+        if (!seatRepository.exists(seatId.trim())) {
             throw new NoSuchElementException(
-                    "Không tìm thấy ghế có mã: "
-                            + seatId
+                    "Không tìm thấy ghế có mã: " + seatId
             );
         }
 
-        return seatRepository.delete(
-                seatId.trim()
-        );
+        return seatRepository.delete(seatId.trim());
     }
 
     public List<Seat> findSeatsByTypeAndTrip(
@@ -412,13 +331,8 @@ public class SeatService {
 
         List<Seat> result = new ArrayList<>();
 
-        for (Seat seat
-                : seatRepository.findByTripId(tripId.trim())) {
-
-            if (sameText(
-                    seat.getSeatType(),
-                    normalizedType
-            )) {
+        for (Seat seat : seatRepository.findByTripId(tripId.trim())) {
+            if (sameText(seat.getSeatType(), normalizedType)) {
                 result.add(seat);
             }
         }
@@ -437,19 +351,12 @@ public class SeatService {
 
         List<Seat> result = new ArrayList<>();
 
-        for (Seat seat
-                : seatRepository.findByTripId(tripId.trim())) {
-
+        for (Seat seat : seatRepository.findByTripId(tripId.trim())) {
             boolean correctType =
-                    sameText(
-                            seat.getSeatType(),
-                            normalizedType
-                    );
+                    sameText(seat.getSeatType(), normalizedType);
 
             boolean available =
-                    isAvailableStatus(
-                            seat.getStatus()
-                    );
+                    isAvailableStatus(seat.getStatus());
 
             if (correctType && available) {
                 result.add(seat);
@@ -466,124 +373,83 @@ public class SeatService {
             );
         }
 
-        validateText(
-                seat.getSeatId(),
-                "Mã ghế"
-        );
+        validateText(seat.getSeatId(), "Mã ghế");
+        validateText(seat.getTripId(), "Mã chuyến xe");
+        validateText(seat.getSeatNumber(), "Số ghế");
+        validateText(seat.getSeatType(), "Loại ghế");
+        validateText(seat.getStatus(), "Trạng thái ghế");
 
-        validateText(
-                seat.getTripId(),
-                "Mã chuyến xe"
-        );
-
-        validateText(
-                seat.getSeatNumber(),
-                "Số ghế"
-        );
-
-        validateText(
-                seat.getSeatType(),
-                "Loại ghế"
-        );
-
-        validateText(
-                seat.getStatus(),
-                "Trạng thái ghế"
-        );
-
-        normalizeSeatType(
-                seat.getSeatType()
-        );
-
-        normalizeSeatStatus(
-                seat.getStatus()
-        );
+        normalizeSeatType(seat.getSeatType());
+        normalizeSeatStatus(seat.getStatus());
     }
 
     private void validateTripExists(String tripId) {
-        validateText(
-                tripId,
-                "Mã chuyến xe"
-        );
+        validateText(tripId, "Mã chuyến xe");
 
-        if (!busTripRepository.exists(
-                tripId.trim()
-        )) {
+        if (!busTripRepository.exists(tripId.trim())) {
             throw new NoSuchElementException(
-                    "Chuyến xe không tồn tại: "
-                            + tripId
+                    "Chuyến xe không tồn tại: " + tripId
             );
         }
     }
 
     private String normalizeSeatType(String seatType) {
-        validateText(
-                seatType,
-                "Loại ghế"
-        );
+        validateText(seatType, "Loại ghế");
 
-        String normalized =
-                seatType.trim()
-                        .replace(" ", "")
-                        .toLowerCase();
+        String normalized = seatType
+                .trim()
+                .replace(" ", "")
+                .replace("_", "")
+                .toLowerCase();
 
         if (normalized.equals("thuong")
-                || normalized.equals("normal")) {
-
-            return TYPE_NORMAL;
+                || normalized.equals("ghethuong")) {
+            return Constants.SEAT_THUONG;
         }
 
-        if (normalized.equals("vip")) {
-            return TYPE_VIP;
+        if (normalized.equals("vip")
+                || normalized.equals("ghevip")) {
+            return Constants.SEAT_VIP;
         }
 
         throw new IllegalArgumentException(
-                "Loại ghế không hợp lệ: "
-                        + seatType
+                "Loại ghế không hợp lệ: " + seatType
         );
     }
 
     private String normalizeSeatStatus(String status) {
-        validateText(
-                status,
-                "Trạng thái ghế"
-        );
+        validateText(status, "Trạng thái ghế");
 
-        String normalized =
-                status.trim()
-                        .replace(" ", "")
-                        .replace("_", "")
-                        .toLowerCase();
+        String normalized = status
+                .trim()
+                .replace(" ", "")
+                .replace("_", "")
+                .toLowerCase();
 
-        if (normalized.equals("controng")
-                || normalized.equals("available")) {
-
-            return STATUS_AVAILABLE;
+        if (normalized.equals("controng")) {
+            return Constants.SEAT_CON_TRONG;
         }
 
-        if (normalized.equals("dadat")
-                || normalized.equals("booked")) {
-
-            return STATUS_BOOKED;
+        if (normalized.equals("dadat")) {
+            return Constants.SEAT_DA_DAT;
         }
 
         throw new IllegalArgumentException(
-                "Trạng thái ghế không hợp lệ: "
-                        + status
+                "Trạng thái ghế không hợp lệ: " + status
         );
     }
 
     private boolean isAvailableStatus(String status) {
         return sameText(
                 status,
-                STATUS_AVAILABLE
+                Constants.SEAT_CON_TRONG
         );
     }
 
     private boolean isBookedStatus(String status) {
         return sameText(
                 status,
-                STATUS_BOOKED
+                Constants.SEAT_DA_DAT
         );
     }
 
