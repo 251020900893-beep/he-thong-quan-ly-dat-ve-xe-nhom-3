@@ -17,12 +17,50 @@ public class CustomerRepository {
         );
     }
 
-    public Customer findById(String id) {
+    public Customer findById(String customerId) {
+        if (isBlank(customerId)) {
+            return null;
+        }
 
-        List<Customer> customers = findAll();
+        for (Customer customer : findAll()) {
+            if (sameText(
+                    customer.getId(),
+                    customerId
+            )) {
+                return customer;
+            }
+        }
 
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
+        return null;
+    }
+
+    public Customer findByPhone(String phone) {
+        if (isBlank(phone)) {
+            return null;
+        }
+
+        for (Customer customer : findAll()) {
+            if (sameText(
+                    customer.getPhone(),
+                    phone
+            )) {
+                return customer;
+            }
+        }
+
+        return null;
+    }
+
+    public Customer findByEmail(String email) {
+        if (isBlank(email)) {
+            return null;
+        }
+
+        for (Customer customer : findAll()) {
+            if (sameText(
+                    customer.getEmail(),
+                    email
+            )) {
                 return customer;
             }
         }
@@ -31,25 +69,39 @@ public class CustomerRepository {
     }
 
     public void save(Customer customer) {
-
         List<Customer> customers = findAll();
 
         customers.add(customer);
 
-        fileManager.writeList(FILE_PATH, customers);
+        fileManager.writeList(
+                FILE_PATH,
+                customers
+        );
     }
 
     public boolean update(Customer customer) {
+        if (customer == null
+                || isBlank(customer.getId())) {
+
+            return false;
+        }
 
         List<Customer> customers = findAll();
 
         for (int i = 0; i < customers.size(); i++) {
+            Customer currentCustomer =
+                    customers.get(i);
 
-            if (customers.get(i).getId().equals(customer.getId())) {
-
+            if (sameText(
+                    currentCustomer.getId(),
+                    customer.getId()
+            )) {
                 customers.set(i, customer);
 
-                fileManager.writeList(FILE_PATH, customers);
+                fileManager.writeList(
+                        FILE_PATH,
+                        customers
+                );
 
                 return true;
             }
@@ -58,26 +110,58 @@ public class CustomerRepository {
         return false;
     }
 
-    public boolean delete(String id) {
+    public boolean delete(String customerId) {
+        if (isBlank(customerId)) {
+            return false;
+        }
 
         List<Customer> customers = findAll();
 
-        boolean removed = customers.removeIf(customer ->
-                customer.getId().equals(id));
+        boolean removed = customers.removeIf(
+                customer -> sameText(
+                        customer.getId(),
+                        customerId
+                )
+        );
 
         if (removed) {
-            fileManager.writeList(FILE_PATH, customers);
+            fileManager.writeList(
+                    FILE_PATH,
+                    customers
+            );
         }
 
         return removed;
     }
 
-    public boolean exists(String id) {
-        return findById(id) != null;
+    public boolean exists(String customerId) {
+        return findById(customerId) != null;
+    }
+
+    public boolean phoneExists(String phone) {
+        return findByPhone(phone) != null;
+    }
+
+    public boolean emailExists(String email) {
+        return findByEmail(email) != null;
     }
 
     public int count() {
         return findAll().size();
     }
 
+    private boolean sameText(
+            String firstValue,
+            String secondValue
+    ) {
+        return firstValue != null
+                && secondValue != null
+                && firstValue.trim()
+                .equalsIgnoreCase(secondValue.trim());
+    }
+
+    private boolean isBlank(String value) {
+        return value == null
+                || value.trim().isEmpty();
+    }
 }

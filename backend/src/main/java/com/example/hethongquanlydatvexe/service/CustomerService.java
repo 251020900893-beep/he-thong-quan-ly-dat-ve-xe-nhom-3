@@ -5,6 +5,7 @@ import com.example.hethongquanlydatvexe.repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class CustomerService {
 
@@ -15,10 +16,12 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     public CustomerService() {
-        this.customerRepository = new CustomerRepository();
+        this(new CustomerRepository());
     }
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(
+            CustomerRepository customerRepository
+    ) {
         if (customerRepository == null) {
             throw new IllegalArgumentException(
                     "CustomerRepository không được để trống"
@@ -28,23 +31,20 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    // Lấy toàn bộ khách hàng
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
-    // Tìm khách hàng theo mã
-    public Customer findCustomerById(String customerId)
-            throws Exception {
-
+    public Customer findCustomerById(String customerId) {
         validateText(customerId, "Mã khách hàng");
 
-        Customer customer = customerRepository.findById(
-                customerId.trim()
-        );
+        Customer customer =
+                customerRepository.findById(
+                        customerId.trim()
+                );
 
         if (customer == null) {
-            throw new Exception(
+            throw new NoSuchElementException(
                     "Không tìm thấy khách hàng có mã: "
                             + customerId
             );
@@ -53,11 +53,149 @@ public class CustomerService {
         return customer;
     }
 
-    // Kiểm tra khách hàng có tồn tại
-    public boolean customerExists(String customerId) {
-        if (customerId == null
-                || customerId.trim().isEmpty()) {
+    public Customer findCustomerByPhone(String phone) {
+        validateText(phone, "Số điện thoại");
 
+        Customer customer =
+                customerRepository.findByPhone(
+                        phone.trim()
+                );
+
+        if (customer == null) {
+            throw new NoSuchElementException(
+                    "Không tìm thấy khách hàng có số điện thoại: "
+                            + phone
+            );
+        }
+
+        return customer;
+    }
+
+    public Customer findCustomerByEmail(String email) {
+        validateText(email, "Email");
+
+        Customer customer =
+                customerRepository.findByEmail(
+                        email.trim()
+                );
+
+        if (customer == null) {
+            throw new NoSuchElementException(
+                    "Không tìm thấy khách hàng có email: "
+                            + email
+            );
+        }
+
+        return customer;
+    }
+
+    public Customer createCustomer(Customer customer) {
+        validateCustomer(customer);
+
+        if (customerRepository.exists(customer.getId())) {
+            throw new IllegalArgumentException(
+                    "Mã khách hàng đã tồn tại: "
+                            + customer.getId()
+            );
+        }
+
+        if (customerRepository.phoneExists(customer.getPhone())) {
+            throw new IllegalArgumentException(
+                    "Số điện thoại đã tồn tại: "
+                            + customer.getPhone()
+            );
+        }
+
+        if (customerRepository.emailExists(customer.getEmail())) {
+            throw new IllegalArgumentException(
+                    "Email đã tồn tại: "
+                            + customer.getEmail()
+            );
+        }
+
+        customer.setCustomerType(
+                normalizeCustomerType(
+                        customer.getCustomerType()
+                )
+        );
+
+        customerRepository.save(customer);
+
+        return customer;
+    }
+
+    public Customer updateCustomer(Customer customer) {
+        validateCustomer(customer);
+
+        Customer currentCustomer =
+                findCustomerById(customer.getId());
+
+        Customer customerByPhone =
+                customerRepository.findByPhone(
+                        customer.getPhone()
+                );
+
+        if (customerByPhone != null
+                && !sameText(
+                customerByPhone.getId(),
+                currentCustomer.getId()
+        )) {
+            throw new IllegalArgumentException(
+                    "Số điện thoại đã được sử dụng bởi khách hàng khác"
+            );
+        }
+
+        Customer customerByEmail =
+                customerRepository.findByEmail(
+                        customer.getEmail()
+                );
+
+        if (customerByEmail != null
+                && !sameText(
+                customerByEmail.getId(),
+                currentCustomer.getId()
+        )) {
+            throw new IllegalArgumentException(
+                    "Email đã được sử dụng bởi khách hàng khác"
+            );
+        }
+
+        customer.setCustomerType(
+                normalizeCustomerType(
+                        customer.getCustomerType()
+                )
+        );
+
+        boolean updated =
+                customerRepository.update(customer);
+
+        if (!updated) {
+            throw new IllegalStateException(
+                    "Không thể cập nhật khách hàng: "
+                            + customer.getId()
+            );
+        }
+
+        return customer;
+    }
+
+    public boolean deleteCustomer(String customerId) {
+        validateText(customerId, "Mã khách hàng");
+
+        if (!customerRepository.exists(customerId.trim())) {
+            throw new NoSuchElementException(
+                    "Không tìm thấy khách hàng có mã: "
+                            + customerId
+            );
+        }
+
+        return customerRepository.delete(
+                customerId.trim()
+        );
+    }
+
+    public boolean customerExists(String customerId) {
+        if (isBlank(customerId)) {
             return false;
         }
 
@@ -66,17 +204,13 @@ public class CustomerService {
         );
     }
 
-    // Đếm tổng số khách hàng
     public int countCustomers() {
         return customerRepository.count();
     }
 
-    // Phân loại khách hàng theo đối tượng Customer
-    public String classifyCustomer(Customer customer)
-            throws Exception {
-
+    public String classifyCustomer(Customer customer) {
         if (customer == null) {
-            throw new Exception(
+            throw new IllegalArgumentException(
                     "Thông tin khách hàng không được để trống"
             );
         }
@@ -86,42 +220,30 @@ public class CustomerService {
         );
     }
 
-    // Tìm khách theo mã rồi phân loại
-    public String classifyCustomerById(String customerId)
-            throws Exception {
-
-        Customer customer = findCustomerById(customerId);
-
-        return classifyCustomer(customer);
+    public String classifyCustomerById(
+            String customerId
+    ) {
+        return classifyCustomer(
+                findCustomerById(customerId)
+        );
     }
 
-    // Lấy danh sách khách thường
-    public List<Customer> getNormalCustomers()
-            throws Exception {
-
+    public List<Customer> getNormalCustomers() {
         return findCustomersByType(TYPE_NORMAL);
     }
 
-    // Lấy danh sách khách thành viên
-    public List<Customer> getMemberCustomers()
-            throws Exception {
-
+    public List<Customer> getMemberCustomers() {
         return findCustomersByType(TYPE_MEMBER);
     }
 
-    // Lấy danh sách khách VIP
-    public List<Customer> getVipCustomers()
-            throws Exception {
-
+    public List<Customer> getVipCustomers() {
         return findCustomersByType(TYPE_VIP);
     }
 
-    // Lọc khách hàng theo loại
     public List<Customer> findCustomersByType(
             String customerType
-    ) throws Exception {
-
-        String normalizedType =
+    ) {
+        String expectedType =
                 normalizeCustomerType(customerType);
 
         List<Customer> result = new ArrayList<>();
@@ -134,7 +256,7 @@ public class CustomerService {
                             customer.getCustomerType()
                     );
 
-            if (currentType.equals(normalizedType)) {
+            if (currentType.equals(expectedType)) {
                 result.add(customer);
             }
         }
@@ -142,63 +264,72 @@ public class CustomerService {
         return result;
     }
 
-    // Đếm khách hàng theo loại
-    public int countCustomersByType(String customerType)
-            throws Exception {
-
-        String normalizedType =
-                normalizeCustomerType(customerType);
-
-        int count = 0;
-
-        for (Customer customer
-                : customerRepository.findAll()) {
-
-            String currentType =
-                    normalizeCustomerType(
-                            customer.getCustomerType()
-                    );
-
-            if (currentType.equals(normalizedType)) {
-                count++;
-            }
-        }
-
-        return count;
+    public int countCustomersByType(
+            String customerType
+    ) {
+        return findCustomersByType(
+                customerType
+        ).size();
     }
 
-    // Kiểm tra khách có phải khách thường
-    public boolean isNormalCustomer(Customer customer)
-            throws Exception {
-
+    public boolean isNormalCustomer(Customer customer) {
         return TYPE_NORMAL.equals(
                 classifyCustomer(customer)
         );
     }
 
-    // Kiểm tra khách có phải thành viên
-    public boolean isMemberCustomer(Customer customer)
-            throws Exception {
-
+    public boolean isMemberCustomer(Customer customer) {
         return TYPE_MEMBER.equals(
                 classifyCustomer(customer)
         );
     }
 
-    // Kiểm tra khách có phải VIP
-    public boolean isVipCustomer(Customer customer)
-            throws Exception {
-
+    public boolean isVipCustomer(Customer customer) {
         return TYPE_VIP.equals(
                 classifyCustomer(customer)
         );
     }
 
-    // Chuẩn hóa cách viết loại khách hàng
+    private void validateCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException(
+                    "Khách hàng không được để trống"
+            );
+        }
+
+        validateText(
+                customer.getId(),
+                "Mã khách hàng"
+        );
+
+        validateText(
+                customer.getFullName(),
+                "Họ tên"
+        );
+
+        validateText(
+                customer.getPhone(),
+                "Số điện thoại"
+        );
+
+        validateText(
+                customer.getEmail(),
+                "Email"
+        );
+
+        validateText(
+                customer.getCustomerType(),
+                "Loại khách hàng"
+        );
+
+        normalizeCustomerType(
+                customer.getCustomerType()
+        );
+    }
+
     private String normalizeCustomerType(
             String customerType
-    ) throws Exception {
-
+    ) {
         validateText(
                 customerType,
                 "Loại khách hàng"
@@ -211,15 +342,15 @@ public class CustomerService {
                 .toLowerCase();
 
         if (normalized.equals("thuong")
-                || normalized.equals("khachthuong")
-                || normalized.equals("normal")) {
+                || normalized.equals("normal")
+                || normalized.equals("khachthuong")) {
 
             return TYPE_NORMAL;
         }
 
         if (normalized.equals("thanhvien")
-                || normalized.equals("khachthanhvien")
-                || normalized.equals("member")) {
+                || normalized.equals("member")
+                || normalized.equals("khachthanhvien")) {
 
             return TYPE_MEMBER;
         }
@@ -230,18 +361,32 @@ public class CustomerService {
             return TYPE_VIP;
         }
 
-        throw new Exception(
+        throw new IllegalArgumentException(
                 "Loại khách hàng không hợp lệ: "
                         + customerType
         );
     }
 
-    // Kiểm tra dữ liệu chuỗi đầu vào
+    private boolean sameText(
+            String firstValue,
+            String secondValue
+    ) {
+        return firstValue != null
+                && secondValue != null
+                && firstValue.trim()
+                .equalsIgnoreCase(secondValue.trim());
+    }
+
+    private boolean isBlank(String value) {
+        return value == null
+                || value.trim().isEmpty();
+    }
+
     private void validateText(
             String value,
             String fieldName
     ) {
-        if (value == null || value.trim().isEmpty()) {
+        if (isBlank(value)) {
             throw new IllegalArgumentException(
                     fieldName + " không được để trống"
             );

@@ -5,46 +5,47 @@ import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class TripService {
 
     private final BusTripRepository busTripRepository;
 
     public TripService() {
-        this.busTripRepository = new BusTripRepository();
+        this(new BusTripRepository());
     }
 
     public TripService(BusTripRepository busTripRepository) {
         if (busTripRepository == null) {
             throw new IllegalArgumentException(
-                    "BusTripRepository không được null"
+                    "BusTripRepository không được để trống"
             );
         }
 
         this.busTripRepository = busTripRepository;
     }
 
-    // Lấy toàn bộ danh sách chuyến xe
     public List<BusTrip> getAllTrips() {
         return busTripRepository.findAll();
     }
 
-    // Tìm chuyến xe theo mã chuyến
-    public BusTrip findTripById(String tripId) throws Exception {
+    public BusTrip findTripById(String tripId) {
         validateText(tripId, "Mã chuyến xe");
 
-        BusTrip trip = busTripRepository.findById(tripId.trim());
+        BusTrip trip = busTripRepository.findById(
+                tripId.trim()
+        );
 
         if (trip == null) {
-            throw new Exception(
-                    "Không tìm thấy chuyến xe có mã: " + tripId
+            throw new NoSuchElementException(
+                    "Không tìm thấy chuyến xe có mã: "
+                            + tripId
             );
         }
 
         return trip;
     }
 
-    // Tìm chuyến theo cả điểm đi và điểm đến
     public List<BusTrip> findTrips(
             String departure,
             String destination
@@ -52,23 +53,22 @@ public class TripService {
         validateText(departure, "Điểm đi");
         validateText(destination, "Điểm đến");
 
-        List<BusTrip> trips = busTripRepository.findAll();
         List<BusTrip> result = new ArrayList<>();
 
-        for (BusTrip trip : trips) {
-            boolean sameDeparture =
-                    equalsIgnoreCaseAndTrim(
+        for (BusTrip trip : busTripRepository.findAll()) {
+            boolean correctDeparture =
+                    sameText(
                             trip.getDeparture(),
                             departure
                     );
 
-            boolean sameDestination =
-                    equalsIgnoreCaseAndTrim(
+            boolean correctDestination =
+                    sameText(
                             trip.getDestination(),
                             destination
                     );
 
-            if (sameDeparture && sameDestination) {
+            if (correctDeparture && correctDestination) {
                 result.add(trip);
             }
         }
@@ -76,7 +76,6 @@ public class TripService {
         return result;
     }
 
-    // Tìm chuyến theo điểm đi
     public List<BusTrip> findTripsByDeparture(
             String departure
     ) {
@@ -85,7 +84,7 @@ public class TripService {
         List<BusTrip> result = new ArrayList<>();
 
         for (BusTrip trip : busTripRepository.findAll()) {
-            if (equalsIgnoreCaseAndTrim(
+            if (sameText(
                     trip.getDeparture(),
                     departure
             )) {
@@ -96,7 +95,6 @@ public class TripService {
         return result;
     }
 
-    // Tìm chuyến theo điểm đến
     public List<BusTrip> findTripsByDestination(
             String destination
     ) {
@@ -105,7 +103,7 @@ public class TripService {
         List<BusTrip> result = new ArrayList<>();
 
         for (BusTrip trip : busTripRepository.findAll()) {
-            if (equalsIgnoreCaseAndTrim(
+            if (sameText(
                     trip.getDestination(),
                     destination
             )) {
@@ -116,26 +114,25 @@ public class TripService {
         return result;
     }
 
-    // Kiểm tra chuyến xe có tồn tại
     public boolean tripExists(String tripId) {
-        if (tripId == null || tripId.trim().isEmpty()) {
+        if (isBlank(tripId)) {
             return false;
         }
 
-        return busTripRepository.exists(tripId.trim());
+        return busTripRepository.exists(
+                tripId.trim()
+        );
     }
 
-    // Đếm tổng số chuyến xe
     public int countTrips() {
         return busTripRepository.count();
     }
 
-    // Kiểm tra tổng số ghế của chuyến
-    public int getTotalSeats(String tripId) throws Exception {
+    public int getTotalSeats(String tripId) {
         BusTrip trip = findTripById(tripId);
 
         if (trip.getTotalSeats() <= 0) {
-            throw new Exception(
+            throw new IllegalStateException(
                     "Tổng số ghế của chuyến xe không hợp lệ"
             );
         }
@@ -143,48 +140,148 @@ public class TripService {
         return trip.getTotalSeats();
     }
 
-    // Kiểm tra chuyến có đúng tuyến hay không
+    public BusTrip createTrip(BusTrip trip) {
+        validateTrip(trip);
+
+        if (busTripRepository.exists(trip.getTripId())) {
+            throw new IllegalArgumentException(
+                    "Mã chuyến xe đã tồn tại: "
+                            + trip.getTripId()
+            );
+        }
+
+        busTripRepository.save(trip);
+
+        return trip;
+    }
+
+    public BusTrip updateTrip(BusTrip trip) {
+        validateTrip(trip);
+
+        if (!busTripRepository.exists(trip.getTripId())) {
+            throw new NoSuchElementException(
+                    "Không tìm thấy chuyến xe có mã: "
+                            + trip.getTripId()
+            );
+        }
+
+        boolean updated =
+                busTripRepository.update(trip);
+
+        if (!updated) {
+            throw new IllegalStateException(
+                    "Không thể cập nhật chuyến xe: "
+                            + trip.getTripId()
+            );
+        }
+
+        return trip;
+    }
+
+    public boolean deleteTrip(String tripId) {
+        validateText(tripId, "Mã chuyến xe");
+
+        if (!busTripRepository.exists(tripId.trim())) {
+            throw new NoSuchElementException(
+                    "Không tìm thấy chuyến xe có mã: "
+                            + tripId
+            );
+        }
+
+        return busTripRepository.delete(
+                tripId.trim()
+        );
+    }
+
     public boolean matchesRoute(
             BusTrip trip,
             String departure,
             String destination
     ) {
-        if (trip == null) {
+        if (trip == null
+                || isBlank(departure)
+                || isBlank(destination)) {
+
             return false;
         }
 
-        if (departure == null || destination == null) {
-            return false;
-        }
-
-        return equalsIgnoreCaseAndTrim(
+        return sameText(
                 trip.getDeparture(),
                 departure
-        ) && equalsIgnoreCaseAndTrim(
+        ) && sameText(
                 trip.getDestination(),
                 destination
         );
     }
 
-    // So sánh hai chuỗi không phân biệt hoa thường và khoảng trắng
-    private boolean equalsIgnoreCaseAndTrim(
+    private void validateTrip(BusTrip trip) {
+        if (trip == null) {
+            throw new IllegalArgumentException(
+                    "Chuyến xe không được để trống"
+            );
+        }
+
+        validateText(
+                trip.getTripId(),
+                "Mã chuyến xe"
+        );
+
+        validateText(
+                trip.getDeparture(),
+                "Điểm đi"
+        );
+
+        validateText(
+                trip.getDestination(),
+                "Điểm đến"
+        );
+
+        validateText(
+                trip.getDepartureTime(),
+                "Thời gian khởi hành"
+        );
+
+        validateText(
+                trip.getLicensePlate(),
+                "Biển số xe"
+        );
+
+        if (trip.getTotalSeats() <= 0) {
+            throw new IllegalArgumentException(
+                    "Tổng số ghế phải lớn hơn 0"
+            );
+        }
+
+        if (sameText(
+                trip.getDeparture(),
+                trip.getDestination()
+        )) {
+            throw new IllegalArgumentException(
+                    "Điểm đi và điểm đến không được trùng nhau"
+            );
+        }
+    }
+
+    private boolean sameText(
             String firstValue,
             String secondValue
     ) {
-        if (firstValue == null || secondValue == null) {
-            return false;
-        }
-
-        return firstValue.trim()
+        return firstValue != null
+                && secondValue != null
+                && firstValue.trim()
                 .equalsIgnoreCase(secondValue.trim());
     }
 
-    // Kiểm tra dữ liệu chuỗi đầu vào
+    private boolean isBlank(String value) {
+        return value == null
+                || value.trim().isEmpty();
+    }
+
     private void validateText(
             String value,
             String fieldName
     ) {
-        if (value == null || value.trim().isEmpty()) {
+        if (isBlank(value)) {
             throw new IllegalArgumentException(
                     fieldName + " không được để trống"
             );
