@@ -2,6 +2,7 @@ package com.example.hethongquanlydatvexe.repository;
 
 import com.example.hethongquanlydatvexe.model.BusTrip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BusTripRepository {
@@ -18,7 +19,6 @@ public class BusTripRepository {
     }
 
     public BusTrip findById(String tripId) {
-
         List<BusTrip> trips = findAll();
 
         for (BusTrip trip : trips) {
@@ -30,27 +30,36 @@ public class BusTripRepository {
         return null;
     }
 
-    public void save(BusTrip trip) {
-
+    public List<BusTrip> findByRoute(
+            String departure,
+            String destination
+    ) {
+        List<BusTrip> result = new ArrayList<>();
         List<BusTrip> trips = findAll();
 
-        trips.add(trip);
+        for (BusTrip trip : trips) {
+            if (trip.getDeparture().equals(departure)
+                    && trip.getDestination().equals(destination)) {
+                result.add(trip);
+            }
+        }
 
+        return result;
+    }
+
+    public void save(BusTrip trip) {
+        List<BusTrip> trips = findAll();
+        trips.add(trip);
         fileManager.writeList(FILE_PATH, trips);
     }
 
     public boolean update(BusTrip trip) {
-
         List<BusTrip> trips = findAll();
 
         for (int i = 0; i < trips.size(); i++) {
-
             if (trips.get(i).getTripId().equals(trip.getTripId())) {
-
                 trips.set(i, trip);
-
                 fileManager.writeList(FILE_PATH, trips);
-
                 return true;
             }
         }
@@ -59,26 +68,20 @@ public class BusTripRepository {
     }
 
     public boolean delete(String tripId) {
-
         List<BusTrip> trips = findAll();
 
-        boolean removed = trips.removeIf(
-                trip -> trip.getTripId().equals(tripId)
-        );
-
-        if (removed) {
-            fileManager.writeList(FILE_PATH, trips);
+        for (int i = 0; i < trips.size(); i++) {
+            if (trips.get(i).getTripId().equals(tripId)) {
+                trips.remove(i);
+                fileManager.writeList(FILE_PATH, trips);
+                return true;
+            }
         }
 
-        return removed;
+        return false;
     }
 
     public boolean exists(String tripId) {
         return findById(tripId) != null;
     }
-
-    public int count() {
-        return findAll().size();
-    }
-
 }

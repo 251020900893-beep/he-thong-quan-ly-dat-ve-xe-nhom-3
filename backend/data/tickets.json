@@ -17,7 +17,8 @@
       "totalSeats": 40
     },
     "seat": {
-      "seatId": "S001",
+      "seatId": "CX001-S001",
+      "tripId": "CX001",
       "seatNumber": "A1",
       "seatType": "VIP",
       "status": "DaDat"

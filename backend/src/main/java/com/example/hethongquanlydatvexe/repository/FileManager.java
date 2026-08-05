@@ -14,53 +14,20 @@ import java.util.List;
 
 public class FileManager {
 
-    private static final Gson gson = new GsonBuilder()
+    private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
-    /**
-     * Ghi danh sách object xuống file JSON
-     */
-    public <T> void writeList(String filePath, List<T> data) {
-        try {
-            File file = new File(filePath);
-
-            File parent = file.getParentFile();
-            if (parent != null && !parent.exists()) {
-                parent.mkdirs();
-            }
-
-            FileWriter writer = new FileWriter(file);
-            gson.toJson(data, writer);
-            writer.flush();
-            writer.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Không thể ghi file: " + filePath, e);
-        }
-    }
-
-    /**
-     * Đọc danh sách object từ file JSON
-     */
     public <T> List<T> readList(String filePath, Type type) {
-
         try {
-
             File file = new File(filePath);
 
-            if (!file.exists()) {
-                return new ArrayList<>();
-            }
-
-            if (file.length() == 0) {
+            if (!file.exists() || file.length() == 0) {
                 return new ArrayList<>();
             }
 
             FileReader reader = new FileReader(file);
-
             List<T> data = gson.fromJson(reader, type);
-
             reader.close();
 
             if (data == null) {
@@ -68,47 +35,16 @@ public class FileManager {
             }
 
             return data;
-
         } catch (IOException e) {
-            throw new RuntimeException("Không thể đọc file: " + filePath, e);
+            throw new RuntimeException(
+                    "Không thể đọc file: " + filePath
+            );
         }
     }
 
-    /**
-     * Đọc object đơn
-     */
-    public <T> T readObject(String filePath, Class<T> clazz) {
-
+    public <T> void writeList(String filePath, List<T> data) {
         try {
-
             File file = new File(filePath);
-
-            if (!file.exists()) {
-                return null;
-            }
-
-            FileReader reader = new FileReader(file);
-
-            T object = gson.fromJson(reader, clazz);
-
-            reader.close();
-
-            return object;
-
-        } catch (IOException e) {
-            throw new RuntimeException("Không thể đọc file: " + filePath, e);
-        }
-    }
-
-    /**
-     * Ghi object đơn
-     */
-    public <T> void writeObject(String filePath, T object) {
-
-        try {
-
-            File file = new File(filePath);
-
             File parent = file.getParentFile();
 
             if (parent != null && !parent.exists()) {
@@ -116,23 +52,18 @@ public class FileManager {
             }
 
             FileWriter writer = new FileWriter(file);
-
-            gson.toJson(object, writer);
-
-            writer.flush();
-
+            gson.toJson(data, writer);
             writer.close();
-
         } catch (IOException e) {
-            throw new RuntimeException("Không thể ghi file: " + filePath, e);
+            throw new RuntimeException(
+                    "Không thể ghi file: " + filePath
+            );
         }
     }
 
-    /**
-     * Tạo Type cho List<T>
-     */
     public static <T> Type getListType(Class<T> clazz) {
-        return TypeToken.getParameterized(List.class, clazz).getType();
+        return TypeToken
+                .getParameterized(List.class, clazz)
+                .getType();
     }
-
 }

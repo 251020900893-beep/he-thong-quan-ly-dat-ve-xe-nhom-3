@@ -17,12 +17,35 @@ public class CustomerRepository {
         );
     }
 
-    public Customer findById(String id) {
-
+    public Customer findById(String customerId) {
         List<Customer> customers = findAll();
 
         for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
+            if (customer.getId().equals(customerId)) {
+                return customer;
+            }
+        }
+
+        return null;
+    }
+
+    public Customer findByPhone(String phone) {
+        List<Customer> customers = findAll();
+
+        for (Customer customer : customers) {
+            if (customer.getPhone().equals(phone)) {
+                return customer;
+            }
+        }
+
+        return null;
+    }
+
+    public Customer findByEmail(String email) {
+        List<Customer> customers = findAll();
+
+        for (Customer customer : customers) {
+            if (customer.getEmail().equals(email)) {
                 return customer;
             }
         }
@@ -31,7 +54,6 @@ public class CustomerRepository {
     }
 
     public void save(Customer customer) {
-
         List<Customer> customers = findAll();
 
         customers.add(customer);
@@ -40,13 +62,10 @@ public class CustomerRepository {
     }
 
     public boolean update(Customer customer) {
-
         List<Customer> customers = findAll();
 
         for (int i = 0; i < customers.size(); i++) {
-
             if (customers.get(i).getId().equals(customer.getId())) {
-
                 customers.set(i, customer);
 
                 fileManager.writeList(FILE_PATH, customers);
@@ -58,26 +77,31 @@ public class CustomerRepository {
         return false;
     }
 
-    public boolean delete(String id) {
-
+    public boolean delete(String customerId) {
         List<Customer> customers = findAll();
 
-        boolean removed = customers.removeIf(customer ->
-                customer.getId().equals(id));
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getId().equals(customerId)) {
+                customers.remove(i);
 
-        if (removed) {
-            fileManager.writeList(FILE_PATH, customers);
+                fileManager.writeList(FILE_PATH, customers);
+
+                return true;
+            }
         }
 
-        return removed;
+        return false;
     }
 
-    public boolean exists(String id) {
-        return findById(id) != null;
+    public boolean exists(String customerId) {
+        return findById(customerId) != null;
     }
 
-    public int count() {
-        return findAll().size();
+    public boolean phoneExists(String phone) {
+        return findByPhone(phone) != null;
     }
 
+    public boolean emailExists(String email) {
+        return findByEmail(email) != null;
+    }
 }

@@ -2,6 +2,7 @@ package com.example.hethongquanlydatvexe.repository;
 
 import com.example.hethongquanlydatvexe.model.Seat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeatRepository {
@@ -18,7 +19,6 @@ public class SeatRepository {
     }
 
     public Seat findById(String seatId) {
-
         List<Seat> seats = findAll();
 
         for (Seat seat : seats) {
@@ -30,8 +30,36 @@ public class SeatRepository {
         return null;
     }
 
-    public void save(Seat seat) {
+    public List<Seat> findByTripId(String tripId) {
+        List<Seat> result = new ArrayList<>();
+        List<Seat> seats = findAll();
 
+        for (Seat seat : seats) {
+            if (seat.getTripId().equals(tripId)) {
+                result.add(seat);
+            }
+        }
+
+        return result;
+    }
+
+    public Seat findByTripIdAndSeatNumber(
+            String tripId,
+            String seatNumber
+    ) {
+        List<Seat> seats = findAll();
+
+        for (Seat seat : seats) {
+            if (seat.getTripId().equals(tripId)
+                    && seat.getSeatNumber().equals(seatNumber)) {
+                return seat;
+            }
+        }
+
+        return null;
+    }
+
+    public void save(Seat seat) {
         List<Seat> seats = findAll();
 
         seats.add(seat);
@@ -40,13 +68,10 @@ public class SeatRepository {
     }
 
     public boolean update(Seat seat) {
-
         List<Seat> seats = findAll();
 
         for (int i = 0; i < seats.size(); i++) {
-
             if (seats.get(i).getSeatId().equals(seat.getSeatId())) {
-
                 seats.set(i, seat);
 
                 fileManager.writeList(FILE_PATH, seats);
@@ -58,33 +83,14 @@ public class SeatRepository {
         return false;
     }
 
-    public boolean delete(String seatId) {
-
-        List<Seat> seats = findAll();
-
-        boolean removed = seats.removeIf(
-                seat -> seat.getSeatId().equals(seatId)
-        );
-
-        if (removed) {
-            fileManager.writeList(FILE_PATH, seats);
-        }
-
-        return removed;
-    }
-
-    public boolean exists(String seatId) {
-        return findById(seatId) != null;
-    }
-
-    public boolean updateStatus(String seatId, String status) {
-
+    public boolean updateStatus(
+            String seatId,
+            String status
+    ) {
         List<Seat> seats = findAll();
 
         for (Seat seat : seats) {
-
             if (seat.getSeatId().equals(seatId)) {
-
                 seat.setStatus(status);
 
                 fileManager.writeList(FILE_PATH, seats);
@@ -96,8 +102,33 @@ public class SeatRepository {
         return false;
     }
 
-    public int count() {
-        return findAll().size();
+    public boolean delete(String seatId) {
+        List<Seat> seats = findAll();
+
+        for (int i = 0; i < seats.size(); i++) {
+            if (seats.get(i).getSeatId().equals(seatId)) {
+                seats.remove(i);
+
+                fileManager.writeList(FILE_PATH, seats);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    public boolean exists(String seatId) {
+        return findById(seatId) != null;
+    }
+
+    public boolean existsInTrip(
+            String tripId,
+            String seatNumber
+    ) {
+        return findByTripIdAndSeatNumber(
+                tripId,
+                seatNumber
+        ) != null;
+    }
 }
