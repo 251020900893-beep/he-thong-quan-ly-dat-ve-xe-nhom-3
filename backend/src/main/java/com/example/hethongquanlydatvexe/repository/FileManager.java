@@ -2,7 +2,6 @@ package com.example.hethongquanlydatvexe.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -15,157 +14,56 @@ import java.util.List;
 
 public class FileManager {
 
-    private static final Gson GSON = new GsonBuilder()
+    private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
-    public <T> void writeList(
-            String filePath,
-            List<T> data
-    ) {
-        validateFilePath(filePath);
+    public <T> List<T> readList(String filePath, Type type) {
+        try {
+            File file = new File(filePath);
 
-        List<T> safeData =
-                data == null ? new ArrayList<>() : data;
+            if (!file.exists() || file.length() == 0) {
+                return new ArrayList<>();
+            }
 
-        File file = prepareFile(filePath);
+            FileReader reader = new FileReader(file);
+            List<T> data = gson.fromJson(reader, type);
+            reader.close();
 
-        try (FileWriter writer = new FileWriter(file)) {
-            GSON.toJson(safeData, writer);
+            if (data == null) {
+                return new ArrayList<>();
+            }
+
+            return data;
         } catch (IOException e) {
             throw new RuntimeException(
-                    "Không thể ghi file: " + filePath,
-                    e
+                    "Không thể đọc file: " + filePath
             );
         }
     }
 
-    public <T> List<T> readList(
-            String filePath,
-            Type type
-    ) {
-        validateFilePath(filePath);
+    public <T> void writeList(String filePath, List<T> data) {
+        try {
+            File file = new File(filePath);
+            File parent = file.getParentFile();
 
-        if (type == null) {
-            throw new IllegalArgumentException(
-                    "Kiểu dữ liệu không được để trống"
-            );
-        }
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
 
-        File file = new File(filePath);
-
-        if (!file.exists() || file.length() == 0) {
-            return new ArrayList<>();
-        }
-
-        try (FileReader reader = new FileReader(file)) {
-            List<T> data = GSON.fromJson(reader, type);
-
-            return data == null
-                    ? new ArrayList<>()
-                    : data;
-        } catch (JsonParseException e) {
-            throw new RuntimeException(
-                    "Dữ liệu JSON không hợp lệ: " + filePath,
-                    e
-            );
+            FileWriter writer = new FileWriter(file);
+            gson.toJson(data, writer);
+            writer.close();
         } catch (IOException e) {
             throw new RuntimeException(
-                    "Không thể đọc file: " + filePath,
-                    e
+                    "Không thể ghi file: " + filePath
             );
         }
     }
 
-    public <T> T readObject(
-            String filePath,
-            Class<T> clazz
-    ) {
-        validateFilePath(filePath);
-
-        if (clazz == null) {
-            throw new IllegalArgumentException(
-                    "Class dữ liệu không được để trống"
-            );
-        }
-
-        File file = new File(filePath);
-
-        if (!file.exists() || file.length() == 0) {
-            return null;
-        }
-
-        try (FileReader reader = new FileReader(file)) {
-            return GSON.fromJson(reader, clazz);
-        } catch (JsonParseException e) {
-            throw new RuntimeException(
-                    "Dữ liệu JSON không hợp lệ: " + filePath,
-                    e
-            );
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    "Không thể đọc file: " + filePath,
-                    e
-            );
-        }
-    }
-
-    public <T> void writeObject(
-            String filePath,
-            T object
-    ) {
-        validateFilePath(filePath);
-
-        File file = prepareFile(filePath);
-
-        try (FileWriter writer = new FileWriter(file)) {
-            GSON.toJson(object, writer);
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    "Không thể ghi file: " + filePath,
-                    e
-            );
-        }
-    }
-
-    public static <T> Type getListType(
-            Class<T> clazz
-    ) {
-        if (clazz == null) {
-            throw new IllegalArgumentException(
-                    "Class dữ liệu không được để trống"
-            );
-        }
-
+    public static <T> Type getListType(Class<T> clazz) {
         return TypeToken
                 .getParameterized(List.class, clazz)
                 .getType();
-    }
-
-    private File prepareFile(String filePath) {
-        File file = new File(filePath);
-        File parent = file.getParentFile();
-
-        if (parent != null
-                && !parent.exists()
-                && !parent.mkdirs()) {
-
-            throw new RuntimeException(
-                    "Không thể tạo thư mục: "
-                            + parent.getPath()
-            );
-        }
-
-        return file;
-    }
-
-    private void validateFilePath(String filePath) {
-        if (filePath == null
-                || filePath.trim().isEmpty()) {
-
-            throw new IllegalArgumentException(
-                    "Đường dẫn file không được để trống"
-            );
-        }
     }
 }

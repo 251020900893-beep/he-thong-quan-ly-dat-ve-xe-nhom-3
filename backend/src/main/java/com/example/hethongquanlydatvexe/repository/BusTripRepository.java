@@ -19,12 +19,10 @@ public class BusTripRepository {
     }
 
     public BusTrip findById(String tripId) {
-        if (isBlank(tripId)) {
-            return null;
-        }
+        List<BusTrip> trips = findAll();
 
-        for (BusTrip trip : findAll()) {
-            if (sameText(trip.getTripId(), tripId)) {
+        for (BusTrip trip : trips) {
+            if (trip.getTripId().equals(tripId)) {
                 return trip;
             }
         }
@@ -32,56 +30,16 @@ public class BusTripRepository {
         return null;
     }
 
-    public List<BusTrip> findByDeparture(String departure) {
-        List<BusTrip> result = new ArrayList<>();
-
-        if (isBlank(departure)) {
-            return result;
-        }
-
-        for (BusTrip trip : findAll()) {
-            if (sameText(trip.getDeparture(), departure)) {
-                result.add(trip);
-            }
-        }
-
-        return result;
-    }
-
-    public List<BusTrip> findByDestination(String destination) {
-        List<BusTrip> result = new ArrayList<>();
-
-        if (isBlank(destination)) {
-            return result;
-        }
-
-        for (BusTrip trip : findAll()) {
-            if (sameText(trip.getDestination(), destination)) {
-                result.add(trip);
-            }
-        }
-
-        return result;
-    }
-
     public List<BusTrip> findByRoute(
             String departure,
             String destination
     ) {
         List<BusTrip> result = new ArrayList<>();
+        List<BusTrip> trips = findAll();
 
-        if (isBlank(departure) || isBlank(destination)) {
-            return result;
-        }
-
-        for (BusTrip trip : findAll()) {
-            boolean correctDeparture =
-                    sameText(trip.getDeparture(), departure);
-
-            boolean correctDestination =
-                    sameText(trip.getDestination(), destination);
-
-            if (correctDeparture && correctDestination) {
+        for (BusTrip trip : trips) {
+            if (trip.getDeparture().equals(departure)
+                    && trip.getDestination().equals(destination)) {
                 result.add(trip);
             }
         }
@@ -91,30 +49,17 @@ public class BusTripRepository {
 
     public void save(BusTrip trip) {
         List<BusTrip> trips = findAll();
-
         trips.add(trip);
-
         fileManager.writeList(FILE_PATH, trips);
     }
 
     public boolean update(BusTrip trip) {
-        if (trip == null || isBlank(trip.getTripId())) {
-            return false;
-        }
-
         List<BusTrip> trips = findAll();
 
         for (int i = 0; i < trips.size(); i++) {
-            BusTrip currentTrip = trips.get(i);
-
-            if (sameText(
-                    currentTrip.getTripId(),
-                    trip.getTripId()
-            )) {
+            if (trips.get(i).getTripId().equals(trip.getTripId())) {
                 trips.set(i, trip);
-
                 fileManager.writeList(FILE_PATH, trips);
-
                 return true;
             }
         }
@@ -123,43 +68,20 @@ public class BusTripRepository {
     }
 
     public boolean delete(String tripId) {
-        if (isBlank(tripId)) {
-            return false;
-        }
-
         List<BusTrip> trips = findAll();
 
-        boolean removed = trips.removeIf(
-                trip -> sameText(trip.getTripId(), tripId)
-        );
-
-        if (removed) {
-            fileManager.writeList(FILE_PATH, trips);
+        for (int i = 0; i < trips.size(); i++) {
+            if (trips.get(i).getTripId().equals(tripId)) {
+                trips.remove(i);
+                fileManager.writeList(FILE_PATH, trips);
+                return true;
+            }
         }
 
-        return removed;
+        return false;
     }
 
     public boolean exists(String tripId) {
         return findById(tripId) != null;
-    }
-
-    public int count() {
-        return findAll().size();
-    }
-
-    private boolean sameText(
-            String firstValue,
-            String secondValue
-    ) {
-        return firstValue != null
-                && secondValue != null
-                && firstValue.trim()
-                .equalsIgnoreCase(secondValue.trim());
-    }
-
-    private boolean isBlank(String value) {
-        return value == null
-                || value.trim().isEmpty();
     }
 }

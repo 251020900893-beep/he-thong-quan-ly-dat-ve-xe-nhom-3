@@ -19,15 +19,10 @@ public class SeatRepository {
     }
 
     public Seat findById(String seatId) {
-        if (isBlank(seatId)) {
-            return null;
-        }
+        List<Seat> seats = findAll();
 
-        for (Seat seat : findAll()) {
-            if (sameText(
-                    seat.getSeatId(),
-                    seatId
-            )) {
+        for (Seat seat : seats) {
+            if (seat.getSeatId().equals(seatId)) {
                 return seat;
             }
         }
@@ -37,16 +32,10 @@ public class SeatRepository {
 
     public List<Seat> findByTripId(String tripId) {
         List<Seat> result = new ArrayList<>();
+        List<Seat> seats = findAll();
 
-        if (isBlank(tripId)) {
-            return result;
-        }
-
-        for (Seat seat : findAll()) {
-            if (sameText(
-                    seat.getTripId(),
-                    tripId
-            )) {
+        for (Seat seat : seats) {
+            if (seat.getTripId().equals(tripId)) {
                 result.add(seat);
             }
         }
@@ -58,26 +47,11 @@ public class SeatRepository {
             String tripId,
             String seatNumber
     ) {
-        if (isBlank(tripId)
-                || isBlank(seatNumber)) {
+        List<Seat> seats = findAll();
 
-            return null;
-        }
-
-        for (Seat seat : findAll()) {
-            boolean correctTrip =
-                    sameText(
-                            seat.getTripId(),
-                            tripId
-                    );
-
-            boolean correctSeatNumber =
-                    sameText(
-                            seat.getSeatNumber(),
-                            seatNumber
-                    );
-
-            if (correctTrip && correctSeatNumber) {
+        for (Seat seat : seats) {
+            if (seat.getTripId().equals(tripId)
+                    && seat.getSeatNumber().equals(seatNumber)) {
                 return seat;
             }
         }
@@ -85,91 +59,22 @@ public class SeatRepository {
         return null;
     }
 
-    public List<Seat> findByStatus(String status) {
-        List<Seat> result = new ArrayList<>();
-
-        if (isBlank(status)) {
-            return result;
-        }
-
-        for (Seat seat : findAll()) {
-            if (sameText(
-                    seat.getStatus(),
-                    status
-            )) {
-                result.add(seat);
-            }
-        }
-
-        return result;
-    }
-
-    public List<Seat> findByTripIdAndStatus(
-            String tripId,
-            String status
-    ) {
-        List<Seat> result = new ArrayList<>();
-
-        if (isBlank(tripId)
-                || isBlank(status)) {
-
-            return result;
-        }
-
-        for (Seat seat : findAll()) {
-            boolean correctTrip =
-                    sameText(
-                            seat.getTripId(),
-                            tripId
-                    );
-
-            boolean correctStatus =
-                    sameText(
-                            seat.getStatus(),
-                            status
-                    );
-
-            if (correctTrip && correctStatus) {
-                result.add(seat);
-            }
-        }
-
-        return result;
-    }
-
     public void save(Seat seat) {
         List<Seat> seats = findAll();
 
         seats.add(seat);
 
-        fileManager.writeList(
-                FILE_PATH,
-                seats
-        );
+        fileManager.writeList(FILE_PATH, seats);
     }
 
     public boolean update(Seat seat) {
-        if (seat == null
-                || isBlank(seat.getSeatId())) {
-
-            return false;
-        }
-
         List<Seat> seats = findAll();
 
         for (int i = 0; i < seats.size(); i++) {
-            Seat currentSeat = seats.get(i);
-
-            if (sameText(
-                    currentSeat.getSeatId(),
-                    seat.getSeatId()
-            )) {
+            if (seats.get(i).getSeatId().equals(seat.getSeatId())) {
                 seats.set(i, seat);
 
-                fileManager.writeList(
-                        FILE_PATH,
-                        seats
-                );
+                fileManager.writeList(FILE_PATH, seats);
 
                 return true;
             }
@@ -182,25 +87,13 @@ public class SeatRepository {
             String seatId,
             String status
     ) {
-        if (isBlank(seatId)
-                || isBlank(status)) {
-
-            return false;
-        }
-
         List<Seat> seats = findAll();
 
         for (Seat seat : seats) {
-            if (sameText(
-                    seat.getSeatId(),
-                    seatId
-            )) {
-                seat.setStatus(status.trim());
+            if (seat.getSeatId().equals(seatId)) {
+                seat.setStatus(status);
 
-                fileManager.writeList(
-                        FILE_PATH,
-                        seats
-                );
+                fileManager.writeList(FILE_PATH, seats);
 
                 return true;
             }
@@ -210,27 +103,19 @@ public class SeatRepository {
     }
 
     public boolean delete(String seatId) {
-        if (isBlank(seatId)) {
-            return false;
-        }
-
         List<Seat> seats = findAll();
 
-        boolean removed = seats.removeIf(
-                seat -> sameText(
-                        seat.getSeatId(),
-                        seatId
-                )
-        );
+        for (int i = 0; i < seats.size(); i++) {
+            if (seats.get(i).getSeatId().equals(seatId)) {
+                seats.remove(i);
 
-        if (removed) {
-            fileManager.writeList(
-                    FILE_PATH,
-                    seats
-            );
+                fileManager.writeList(FILE_PATH, seats);
+
+                return true;
+            }
         }
 
-        return removed;
+        return false;
     }
 
     public boolean exists(String seatId) {
@@ -245,28 +130,5 @@ public class SeatRepository {
                 tripId,
                 seatNumber
         ) != null;
-    }
-
-    public int count() {
-        return findAll().size();
-    }
-
-    public int countByTripId(String tripId) {
-        return findByTripId(tripId).size();
-    }
-
-    private boolean sameText(
-            String firstValue,
-            String secondValue
-    ) {
-        return firstValue != null
-                && secondValue != null
-                && firstValue.trim()
-                .equalsIgnoreCase(secondValue.trim());
-    }
-
-    private boolean isBlank(String value) {
-        return value == null
-                || value.trim().isEmpty();
     }
 }

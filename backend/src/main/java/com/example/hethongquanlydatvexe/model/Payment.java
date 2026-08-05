@@ -10,7 +10,6 @@ public class Payment {
 
     public Payment() {
     }
-
     public Payment(
             String paymentId,
             String bookingId,

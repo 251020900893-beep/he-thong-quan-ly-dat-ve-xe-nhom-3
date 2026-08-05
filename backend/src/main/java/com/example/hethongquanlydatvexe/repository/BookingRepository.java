@@ -1,7 +1,6 @@
 package com.example.hethongquanlydatvexe.repository;
 
 import com.example.hethongquanlydatvexe.model.Booking;
-import com.example.hethongquanlydatvexe.model.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +19,17 @@ public class BookingRepository {
     }
 
     public Booking findById(String bookingId) {
-        if (isBlank(bookingId)) {
+        if (bookingId == null || bookingId.trim().isEmpty()) {
             return null;
         }
 
-        for (Booking booking : findAll()) {
-            if (sameText(
-                    booking.getBookingId(),
-                    bookingId
-            )) {
+        List<Booking> bookings = findAll();
+
+        for (Booking booking : bookings) {
+            if (booking.getBookingId() != null
+                    && booking.getBookingId()
+                    .equalsIgnoreCase(bookingId.trim())) {
+
                 return booking;
             }
         }
@@ -36,66 +37,21 @@ public class BookingRepository {
         return null;
     }
 
-    public List<Booking> findByCustomerId(
-            String customerId
-    ) {
+    public List<Booking> findByCustomerId(String customerId) {
         List<Booking> result = new ArrayList<>();
 
-        if (isBlank(customerId)) {
+        if (customerId == null || customerId.trim().isEmpty()) {
             return result;
         }
 
-        for (Booking booking : findAll()) {
+        List<Booking> bookings = findAll();
+
+        for (Booking booking : bookings) {
             if (booking.getCustomer() != null
-                    && sameText(
-                    booking.getCustomer().getId(),
-                    customerId
-            )) {
-                result.add(booking);
-            }
-        }
+                    && booking.getCustomer().getId() != null
+                    && booking.getCustomer().getId()
+                    .equalsIgnoreCase(customerId.trim())) {
 
-        return result;
-    }
-
-    public Booking findByTicketId(String ticketId) {
-        if (isBlank(ticketId)) {
-            return null;
-        }
-
-        for (Booking booking : findAll()) {
-            List<Ticket> tickets = booking.getTickets();
-
-            if (tickets == null) {
-                continue;
-            }
-
-            for (Ticket ticket : tickets) {
-                if (ticket != null
-                        && sameText(
-                        ticket.getTicketId(),
-                        ticketId
-                )) {
-                    return booking;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public List<Booking> findByTripId(String tripId) {
-        List<Booking> result = new ArrayList<>();
-
-        if (isBlank(tripId)) {
-            return result;
-        }
-
-        for (Booking booking : findAll()) {
-            if (containsTrip(
-                    booking,
-                    tripId
-            )) {
                 result.add(booking);
             }
         }
@@ -116,7 +72,8 @@ public class BookingRepository {
 
     public boolean update(Booking booking) {
         if (booking == null
-                || isBlank(booking.getBookingId())) {
+                || booking.getBookingId() == null
+                || booking.getBookingId().trim().isEmpty()) {
 
             return false;
         }
@@ -126,10 +83,12 @@ public class BookingRepository {
         for (int i = 0; i < bookings.size(); i++) {
             Booking currentBooking = bookings.get(i);
 
-            if (sameText(
-                    currentBooking.getBookingId(),
-                    booking.getBookingId()
-            )) {
+            if (currentBooking.getBookingId() != null
+                    && currentBooking.getBookingId()
+                    .equalsIgnoreCase(
+                            booking.getBookingId().trim()
+                    )) {
+
                 bookings.set(i, booking);
 
                 fileManager.writeList(
@@ -145,17 +104,16 @@ public class BookingRepository {
     }
 
     public boolean delete(String bookingId) {
-        if (isBlank(bookingId)) {
+        if (bookingId == null || bookingId.trim().isEmpty()) {
             return false;
         }
 
         List<Booking> bookings = findAll();
 
         boolean removed = bookings.removeIf(
-                booking -> sameText(
-                        booking.getBookingId(),
-                        bookingId
-                )
+                booking -> booking.getBookingId() != null
+                        && booking.getBookingId()
+                        .equalsIgnoreCase(bookingId.trim())
         );
 
         if (removed) {
@@ -172,68 +130,7 @@ public class BookingRepository {
         return findById(bookingId) != null;
     }
 
-    public boolean ticketExistsInBooking(
-            String ticketId
-    ) {
-        return findByTicketId(ticketId) != null;
-    }
-
     public int count() {
         return findAll().size();
-    }
-
-    public int countByCustomerId(
-            String customerId
-    ) {
-        return findByCustomerId(
-                customerId
-        ).size();
-    }
-
-    public int countByTripId(
-            String tripId
-    ) {
-        return findByTripId(
-                tripId
-        ).size();
-    }
-
-    private boolean containsTrip(
-            Booking booking,
-            String tripId
-    ) {
-        if (booking == null
-                || booking.getTickets() == null) {
-
-            return false;
-        }
-
-        for (Ticket ticket : booking.getTickets()) {
-            if (ticket != null
-                    && ticket.getTrip() != null
-                    && sameText(
-                    ticket.getTrip().getTripId(),
-                    tripId
-            )) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean sameText(
-            String firstValue,
-            String secondValue
-    ) {
-        return firstValue != null
-                && secondValue != null
-                && firstValue.trim()
-                .equalsIgnoreCase(secondValue.trim());
-    }
-
-    private boolean isBlank(String value) {
-        return value == null
-                || value.trim().isEmpty();
     }
 }
