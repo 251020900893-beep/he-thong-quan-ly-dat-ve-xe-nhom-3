@@ -1,0 +1,32 @@
+[
+  {
+    "seatId": "S001",
+    "seatNumber": "A1",
+    "seatType": "VIP",
+    "status": "DaDat"
+  },
+  {
+    "seatId": "S002",
+    "seatNumber": "A2",
+    "seatType": "VIP",
+    "status": "ConTrong"
+  },
+  {
+    "seatId": "S003",
+    "seatNumber": "B1",
+    "seatType": "Thuong",
+    "status": "ConTrong"
+  },
+  {
+    "seatId": "S004",
+    "seatNumber": "B2",
+    "seatType": "Thuong",
+    "status": "DaDat"
+  },
+  {
+    "seatId": "S005",
+    "seatNumber": "C1",
+    "seatType": "Thuong",
+    "status": "ConTrong"
+  }
+]
