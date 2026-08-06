@@ -7,8 +7,9 @@ import com.example.hethongquanlydatvexe.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
+import exception.SeatAlreadyBookedException;
+import exception.SeatNotFoundException;
+import exception.TripNotFoundException;
 public class SeatService {
 
     private final SeatRepository seatRepository =
@@ -25,7 +26,7 @@ public class SeatService {
         Seat seat = seatRepository.findById(seatId);
 
         if (seat == null) {
-            throw new NoSuchElementException(
+            throw new SeatNotFoundException(
                     "Không tìm thấy ghế: " + seatId
             );
         }
@@ -35,7 +36,7 @@ public class SeatService {
 
     public List<Seat> getSeatsByTrip(String tripId) {
         if (!busTripRepository.exists(tripId)) {
-            throw new NoSuchElementException(
+            throw new TripNotFoundException(
                     "Chuyến xe không tồn tại"
             );
         }
@@ -68,7 +69,7 @@ public class SeatService {
         );
 
         if (seat == null) {
-            throw new NoSuchElementException(
+            throw new SeatNotFoundException(
                     "Ghế không tồn tại trong chuyến xe"
             );
         }
@@ -96,7 +97,7 @@ public class SeatService {
         if (!seat.getStatus().equals(
                 Constants.SEAT_CON_TRONG
         )) {
-            throw new IllegalStateException(
+            throw new SeatAlreadyBookedException(
                     "Ghế đã được đặt"
             );
         }
@@ -106,13 +107,13 @@ public class SeatService {
 
     public void createSeat(Seat seat) {
         if (seat == null) {
-            throw new IllegalArgumentException(
+            throw new TripNotFoundException(
                     "Ghế không được để trống"
             );
         }
 
         if (!busTripRepository.exists(seat.getTripId())) {
-            throw new NoSuchElementException(
+            throw new TripNotFoundException(
                     "Chuyến xe không tồn tại"
             );
         }
@@ -137,7 +138,7 @@ public class SeatService {
 
     public boolean updateSeat(Seat seat) {
         if (!seatRepository.exists(seat.getSeatId())) {
-            throw new NoSuchElementException(
+            throw new SeatNotFoundException(
                     "Ghế không tồn tại"
             );
         }
@@ -147,7 +148,7 @@ public class SeatService {
 
     public boolean deleteSeat(String seatId) {
         if (!seatRepository.exists(seatId)) {
-            throw new NoSuchElementException(
+            throw new SeatNotFoundException(
                     "Ghế không tồn tại"
             );
         }

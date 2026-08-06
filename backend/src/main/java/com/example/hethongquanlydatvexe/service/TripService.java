@@ -4,8 +4,7 @@ import com.example.hethongquanlydatvexe.model.BusTrip;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-
+import exception.TripNotFoundException;
 public class TripService {
 
     private final BusTripRepository busTripRepository =
@@ -19,7 +18,7 @@ public class TripService {
         BusTrip trip = busTripRepository.findById(tripId);
 
         if (trip == null) {
-            throw new NoSuchElementException(
+            throw new TripNotFoundException(
                     "Không tìm thấy chuyến xe: " + tripId
             );
         }
@@ -65,7 +64,7 @@ public class TripService {
         validateTrip(trip);
 
         if (!busTripRepository.exists(trip.getTripId())) {
-            throw new NoSuchElementException(
+            throw new TripNotFoundException(
                     "Chuyến xe không tồn tại"
             );
         }
@@ -75,7 +74,7 @@ public class TripService {
 
     public boolean deleteTrip(String tripId) {
         if (!busTripRepository.exists(tripId)) {
-            throw new NoSuchElementException(
+            throw new TripNotFoundException(
                     "Chuyến xe không tồn tại"
             );
         }
