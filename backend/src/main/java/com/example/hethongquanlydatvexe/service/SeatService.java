@@ -7,9 +7,9 @@ import com.example.hethongquanlydatvexe.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import exception.SeatAlreadyBookedException;
-import exception.SeatNotFoundException;
-import exception.TripNotFoundException;
+import com.example.hethongquanlydatvexe.exception.SeatAlreadyBookedException;
+import com.example.hethongquanlydatvexe.exception.SeatNotFoundException;
+import com.example.hethongquanlydatvexe.exception.TripNotFoundException;
 public class SeatService {
 
     private final SeatRepository seatRepository =

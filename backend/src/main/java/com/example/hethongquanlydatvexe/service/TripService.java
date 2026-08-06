@@ -4,7 +4,7 @@ import com.example.hethongquanlydatvexe.model.BusTrip;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 
 import java.util.List;
-import exception.TripNotFoundException;
+import com.example.hethongquanlydatvexe.exception.TripNotFoundException;
 public class TripService {
 
     private final BusTripRepository busTripRepository =
