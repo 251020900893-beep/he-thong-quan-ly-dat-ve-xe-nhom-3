@@ -6,8 +6,7 @@ import com.example.hethongquanlydatvexe.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
+import exception.CustomerNotFoundException;
 public class CustomerService {
 
     private final CustomerRepository customerRepository =
@@ -21,7 +20,7 @@ public class CustomerService {
         Customer customer = customerRepository.findById(customerId);
 
         if (customer == null) {
-            throw new NoSuchElementException(
+            throw new CustomerNotFoundException(
                     "Không tìm thấy khách hàng: " + customerId
             );
         }
@@ -33,7 +32,7 @@ public class CustomerService {
         Customer customer = customerRepository.findByPhone(phone);
 
         if (customer == null) {
-            throw new NoSuchElementException(
+            throw new CustomerNotFoundException(
                     "Không tìm thấy số điện thoại: " + phone
             );
         }
@@ -45,7 +44,7 @@ public class CustomerService {
         Customer customer = customerRepository.findByEmail(email);
 
         if (customer == null) {
-            throw new NoSuchElementException(
+            throw new CustomerNotFoundException(
                     "Không tìm thấy email: " + email
             );
         }
@@ -81,7 +80,7 @@ public class CustomerService {
         validateCustomer(customer);
 
         if (!customerRepository.exists(customer.getId())) {
-            throw new NoSuchElementException(
+            throw new CustomerNotFoundException(
                     "Khách hàng không tồn tại"
             );
         }
@@ -91,7 +90,7 @@ public class CustomerService {
 
     public boolean deleteCustomer(String customerId) {
         if (!customerRepository.exists(customerId)) {
-            throw new NoSuchElementException(
+            throw new CustomerNotFoundException(
                     "Khách hàng không tồn tại"
             );
         }
