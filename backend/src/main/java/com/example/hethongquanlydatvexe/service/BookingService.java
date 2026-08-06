@@ -1,7 +1,7 @@
 package com.example.hethongquanlydatvexe.service;
 
 import com.example.hethongquanlydatvexe.model.*;
-import exception.SeatAlreadyBookedException;
+import com.example.hethongquanlydatvexe.exception.SeatAlreadyBookedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class BookingService {
         newTicket.setTrip(trip);
         newTicket.setSeat(selectedSeat);
         newTicket.setPrice(finalPrice);
-
+        newTicket.setStatus("Đã thanh toán");
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(newTicket);
 

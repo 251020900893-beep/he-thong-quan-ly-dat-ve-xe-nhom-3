@@ -6,7 +6,7 @@ import com.example.hethongquanlydatvexe.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import exception.CustomerNotFoundException;
+import com.example.hethongquanlydatvexe.exception.CustomerNotFoundException;
 public class CustomerService {
 
     private final CustomerRepository customerRepository =

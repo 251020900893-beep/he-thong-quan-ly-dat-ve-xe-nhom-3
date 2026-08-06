@@ -10,7 +10,7 @@ public class BookingRequest {
     private BusTrip trip;
     private Seat seat;
     private double basePrice;
-
+    private String paymentMethod;
     public Customer getCustomer() {
         return customer;
     }
@@ -41,5 +41,12 @@ public class BookingRequest {
 
     public void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
+    }
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
