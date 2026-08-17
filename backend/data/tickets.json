@@ -1,28 +1,29 @@
 [
   {
-    "ticketId": "T001",
+    "ticketId": "VE-0001",
     "customer": {
       "id": "KH001",
-      "fullName": "Nguyen Van A",
+      "fullName": "Nguyễn Văn An",
       "phone": "0901234567",
-      "email": "a@gmail.com",
+      "email": "an.nguyen@gmail.com",
       "customerType": "VIP"
     },
     "trip": {
       "tripId": "CX001",
-      "departure": "Ha Noi",
-      "destination": "Hai Phong",
-      "departureTime": "2026-08-10 08:00",
-      "licensePlate": "30A-12345",
-      "totalSeats": 40
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "07:00",
+      "licensePlate": "29B-688.88",
+      "totalSeats": 9
     },
     "seat": {
-      "seatId": "CX001-S001",
+      "seatId": "CX001-S03",
       "tripId": "CX001",
-      "seatNumber": "A1",
+      "seatNumber": "B1",
       "seatType": "VIP",
-      "status": "DaDat"
+      "status": "BOOKED"
     },
-    "price": 300000
+    "price": 280000,
+    "status": "PAID"
   }
 ]

@@ -1,37 +1,11 @@
 [
-  {
-    "seatId": "CX001-S001",
-    "tripId": "CX001",
-    "seatNumber": "A1",
-    "seatType": "VIP",
-    "status": "DaDat"
-  },
-  {
-    "seatId": "CX001-S002",
-    "tripId": "CX001",
-    "seatNumber": "A2",
-    "seatType": "VIP",
-    "status": "ConTrong"
-  },
-  {
-    "seatId": "CX001-S003",
-    "tripId": "CX001",
-    "seatNumber": "B1",
-    "seatType": "Thuong",
-    "status": "ConTrong"
-  },
-  {
-    "seatId": "CX002-S001",
-    "tripId": "CX002",
-    "seatNumber": "A1",
-    "seatType": "VIP",
-    "status": "DaDat"
-  },
-  {
-    "seatId": "CX002-S002",
-    "tripId": "CX002",
-    "seatNumber": "A2",
-    "seatType": "Thuong",
-    "status": "ConTrong"
-  }
+  { "seatId": "CX001-S01", "tripId": "CX001", "seatNumber": "A1", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S02", "tripId": "CX001", "seatNumber": "A2", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S03", "tripId": "CX001", "seatNumber": "B1", "seatType": "VIP", "surcharge": 50000, "status": "BOOKED", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": "VE-0001" },
+  { "seatId": "CX001-S04", "tripId": "CX001", "seatNumber": "B2", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S05", "tripId": "CX001", "seatNumber": "B3", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S06", "tripId": "CX001", "seatNumber": "B4", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S07", "tripId": "CX001", "seatNumber": "C1", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S08", "tripId": "CX001", "seatNumber": "C2", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
+  { "seatId": "CX001-S09", "tripId": "CX001", "seatNumber": "C3", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null }
 ]
