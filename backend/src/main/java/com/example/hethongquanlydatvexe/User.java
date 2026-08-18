@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe.model;
+package com.example.hethongquanlydatvexe;
 
 public class User {
     private String id;

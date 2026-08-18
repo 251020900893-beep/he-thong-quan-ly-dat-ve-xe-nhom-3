@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe.model;
+package com.example.hethongquanlydatvexe;
 
 import com.example.hethongquanlydatvexe.exception.BusinessRuleException;
 import java.time.Instant;

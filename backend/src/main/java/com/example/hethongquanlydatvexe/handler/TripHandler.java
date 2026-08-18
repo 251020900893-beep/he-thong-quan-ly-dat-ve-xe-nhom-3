@@ -1,7 +1,7 @@
 package com.example.hethongquanlydatvexe.handler;
 
 import com.example.hethongquanlydatvexe.dto.ApiResponse;
-import com.example.hethongquanlydatvexe.model.BusTrip;
+import com.example.hethongquanlydatvexe.BusTrip;
 import com.example.hethongquanlydatvexe.service.TripService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

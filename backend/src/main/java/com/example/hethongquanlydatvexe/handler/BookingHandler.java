@@ -1,7 +1,10 @@
 package com.example.hethongquanlydatvexe.handler;
 
+import com.example.hethongquanlydatvexe.BusTrip;
+import com.example.hethongquanlydatvexe.Customer;
+import com.example.hethongquanlydatvexe.Seat;
+import com.example.hethongquanlydatvexe.Ticket;
 import com.example.hethongquanlydatvexe.dto.ApiResponse;
-import com.example.hethongquanlydatvexe.model.*;
 import com.example.hethongquanlydatvexe.repository.*;
 import com.example.hethongquanlydatvexe.utils.IdGenerator;
 import org.springframework.http.ResponseEntity;

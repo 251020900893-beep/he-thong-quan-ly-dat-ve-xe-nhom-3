@@ -1,7 +1,7 @@
 package com.example.hethongquanlydatvexe.handler;
 
-import com.example.hethongquanlydatvexe.model.Seat;
-import com.example.hethongquanlydatvexe.model.Ticket;
+import com.example.hethongquanlydatvexe.Seat;
+import com.example.hethongquanlydatvexe.Ticket;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
 import com.example.hethongquanlydatvexe.repository.TicketRepository;
 import org.springframework.http.ResponseEntity;

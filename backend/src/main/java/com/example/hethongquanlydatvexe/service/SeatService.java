@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.service;
 
-import com.example.hethongquanlydatvexe.model.Seat;
+import com.example.hethongquanlydatvexe.Seat;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
 import com.example.hethongquanlydatvexe.utils.Constants;

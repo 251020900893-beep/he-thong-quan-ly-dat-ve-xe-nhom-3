@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.handler;
 
-import com.example.hethongquanlydatvexe.model.Seat;
+import com.example.hethongquanlydatvexe.Seat;
 import com.example.hethongquanlydatvexe.service.SeatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

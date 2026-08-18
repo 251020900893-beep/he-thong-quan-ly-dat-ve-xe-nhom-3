@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.repository;
 
-import com.example.hethongquanlydatvexe.model.Customer;
+import com.example.hethongquanlydatvexe.Customer;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.service;
 
-import com.example.hethongquanlydatvexe.model.*;
+import com.example.hethongquanlydatvexe.*;
 import com.example.hethongquanlydatvexe.exception.SeatAlreadyBookedException;
 
 import java.util.ArrayList;
