@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe.model;
+package com.example.hethongquanlydatvexe;
 
 public class Ticket {
     private String ticketId;

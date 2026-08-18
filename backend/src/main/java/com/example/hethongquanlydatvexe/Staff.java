@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe.model;
+package com.example.hethongquanlydatvexe;
 
 public class Staff extends User {
     private String role; // Ví dụ: QuanLy, NhanVienBanVe
