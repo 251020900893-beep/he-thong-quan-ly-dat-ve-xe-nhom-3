@@ -6,8 +6,15 @@ public class Ticket {
     private BusTrip trip;
     private Seat seat;
     private double price;
-    private String status;
+    private String status;           // "HOLDING", "PAID", "CANCELLED"
+    private String paymentMethod;    // "BANKING", "E_WALLET", "CASH"
+    private String createdAt;
+    private String expiresAt;
+    private String paidAt;
+
     public Ticket() {
+        this.status = "HOLDING";
+        this.paymentMethod = "BANKING";
     }
 
     public Ticket(String ticketId, Customer customer, BusTrip trip, Seat seat, double price) {
@@ -16,6 +23,8 @@ public class Ticket {
         this.trip = trip;
         this.seat = seat;
         this.price = price;
+        this.status = "HOLDING";
+        this.paymentMethod = "BANKING";
     }
 
     public String getTicketId() { return ticketId; }
@@ -32,5 +41,19 @@ public class Ticket {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
-    public String getStatus() {return status;}public void setStatus(String status) {this.status = status;}
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+
+    public String getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(String expiresAt) { this.expiresAt = expiresAt; }
+
+    public String getPaidAt() { return paidAt; }
+    public void setPaidAt(String paidAt) { this.paidAt = paidAt; }
 }

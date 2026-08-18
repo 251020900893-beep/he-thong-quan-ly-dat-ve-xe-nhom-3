@@ -1,23 +1,23 @@
 [
   {
+    "customerType": "VIP",
     "id": "KH001",
     "fullName": "Nguyễn Văn Hùng",
     "phone": "0912345678",
-    "email": "hung.nguyen@gmail.com",
-    "customerType": "VIP"
+    "email": "hung.nguyen@gmail.com"
   },
   {
+    "customerType": "MEMBER",
     "id": "KH002",
     "fullName": "Trần Thị Mai",
     "phone": "0987654321",
-    "email": "mai.tran@gmail.com",
-    "customerType": "MEMBER"
+    "email": "mai.tran@gmail.com"
   },
   {
+    "customerType": "NORMAL",
     "id": "KH003",
     "fullName": "Lê Hoàng Nam",
     "phone": "0905123456",
-    "email": "nam.le@gmail.com",
-    "customerType": "NORMAL"
+    "email": "nam.le@gmail.com"
   }
 ]
