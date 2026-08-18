@@ -5,7 +5,8 @@
     "seatNumber": "A1",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-A1-2308"
   },
   {
     "seatId": "CX001-S02",
@@ -13,7 +14,8 @@
     "seatNumber": "A2",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-A2-9717"
   },
   {
     "seatId": "CX001-S03",
@@ -21,7 +23,8 @@
     "seatNumber": "B1",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-B1-9519"
   },
   {
     "seatId": "CX001-S04",
@@ -39,9 +42,8 @@
     "seatNumber": "B3",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE",
-    "holdingCustomerId": "0912345678",
-    "bookedTicketId": "T013"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-B3-4179"
   },
   {
     "seatId": "CX001-S06",
@@ -49,9 +51,8 @@
     "seatNumber": "B4",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE",
-    "holdingCustomerId": "0912345678",
-    "bookedTicketId": "T011"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-B4-8117"
   },
   {
     "seatId": "CX001-S07",
@@ -59,7 +60,8 @@
     "seatNumber": "C1",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-C1-2638"
   },
   {
     "seatId": "CX001-S08",
@@ -67,7 +69,8 @@
     "seatNumber": "C2",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-C2-3341"
   },
   {
     "seatId": "CX001-S09",
@@ -75,7 +78,8 @@
     "seatNumber": "C3",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0630-C3-6717"
   },
   {
     "seatId": "CX002-A1",
@@ -99,9 +103,8 @@
     "seatNumber": "B1",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE",
-    "holdingCustomerId": "0912345678",
-    "bookedTicketId": "T008"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-B1-9517"
   },
   {
     "seatId": "CX002-B2",
@@ -109,7 +112,8 @@
     "seatNumber": "B2",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-B2-7325"
   },
   {
     "seatId": "CX002-B3",
@@ -117,7 +121,8 @@
     "seatNumber": "B3",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-B3-8604"
   },
   {
     "seatId": "CX002-B4",
@@ -125,9 +130,8 @@
     "seatNumber": "B4",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE",
-    "holdingCustomerId": "0912345678",
-    "bookedTicketId": "VE-HNHP0800-B4-9848"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-B4-8664"
   },
   {
     "seatId": "CX002-B5",
@@ -143,9 +147,8 @@
     "seatNumber": "B6",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE",
-    "holdingCustomerId": "0987654321",
-    "bookedTicketId": "T012"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-B6-9971"
   },
   {
     "seatId": "CX002-C1",
@@ -169,7 +172,8 @@
     "seatNumber": "C3",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP0800-C3-2087"
   },
   {
     "seatId": "CX002-C4",
@@ -249,7 +253,8 @@
     "seatNumber": "C3",
     "seatType": "NORMAL",
     "surcharge": 0.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP1000-C3-7406"
   },
   {
     "seatId": "CX004-A1",
@@ -297,7 +302,8 @@
     "seatNumber": "B4",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP1330-B4-9457"
   },
   {
     "seatId": "CX004-B5",
@@ -377,7 +383,8 @@
     "seatNumber": "B2",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP1530-B2-8884"
   },
   {
     "seatId": "CX005-B3",
@@ -393,7 +400,8 @@
     "seatNumber": "B4",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HNHP1530-B4-1250"
   },
   {
     "seatId": "CX005-C1",
@@ -449,7 +457,9 @@
     "seatNumber": "B2",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "holdingCustomerId": "0905123456",
+    "bookedTicketId": "VE-HNHP1800-B2-7208"
   },
   {
     "seatId": "CX006-B3",
@@ -617,7 +627,8 @@
     "seatNumber": "B2",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HPHN0830-B2-6956"
   },
   {
     "seatId": "CX008-B3",
@@ -633,7 +644,8 @@
     "seatNumber": "B4",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HPHN0830-B4-6806"
   },
   {
     "seatId": "CX008-B5",
@@ -649,7 +661,9 @@
     "seatNumber": "B6",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "holdingCustomerId": "0905123456",
+    "bookedTicketId": "VE-HPHN0830-B6-2078"
   },
   {
     "seatId": "CX008-C1",

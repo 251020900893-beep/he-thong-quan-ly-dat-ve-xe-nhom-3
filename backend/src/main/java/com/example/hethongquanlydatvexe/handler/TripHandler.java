@@ -1,7 +1,7 @@
 package com.example.hethongquanlydatvexe.handler;
 
+import com.example.hethongquanlydatvexe.model.BusTrip;
 import com.example.hethongquanlydatvexe.dto.ApiResponse;
-import com.example.hethongquanlydatvexe.BusTrip;
 import com.example.hethongquanlydatvexe.service.TripService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/api/trips", "/trips"})
-@CrossOrigin(origins = "*")
+@RequestMapping({"/trips", "/api/trips"})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TripHandler {
 
     private final TripService tripService = new TripService();

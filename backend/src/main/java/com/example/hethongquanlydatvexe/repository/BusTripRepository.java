@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.repository;
 
-import com.example.hethongquanlydatvexe.BusTrip;
+import com.example.hethongquanlydatvexe.model.BusTrip;
 
 import java.util.ArrayList;
 import java.util.List;

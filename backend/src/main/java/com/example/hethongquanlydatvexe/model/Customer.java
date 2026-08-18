@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe;
+package com.example.hethongquanlydatvexe.model;
 
 public class Customer extends User {
     private String customerType; // Ví dụ: Thuong, VIP
