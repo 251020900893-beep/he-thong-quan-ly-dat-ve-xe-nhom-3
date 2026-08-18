@@ -1,11 +1,1022 @@
 [
-  { "seatId": "CX001-S01", "tripId": "CX001", "seatNumber": "A1", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S02", "tripId": "CX001", "seatNumber": "A2", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S03", "tripId": "CX001", "seatNumber": "B1", "seatType": "VIP", "surcharge": 50000, "status": "BOOKED", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": "VE-0001" },
-  { "seatId": "CX001-S04", "tripId": "CX001", "seatNumber": "B2", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S05", "tripId": "CX001", "seatNumber": "B3", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S06", "tripId": "CX001", "seatNumber": "B4", "seatType": "VIP", "surcharge": 50000, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S07", "tripId": "CX001", "seatNumber": "C1", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S08", "tripId": "CX001", "seatNumber": "C2", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null },
-  { "seatId": "CX001-S09", "tripId": "CX001", "seatNumber": "C3", "seatType": "NORMAL", "surcharge": 0, "status": "AVAILABLE", "holdingExpiresAt": null, "holdingCustomerId": null, "bookedTicketId": null }
+  {
+    "seatId": "CX001-S01",
+    "tripId": "CX001",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX001-S02",
+    "tripId": "CX001",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX001-S03",
+    "tripId": "CX001",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX001-S04",
+    "tripId": "CX001",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "BOOKED",
+    "holdingCustomerId": "0912345678",
+    "bookedTicketId": "VE-HNHP0630-B2-7506"
+  },
+  {
+    "seatId": "CX001-S05",
+    "tripId": "CX001",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE",
+    "holdingCustomerId": "0912345678",
+    "bookedTicketId": "T013"
+  },
+  {
+    "seatId": "CX001-S06",
+    "tripId": "CX001",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE",
+    "holdingCustomerId": "0912345678",
+    "bookedTicketId": "T011"
+  },
+  {
+    "seatId": "CX001-S07",
+    "tripId": "CX001",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX001-S08",
+    "tripId": "CX001",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX001-S09",
+    "tripId": "CX001",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-A1",
+    "tripId": "CX002",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-A2",
+    "tripId": "CX002",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-B1",
+    "tripId": "CX002",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE",
+    "holdingCustomerId": "0912345678",
+    "bookedTicketId": "T008"
+  },
+  {
+    "seatId": "CX002-B2",
+    "tripId": "CX002",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-B3",
+    "tripId": "CX002",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-B4",
+    "tripId": "CX002",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE",
+    "holdingCustomerId": "0912345678",
+    "bookedTicketId": "VE-HNHP0800-B4-9848"
+  },
+  {
+    "seatId": "CX002-B5",
+    "tripId": "CX002",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-B6",
+    "tripId": "CX002",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE",
+    "holdingCustomerId": "0987654321",
+    "bookedTicketId": "T012"
+  },
+  {
+    "seatId": "CX002-C1",
+    "tripId": "CX002",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-C2",
+    "tripId": "CX002",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-C3",
+    "tripId": "CX002",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX002-C4",
+    "tripId": "CX002",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-A1",
+    "tripId": "CX003",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-A2",
+    "tripId": "CX003",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-B1",
+    "tripId": "CX003",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-B2",
+    "tripId": "CX003",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-B3",
+    "tripId": "CX003",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-B4",
+    "tripId": "CX003",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-C1",
+    "tripId": "CX003",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-C2",
+    "tripId": "CX003",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX003-C3",
+    "tripId": "CX003",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-A1",
+    "tripId": "CX004",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-A2",
+    "tripId": "CX004",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B1",
+    "tripId": "CX004",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B2",
+    "tripId": "CX004",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B3",
+    "tripId": "CX004",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B4",
+    "tripId": "CX004",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B5",
+    "tripId": "CX004",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-B6",
+    "tripId": "CX004",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-C1",
+    "tripId": "CX004",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-C2",
+    "tripId": "CX004",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-C3",
+    "tripId": "CX004",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX004-C4",
+    "tripId": "CX004",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-A1",
+    "tripId": "CX005",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-A2",
+    "tripId": "CX005",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-B1",
+    "tripId": "CX005",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-B2",
+    "tripId": "CX005",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-B3",
+    "tripId": "CX005",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-B4",
+    "tripId": "CX005",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-C1",
+    "tripId": "CX005",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-C2",
+    "tripId": "CX005",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX005-C3",
+    "tripId": "CX005",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-A1",
+    "tripId": "CX006",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-A2",
+    "tripId": "CX006",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B1",
+    "tripId": "CX006",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B2",
+    "tripId": "CX006",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B3",
+    "tripId": "CX006",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B4",
+    "tripId": "CX006",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B5",
+    "tripId": "CX006",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-B6",
+    "tripId": "CX006",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-C1",
+    "tripId": "CX006",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-C2",
+    "tripId": "CX006",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-C3",
+    "tripId": "CX006",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX006-C4",
+    "tripId": "CX006",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-A1",
+    "tripId": "CX007",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-A2",
+    "tripId": "CX007",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-B1",
+    "tripId": "CX007",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-B2",
+    "tripId": "CX007",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-B3",
+    "tripId": "CX007",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-B4",
+    "tripId": "CX007",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-C1",
+    "tripId": "CX007",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-C2",
+    "tripId": "CX007",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX007-C3",
+    "tripId": "CX007",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-A1",
+    "tripId": "CX008",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-A2",
+    "tripId": "CX008",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B1",
+    "tripId": "CX008",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B2",
+    "tripId": "CX008",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B3",
+    "tripId": "CX008",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B4",
+    "tripId": "CX008",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B5",
+    "tripId": "CX008",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-B6",
+    "tripId": "CX008",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-C1",
+    "tripId": "CX008",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-C2",
+    "tripId": "CX008",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-C3",
+    "tripId": "CX008",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX008-C4",
+    "tripId": "CX008",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-A1",
+    "tripId": "CX009",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-A2",
+    "tripId": "CX009",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-B1",
+    "tripId": "CX009",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-B2",
+    "tripId": "CX009",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-B3",
+    "tripId": "CX009",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-B4",
+    "tripId": "CX009",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-C1",
+    "tripId": "CX009",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-C2",
+    "tripId": "CX009",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX009-C3",
+    "tripId": "CX009",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-A1",
+    "tripId": "CX010",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-A2",
+    "tripId": "CX010",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B1",
+    "tripId": "CX010",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B2",
+    "tripId": "CX010",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B3",
+    "tripId": "CX010",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B4",
+    "tripId": "CX010",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B5",
+    "tripId": "CX010",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-B6",
+    "tripId": "CX010",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-C1",
+    "tripId": "CX010",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-C2",
+    "tripId": "CX010",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-C3",
+    "tripId": "CX010",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX010-C4",
+    "tripId": "CX010",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-A1",
+    "tripId": "CX011",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-A2",
+    "tripId": "CX011",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-B1",
+    "tripId": "CX011",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-B2",
+    "tripId": "CX011",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-B3",
+    "tripId": "CX011",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-B4",
+    "tripId": "CX011",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-C1",
+    "tripId": "CX011",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-C2",
+    "tripId": "CX011",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX011-C3",
+    "tripId": "CX011",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-A1",
+    "tripId": "CX012",
+    "seatNumber": "A1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-A2",
+    "tripId": "CX012",
+    "seatNumber": "A2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B1",
+    "tripId": "CX012",
+    "seatNumber": "B1",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B2",
+    "tripId": "CX012",
+    "seatNumber": "B2",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B3",
+    "tripId": "CX012",
+    "seatNumber": "B3",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B4",
+    "tripId": "CX012",
+    "seatNumber": "B4",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B5",
+    "tripId": "CX012",
+    "seatNumber": "B5",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-B6",
+    "tripId": "CX012",
+    "seatNumber": "B6",
+    "seatType": "VIP",
+    "surcharge": 50000.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-C1",
+    "tripId": "CX012",
+    "seatNumber": "C1",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-C2",
+    "tripId": "CX012",
+    "seatNumber": "C2",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-C3",
+    "tripId": "CX012",
+    "seatNumber": "C3",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  },
+  {
+    "seatId": "CX012-C4",
+    "tripId": "CX012",
+    "seatNumber": "C4",
+    "seatType": "NORMAL",
+    "surcharge": 0.0,
+    "status": "AVAILABLE"
+  }
 ]

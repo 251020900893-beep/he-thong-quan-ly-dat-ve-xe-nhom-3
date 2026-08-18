@@ -18,52 +18,59 @@ public class FileManager {
             .setPrettyPrinting()
             .create();
 
-    public <T> List<T> readList(String filePath, Type type) {
+    private File resolveFile(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) return file;
+
+        // Nếu chạy từ thư mục root thì kiểm tra thư mục backend/
+        File backendFile = new File("backend/" + filePath);
+        if (backendFile.exists()) return backendFile;
+
+        // Nếu chạy từ backend/ mà path là backend/data
+        if (filePath.startsWith("backend/")) {
+            File directFile = new File(filePath.replace("backend/", ""));
+            if (directFile.exists()) return directFile;
+        }
+
+        return file; // Trả về file ban đầu để tạo mới nếu cần
+    }
+
+    public synchronized <T> List<T> readList(String filePath, Type type) {
         try {
-            File file = new File(filePath);
+            File file = resolveFile(filePath);
 
             if (!file.exists() || file.length() == 0) {
                 return new ArrayList<>();
             }
 
-            FileReader reader = new FileReader(file);
-            List<T> data = gson.fromJson(reader, type);
-            reader.close();
-
-            if (data == null) {
-                return new ArrayList<>();
+            try (FileReader reader = new FileReader(file)) {
+                List<T> data = gson.fromJson(reader, type);
+                return (data != null) ? data : new ArrayList<>();
             }
-
-            return data;
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "Không thể đọc file: " + filePath
-            );
+            System.err.println("Cảnh báo: Không thể đọc file " + filePath + ", tạo danh sách rỗng.");
+            return new ArrayList<>();
         }
     }
 
-    public <T> void writeList(String filePath, List<T> data) {
+    public synchronized <T> void writeList(String filePath, List<T> data) {
         try {
-            File file = new File(filePath);
+            File file = resolveFile(filePath);
             File parent = file.getParentFile();
 
             if (parent != null && !parent.exists()) {
                 parent.mkdirs();
             }
 
-            FileWriter writer = new FileWriter(file);
-            gson.toJson(data, writer);
-            writer.close();
+            try (FileWriter writer = new FileWriter(file)) {
+                gson.toJson(data, writer);
+            }
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "Không thể ghi file: " + filePath
-            );
+            throw new RuntimeException("Không thể ghi file: " + filePath, e);
         }
     }
 
     public static <T> Type getListType(Class<T> clazz) {
-        return TypeToken
-                .getParameterized(List.class, clazz)
-                .getType();
+        return TypeToken.getParameterized(List.class, clazz).getType();
     }
 }
