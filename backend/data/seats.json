@@ -831,7 +831,8 @@
     "seatNumber": "B6",
     "seatType": "VIP",
     "surcharge": 50000.0,
-    "status": "AVAILABLE"
+    "status": "BOOKED",
+    "bookedTicketId": "VE-HPHN1400-B6-7021"
   },
   {
     "seatId": "CX010-C1",
