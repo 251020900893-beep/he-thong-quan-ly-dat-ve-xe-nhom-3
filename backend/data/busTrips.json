@@ -1,42 +1,47 @@
 [
   {
     "tripId": "CX001",
-    "departure": "Ha Noi",
-    "destination": "Hai Phong",
-    "departureTime": "2026-08-10 08:00",
-    "licensePlate": "30A-12345",
-    "totalSeats": 40
+    "tripCode": "HN-HP-0700",
+    "departure": "Hà Nội (BX Mỹ Đình)",
+    "destination": "Hải Phòng (BX Vĩnh Niệm)",
+    "departureTime": "07:00",
+    "arrivalTime": "08:30",
+    "licensePlate": "29B-688.88",
+    "busType": "Limousine VIP 9 Chỗ",
+    "basePrice": 230000,
+    "totalSeats": 9,
+    "driverName": "Nguyễn Thành Long (0912.888.111)",
+    "pickupPoints": ["Bến xe Mỹ Đình", "Đại học Sư Phạm", "Nhà hát Lớn"],
+    "dropoffPoints": ["Bến xe Vĩnh Niệm", "Bến xe Cầu Rào 2", "Ngã 4 Cơ Điện"]
   },
   {
     "tripId": "CX002",
-    "departure": "Ha Noi",
-    "destination": "Nam Dinh",
-    "departureTime": "2026-08-10 09:30",
-    "licensePlate": "29B-56789",
-    "totalSeats": 35
+    "tripCode": "HN-HP-0830",
+    "departure": "Hà Nội (BX Nước Ngầm)",
+    "destination": "Hải Phòng (BX Lạc Long)",
+    "departureTime": "08:30",
+    "arrivalTime": "10:00",
+    "licensePlate": "29B-999.66",
+    "busType": "Limousine Luxury 12 Chỗ",
+    "basePrice": 240000,
+    "totalSeats": 12,
+    "driverName": "Trần Văn Dũng (0903.456.789)",
+    "pickupPoints": ["Bến xe Nước Ngầm", "Bến xe Giáp Bát", "Vành đai 3"],
+    "dropoffPoints": ["Bến xe Lạc Long", "Nhà hát TP Hải Phòng", "Cầu Bính"]
   },
   {
     "tripId": "CX003",
-    "departure": "Ha Noi",
-    "destination": "Ninh Binh",
-    "departureTime": "2026-08-10 13:00",
-    "licensePlate": "30C-99999",
-    "totalSeats": 45
-  },
-  {
-    "tripId": "CX004",
-    "departure": "Hai Phong",
-    "destination": "Ha Noi",
-    "departureTime": "2026-08-11 07:00",
-    "licensePlate": "15A-88888",
-    "totalSeats": 40
-  },
-  {
-    "tripId": "CX005",
-    "departure": "Hai Phong",
-    "destination": "Quang Ninh",
-    "departureTime": "2026-08-11 15:00",
-    "licensePlate": "15B-66666",
-    "totalSeats": 30
+    "tripCode": "HP-HN-1630",
+    "departure": "Hải Phòng (BX Vĩnh Niệm)",
+    "destination": "Hà Nội (BX Mỹ Đình)",
+    "departureTime": "16:30",
+    "arrivalTime": "18:00",
+    "licensePlate": "15B-888.11",
+    "busType": "Limousine VIP 9 Chỗ",
+    "basePrice": 230000,
+    "totalSeats": 9,
+    "driverName": "Đặng Quốc Huy (0915.222.333)",
+    "pickupPoints": ["Bến xe Vĩnh Niệm", "Nhà hát Lớn", "Đình Vũ"],
+    "dropoffPoints": ["Bến xe Nước Ngầm", "Bến xe Mỹ Đình"]
   }
 ]
