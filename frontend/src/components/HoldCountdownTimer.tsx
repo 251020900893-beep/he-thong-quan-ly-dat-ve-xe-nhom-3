@@ -2,56 +2,76 @@ import React, { useEffect, useState } from 'react';
 import { Clock, AlertTriangle } from 'lucide-react';
 
 interface HoldCountdownTimerProps {
-    expireAt: string | number; // Timestamp hoặc ISO String
+    expireAt?: string | number | null;
+    expiresAt?: string | number | null;
     onExpire: () => void;
 }
 
-export const HoldCountdownTimer: React.FC<HoldCountdownTimerProps> = ({ expireAt, onExpire }) => {
+export const HoldCountdownTimer: React.FC<HoldCountdownTimerProps> = ({
+                                                                          expireAt,
+                                                                          expiresAt,
+                                                                          onExpire
+                                                                      }) => {
+    const targetValue = expireAt || expiresAt;
+
     const calculateRemaining = () => {
-        const target = typeof expireAt === 'string' ? new Date(expireAt).getTime() : expireAt;
-        const diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
-        return diff;
+        if (!targetValue) {
+            // Mặc định đếm 3 phút (180s) nếu chưa nhận được thời gian từ BE
+            return 180;
+        }
+        let targetMs = 0;
+        if (typeof targetValue === 'number') {
+            targetMs = targetValue > 10000000000 ? targetValue : targetValue * 1000;
+        } else {
+            targetMs = new Date(targetValue).getTime();
+        }
+
+        if (isNaN(targetMs)) return 180;
+        return Math.max(0, Math.floor((targetMs - Date.now()) / 1000));
     };
 
-    const [secondsLeft, setSecondsLeft] = useState(calculateRemaining);
+    const [secondsLeft, setSecondsLeft] = useState<number>(calculateRemaining);
 
     useEffect(() => {
+        setSecondsLeft(calculateRemaining());
         const timer = setInterval(() => {
-            const remaining = calculateRemaining();
-            setSecondsLeft(remaining);
-            if (remaining <= 0) {
-                clearInterval(timer);
-                onExpire();
-            }
+            setSecondsLeft(prev => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    onExpire();
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [expireAt, onExpire]);
+    }, [targetValue]);
 
     const mins = Math.floor(secondsLeft / 60);
     const secs = secondsLeft % 60;
     const isUrgent = secondsLeft <= 30;
 
     return (
-        <div className={`p-4 rounded-2xl border-2 transition-all flex items-center justify-between gap-3 ${
+        <div className={`px-3 py-1.5 rounded-xl border flex items-center justify-between gap-3 ${
             isUrgent
                 ? 'bg-rose-50 border-rose-400 text-rose-800 animate-pulse'
                 : 'bg-amber-50 border-amber-300 text-amber-900'
         }`}>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
                 {isUrgent ? (
-                    <AlertTriangle className="w-5 h-5 text-rose-600 animate-bounce" />
+                    <AlertTriangle className="w-4 h-4 text-rose-600 animate-bounce" />
                 ) : (
-                    <Clock className="w-5 h-5 text-amber-600" />
+                    <Clock className="w-4 h-4 text-amber-600" />
                 )}
                 <div>
-                    <div className="text-xs font-bold uppercase tracking-wider">Thời gian giữ chỗ</div>
-                    <div className="text-[11px] opacity-80">Ghế sẽ tự giải phóng nếu hết hạn</div>
+                    <div className="text-[10px] font-black uppercase tracking-wider">Thời gian giữ chỗ</div>
+                    <div className="text-[9px] opacity-80">Tự giải phóng khi hết giờ</div>
                 </div>
             </div>
 
-            <div className="font-mono text-2xl font-black px-3 py-1 bg-white rounded-xl border border-inherit shadow-xs">
-                {String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}
+            <div className="font-mono text-base font-black px-2.5 py-0.5 bg-white rounded-lg border border-inherit shadow-2xs">
+                {String(isNaN(mins) ? 3 : mins).padStart(2, '0')}:{String(isNaN(secs) ? 0 : secs).padStart(2, '0')}
             </div>
         </div>
     );
