@@ -1,30 +1,22 @@
 package com.example.hethongquanlydatvexe.handler;
 
-import com.example.hethongquanlydatvexe.repository.BookingRepository;
-import com.example.hethongquanlydatvexe.repository.TicketRepository;
+import com.example.hethongquanlydatvexe.dto.ApiResponse;
+import com.example.hethongquanlydatvexe.service.TicketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
+
 import java.util.Map;
 
 @RestController
-@RequestMapping("/staff")
+@RequestMapping({"/staff", "/api/staff"})
 @CrossOrigin(origins = "*")
 public class StaffHandler {
-    private final TicketRepository ticketRepo = new TicketRepository();
-    private final BookingRepository bookingRepo = new BookingRepository();
 
-    // GET /staff/dashboard-stats
+    private final TicketService ticketService = new TicketService();
+
     @GetMapping("/dashboard-stats")
-    public ResponseEntity<?> getDashboardStats() {
-        var tickets = ticketRepo.findAll();
-        double totalRevenue = tickets.stream().mapToDouble(t -> t.getPrice()).sum();
-        int totalTickets = tickets.size();
-
-        Map<String, Object> stats = new HashMap<>();
-        stats.put("totalRevenue", totalRevenue);
-        stats.put("totalTicketsBooked", totalTickets);
-        stats.put("occupancyRate", 85.5); // % tỷ lệ lấp đầy
-        return ResponseEntity.ok(stats);
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getDashboardStats() {
+        Map<String, Object> stats = ticketService.getStaffDashboardStats();
+        return ResponseEntity.ok(ApiResponse.ok(stats, "Lấy thống kê doanh thu thành công"));
     }
 }

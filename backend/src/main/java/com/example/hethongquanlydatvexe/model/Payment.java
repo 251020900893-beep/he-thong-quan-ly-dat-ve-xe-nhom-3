@@ -1,4 +1,4 @@
-package com.example.hethongquanlydatvexe;
+package com.example.hethongquanlydatvexe.model;
 
 public class Payment {
 

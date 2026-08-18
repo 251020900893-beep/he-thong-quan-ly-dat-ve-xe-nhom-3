@@ -1,9 +1,9 @@
 package com.example.hethongquanlydatvexe.repository;
 
-import com.example.hethongquanlydatvexe.BusTrip;
-import com.example.hethongquanlydatvexe.Customer;
-import com.example.hethongquanlydatvexe.Seat;
-import com.example.hethongquanlydatvexe.Ticket;
+import com.example.hethongquanlydatvexe.model.BusTrip;
+import com.example.hethongquanlydatvexe.model.Customer;
+import com.example.hethongquanlydatvexe.model.Seat;
+import com.example.hethongquanlydatvexe.model.Ticket;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -12,14 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicketRepository {
-    private static final String FILE_PATH = "backend/data/tickets.json";
+    private static final String FILE_PATH = "data/tickets.json";
     private final FileManager fileManager = new FileManager();
     private final Type listType = new TypeToken<List<Ticket>>() {}.getType();
 
     public List<Ticket> findAll() {
         List<Ticket> list = fileManager.readList(FILE_PATH, listType);
-        if (list == null) list = new ArrayList<>();
-        return list;
+        return (list != null) ? list : new ArrayList<>();
     }
 
     public Ticket findById(String id) {
@@ -54,18 +53,10 @@ public class TicketRepository {
         }
     }
 
-    // 🚀 HÀM KHÔI PHỤC DỮ LIỆU GỐC (2 VÉ MẪU)
     public void initSampleTicketsIfEmpty() {
         List<Ticket> sampleTickets = new ArrayList<>();
 
-        // Vé mẫu 1: Chuyển khoản VietQR (VIP - giảm 20%)
-        Customer c1 = new Customer();
-        c1.setId("KH001");
-        c1.setFullName("Nguyễn Văn Hùng");
-        c1.setPhone("0912345678");
-        c1.setEmail("hung.nguyen@gmail.com");
-        c1.setCustomerType("VIP");
-
+        Customer c1 = new Customer("KH001", "Nguyễn Văn Hùng", "0912345678", "hung.nguyen@gmail.com", "VIP");
         BusTrip trip1 = new BusTrip();
         trip1.setTripId("CX001");
         trip1.setTripCode("HN-HP-0630");
@@ -78,33 +69,15 @@ public class TicketRepository {
         trip1.setBasePrice(230000.0);
         trip1.setTotalSeats(9);
 
-        Seat s1 = new Seat();
-        s1.setTripId("CX001");
-        s1.setSeatNumber("B1");
-        s1.setSeatType("VIP");
-        s1.setSurcharge(40000.0);
-        s1.setStatus("BOOKED");
-
-        Ticket t1 = new Ticket();
-        t1.setTicketId("VE-HNHP0700-B1-1024");
-        t1.setCustomer(c1);
-        t1.setTrip(trip1);
-        t1.setSeat(s1);
-        t1.setPrice(216000.0);
+        Seat s1 = new Seat("CX001-S03", "CX001", "B1", "VIP", 50000.0, "BOOKED", null, null, "VE-0001");
+        Ticket t1 = new Ticket("VE-HNHP0700-B1-1024", c1, trip1, s1, 216000.0);
         t1.setStatus("PAID");
         t1.setPaymentMethod("BANKING");
         t1.setCreatedAt(Instant.now().toString());
         t1.setPaidAt(Instant.now().toString());
         sampleTickets.add(t1);
 
-        // Vé mẫu 2: Ví MoMo / VNPay (Thành viên - giảm 10%)
-        Customer c2 = new Customer();
-        c2.setId("KH002");
-        c2.setFullName("Trần Thị Mai");
-        c2.setPhone("0987654321");
-        c2.setEmail("mai.tran@gmail.com");
-        c2.setCustomerType("MEMBER");
-
+        Customer c2 = new Customer("KH002", "Trần Thị Mai", "0987654321", "mai.tran@gmail.com", "MEMBER");
         BusTrip trip2 = new BusTrip();
         trip2.setTripId("CX008");
         trip2.setTripCode("HP-HN-0830");
@@ -117,19 +90,8 @@ public class TicketRepository {
         trip2.setBasePrice(240000.0);
         trip2.setTotalSeats(12);
 
-        Seat s2 = new Seat();
-        s2.setTripId("CX008");
-        s2.setSeatNumber("B2");
-        s2.setSeatType("VIP");
-        s2.setSurcharge(40000.0);
-        s2.setStatus("BOOKED");
-
-        Ticket t2 = new Ticket();
-        t2.setTicketId("VE-HPHN0800-B2-3523");
-        t2.setCustomer(c2);
-        t2.setTrip(trip2);
-        t2.setSeat(s2);
-        t2.setPrice(252000.0);
+        Seat s2 = new Seat("CX008-B2", "CX008", "B2", "VIP", 50000.0, "BOOKED", null, null, "VE-0002");
+        Ticket t2 = new Ticket("VE-HPHN0800-B2-3523", c2, trip2, s2, 252000.0);
         t2.setStatus("PAID");
         t2.setPaymentMethod("E_WALLET");
         t2.setCreatedAt(Instant.now().toString());

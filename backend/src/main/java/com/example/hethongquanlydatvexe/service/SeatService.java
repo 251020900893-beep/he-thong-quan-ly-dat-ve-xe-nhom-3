@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.service;
 
-import com.example.hethongquanlydatvexe.Seat;
+import com.example.hethongquanlydatvexe.model.Seat;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
 import com.example.hethongquanlydatvexe.utils.Constants;
@@ -107,10 +107,10 @@ public class SeatService {
 
     public void createSeat(Seat seat) {
         if (seat == null) {
-            throw new TripNotFoundException(
-                    "Ghế không được để trống"
-            );
+            // Sửa tên Exception cho chuẩn OOP
+            throw new IllegalArgumentException("Ghế không được để trống");
         }
+        // ... (phần code dưới giữ nguyên)
 
         if (!busTripRepository.exists(seat.getTripId())) {
             throw new TripNotFoundException(

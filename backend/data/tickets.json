@@ -181,5 +181,1645 @@
     "paymentMethod": "BANK_TRANSFER",
     "createdAt": "2026-08-18T01:37:58.379186600Z",
     "expiresAt": "2026-08-18T01:40:58.364579200Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B4-6268",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S06",
+      "tripId": "CX001",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T04:06:36.282997200Z",
+      "holdingCustomerId": "0987654321",
+      "bookedTicketId": "T011"
+    },
+    "price": 252000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T04:03:36.299497900Z",
+    "expiresAt": "2026-08-18T04:06:36.282997200Z"
+  },
+  {
+    "ticketId": "VE-HPHN0830-B6-2078",
+    "customer": {
+      "customerType": "NORMAL",
+      "id": "KH003",
+      "fullName": "Lê Hoàng Nam",
+      "phone": "0905123456",
+      "email": "nam.le@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX008",
+      "tripCode": "HP-HN-0830",
+      "departure": "Hải Phòng (BX Vĩnh Niệm)",
+      "destination": "Hà Nội (BX Giáp Bát)",
+      "departureTime": "08:30",
+      "arrivalTime": "10:00",
+      "licensePlate": "15B-666.99",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Bùi Đức Long (0936.555.777)",
+      "pickupPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Nhà Hát Lớn Hải Phòng",
+        "Quán Mau"
+      ],
+      "dropoffPoints": [
+        "Khuất Duy Tiến",
+        "Bến xe Giáp Bát",
+        "Hoàn Kiếm"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX008-B6",
+      "tripId": "CX008",
+      "seatNumber": "B6",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T04:06:49.374467800Z",
+      "holdingCustomerId": "0905123456"
+    },
+    "price": 290000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T04:03:49.382312800Z",
+    "expiresAt": "2026-08-18T04:06:49.374467800Z",
+    "paidAt": "2026-08-18T04:03:53.157658100Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B1-7885",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S03",
+      "tripId": "CX001",
+      "seatNumber": "B1",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T04:07:15.022722200Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 224000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T04:04:15.031636400Z",
+    "expiresAt": "2026-08-18T04:07:15.022722200Z"
+  },
+  {
+    "ticketId": "VE-HNHP1800-B2-7208",
+    "customer": {
+      "customerType": "NORMAL",
+      "id": "KH003",
+      "fullName": "Lê Hoàng Nam",
+      "phone": "0905123456",
+      "email": "nam.le@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX006",
+      "tripCode": "HN-HP-1800",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "18:00",
+      "arrivalTime": "19:30",
+      "licensePlate": "29B-777.99",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Lê Hải Đăng (0988.444.666)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Keangnam Landmark",
+        "BigC Thăng Long"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Cầu Rào 2",
+        "Ngã 4 Phúc Tăng"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX006-B2",
+      "tripId": "CX006",
+      "seatNumber": "B2",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T04:07:29.525421500Z",
+      "holdingCustomerId": "0905123456"
+    },
+    "price": 290000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T04:04:29.529817900Z",
+    "expiresAt": "2026-08-18T04:07:29.525421500Z",
+    "paidAt": "2026-08-18T04:04:30.484653300Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B4-5327",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S06",
+      "tripId": "CX001",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T04:31:41.274100800Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 252000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T04:28:41.290632100Z",
+    "expiresAt": "2026-08-18T04:31:41.274100800Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B4-8117",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S06",
+      "tripId": "CX001",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:37:22.871828900Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 252000.0,
+    "status": "PAID",
+    "paymentMethod": "BANKING",
+    "createdAt": "2026-08-18T06:34:22.886336400Z",
+    "expiresAt": "2026-08-18T06:37:22.871828900Z",
+    "paidAt": "2026-08-18T06:34:25.670210900Z"
+  },
+  {
+    "ticketId": "VE-HNHP1000-C3-7406",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX003",
+      "tripCode": "HN-HP-1000",
+      "departure": "Hà Nội (Sân Bay Nội Bài)",
+      "destination": "Hải Phòng (Sân Bay Cát Bi)",
+      "departureTime": "10:00",
+      "arrivalTime": "11:30",
+      "licensePlate": "29B-555.22",
+      "busType": "President VIP 9 Chỗ",
+      "basePrice": 250000.0,
+      "totalSeats": 9,
+      "driverName": "Hoàng Minh Tuấn (0982.333.555)",
+      "pickupPoints": [
+        "Sảnh T1 Sân bay Nội Bài",
+        "KĐT Ciputra",
+        "Aeon Mall Long Biên"
+      ],
+      "dropoffPoints": [
+        "Sân bay Cát Bi",
+        "Lê Hồng Phong",
+        "Vinhomes Marina"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX003-C3",
+      "tripId": "CX003",
+      "seatNumber": "C3",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:37:33.496637500Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 200000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:34:33.503152200Z",
+    "expiresAt": "2026-08-18T06:37:33.496637500Z",
+    "paidAt": "2026-08-18T06:35:30.814371100Z"
+  },
+  {
+    "ticketId": "VE-HNHP1530-B2-8884",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX005",
+      "tripCode": "HN-HP-1530",
+      "departure": "Hà Nội (Hoàn Kiếm)",
+      "destination": "Hải Phòng (Đồ Sơn / TTTP)",
+      "departureTime": "15:30",
+      "arrivalTime": "17:00",
+      "licensePlate": "29B-111.44",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 9,
+      "driverName": "Vũ Đình Trọng (0971.222.888)",
+      "pickupPoints": [
+        "Nhà Hát Lớn Hà Nội",
+        "Trần Quang Khải",
+        "Vincom Times City"
+      ],
+      "dropoffPoints": [
+        "Nhà Hát Lớn Hải Phòng",
+        "KDL Đồ Sơn",
+        "Đại học Hàng Hải"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX005-B2",
+      "tripId": "CX005",
+      "seatNumber": "B2",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:48:31.657529700Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "BANKING",
+    "createdAt": "2026-08-18T06:45:31.673809900Z",
+    "expiresAt": "2026-08-18T06:48:31.657529700Z",
+    "paidAt": "2026-08-18T06:45:36.791652Z"
+  },
+  {
+    "ticketId": "VE-HNHP1530-B4-1250",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX005",
+      "tripCode": "HN-HP-1530",
+      "departure": "Hà Nội (Hoàn Kiếm)",
+      "destination": "Hải Phòng (Đồ Sơn / TTTP)",
+      "departureTime": "15:30",
+      "arrivalTime": "17:00",
+      "licensePlate": "29B-111.44",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 9,
+      "driverName": "Vũ Đình Trọng (0971.222.888)",
+      "pickupPoints": [
+        "Nhà Hát Lớn Hà Nội",
+        "Trần Quang Khải",
+        "Vincom Times City"
+      ],
+      "dropoffPoints": [
+        "Nhà Hát Lớn Hải Phòng",
+        "KDL Đồ Sơn",
+        "Đại học Hàng Hải"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX005-B4",
+      "tripId": "CX005",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:48:45.244842800Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:45:45.252030100Z",
+    "expiresAt": "2026-08-18T06:48:45.244842800Z",
+    "paidAt": "2026-08-18T06:45:46.252105700Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B1-9519",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S03",
+      "tripId": "CX001",
+      "seatNumber": "B1",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:48:58.527408400Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 224000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:45:58.532189700Z",
+    "expiresAt": "2026-08-18T06:48:58.527408400Z",
+    "paidAt": "2026-08-18T06:45:59.462031100Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-A2-1727",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S02",
+      "tripId": "CX001",
+      "seatNumber": "A2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:49:52.607271500Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:46:52.611675700Z",
+    "expiresAt": "2026-08-18T06:49:52.607271500Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-B3-4179",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S05",
+      "tripId": "CX001",
+      "seatNumber": "B3",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:52:10.572076700Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 224000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:49:10.577751900Z",
+    "expiresAt": "2026-08-18T06:52:10.572076700Z",
+    "paidAt": "2026-08-18T06:49:11.676646Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-A1-2308",
+    "customer": {
+      "customerType": "NORMAL",
+      "id": "KH003",
+      "fullName": "Lê Hoàng Nam",
+      "phone": "0905123456",
+      "email": "nam.le@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S01",
+      "tripId": "CX001",
+      "seatNumber": "A1",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:52:17.993654Z",
+      "holdingCustomerId": "0905123456"
+    },
+    "price": 230000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:49:17.999902200Z",
+    "expiresAt": "2026-08-18T06:52:17.993654Z",
+    "paidAt": "2026-08-18T06:49:19.639310700Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C2-3329",
+    "customer": {
+      "customerType": "NORMAL",
+      "id": "KH003",
+      "fullName": "Lê Hoàng Nam",
+      "phone": "0905123456",
+      "email": "nam.le@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S08",
+      "tripId": "CX001",
+      "seatNumber": "C2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:52:27.812482400Z",
+      "holdingCustomerId": "0905123456"
+    },
+    "price": 230000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:49:27.816519900Z",
+    "expiresAt": "2026-08-18T06:52:27.812482400Z"
+  },
+  {
+    "ticketId": "VE-HNHP1330-B4-9457",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX004",
+      "tripCode": "HN-HP-1330",
+      "departure": "Hà Nội (Cầu Giấy)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "13:30",
+      "arrivalTime": "15:00",
+      "licensePlate": "29B-333.88",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Phạm Văn Nam (0966.789.123)",
+      "pickupPoints": [
+        "Đại học Quốc Gia Hà Nội",
+        "Times City",
+        "Cổ Linh"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Vinhomes Imperia",
+        "Ngã 6 Máy Tơ"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX004-B4",
+      "tripId": "CX004",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:52:39.033254900Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:49:39.038270Z",
+    "expiresAt": "2026-08-18T06:52:39.033254900Z",
+    "paidAt": "2026-08-18T06:49:40.422279Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-A2-9717",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S02",
+      "tripId": "CX001",
+      "seatNumber": "A2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:53:10.600102400Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:50:10.607770900Z",
+    "expiresAt": "2026-08-18T06:53:10.600102400Z",
+    "paidAt": "2026-08-18T06:50:12.731547600Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C3-4687",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S09",
+      "tripId": "CX001",
+      "seatNumber": "C3",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:53:39.135010800Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:50:39.139498200Z",
+    "expiresAt": "2026-08-18T06:53:39.135010800Z"
+  },
+  {
+    "ticketId": "VE-HPHN0830-B4-6806",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX008",
+      "tripCode": "HP-HN-0830",
+      "departure": "Hải Phòng (BX Vĩnh Niệm)",
+      "destination": "Hà Nội (BX Giáp Bát)",
+      "departureTime": "08:30",
+      "arrivalTime": "10:00",
+      "licensePlate": "15B-666.99",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Bùi Đức Long (0936.555.777)",
+      "pickupPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Nhà Hát Lớn Hải Phòng",
+        "Quán Mau"
+      ],
+      "dropoffPoints": [
+        "Khuất Duy Tiến",
+        "Bến xe Giáp Bát",
+        "Hoàn Kiếm"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX008-B4",
+      "tripId": "CX008",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:56:55.299349700Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:53:55.303353100Z",
+    "expiresAt": "2026-08-18T06:56:55.299349700Z",
+    "paidAt": "2026-08-18T06:53:56.411453400Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C2-6820",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S08",
+      "tripId": "CX001",
+      "seatNumber": "C2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:57:10.157186800Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:54:10.162753600Z",
+    "expiresAt": "2026-08-18T06:57:10.157186800Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C3-6717",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S09",
+      "tripId": "CX001",
+      "seatNumber": "C3",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:57:19.635021800Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:54:19.640035800Z",
+    "expiresAt": "2026-08-18T06:57:19.635021800Z",
+    "paidAt": "2026-08-18T06:54:20.713650100Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C1-2638",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S07",
+      "tripId": "CX001",
+      "seatNumber": "C1",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:58:29.956707900Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:55:29.960765400Z",
+    "expiresAt": "2026-08-18T06:58:29.956707900Z",
+    "paidAt": "2026-08-18T06:55:30.979987600Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B2-7325",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B2",
+      "tripId": "CX002",
+      "seatNumber": "B2",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:58:56.943176200Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:55:56.947836500Z",
+    "expiresAt": "2026-08-18T06:58:56.943176200Z",
+    "paidAt": "2026-08-18T06:55:58.806830700Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B4-8664",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B4",
+      "tripId": "CX002",
+      "seatNumber": "B4",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:59:03.332728800Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:56:03.338239500Z",
+    "expiresAt": "2026-08-18T06:59:03.332728800Z",
+    "paidAt": "2026-08-18T06:56:04.324165100Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B3-5941",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B3",
+      "tripId": "CX002",
+      "seatNumber": "B3",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:59:23.086252500Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:56:23.092268Z",
+    "expiresAt": "2026-08-18T06:59:23.086252500Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B3-8604",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B3",
+      "tripId": "CX002",
+      "seatNumber": "B3",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:59:28.419737100Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:56:28.425052500Z",
+    "expiresAt": "2026-08-18T06:59:28.419737100Z",
+    "paidAt": "2026-08-18T06:56:29.890667600Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B1-9517",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B1",
+      "tripId": "CX002",
+      "seatNumber": "B1",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:59:35.097675800Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:56:35.101702100Z",
+    "expiresAt": "2026-08-18T06:59:35.097675800Z",
+    "paidAt": "2026-08-18T06:56:36.215152300Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B5-4630",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B5",
+      "tripId": "CX002",
+      "seatNumber": "B5",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T06:59:47.299604500Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:56:47.306275700Z",
+    "expiresAt": "2026-08-18T06:59:47.299604500Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C2-4317",
+    "customer": {
+      "customerType": "NORMAL",
+      "id": "KH003",
+      "fullName": "Lê Hoàng Nam",
+      "phone": "0905123456",
+      "email": "nam.le@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S08",
+      "tripId": "CX001",
+      "seatNumber": "C2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T07:00:44.060334600Z",
+      "holdingCustomerId": "0905123456"
+    },
+    "price": 230000.0,
+    "status": "CANCELLED",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T06:57:44.065098Z",
+    "expiresAt": "2026-08-18T07:00:44.060334600Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-B6-9971",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-B6",
+      "tripId": "CX002",
+      "seatNumber": "B6",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T07:00:51.487461300Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 261000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:57:51.494095700Z",
+    "expiresAt": "2026-08-18T07:00:51.487461300Z",
+    "paidAt": "2026-08-18T06:57:52.838217600Z"
+  },
+  {
+    "ticketId": "VE-HNHP0800-C3-2087",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX002",
+      "tripCode": "HN-HP-0800",
+      "departure": "Hà Nội (BX Nước Ngầm)",
+      "destination": "Hải Phòng (BX Lạc Long)",
+      "departureTime": "08:00",
+      "arrivalTime": "09:30",
+      "licensePlate": "29B-999.66",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Trần Văn Dũng (0903.456.789)",
+      "pickupPoints": [
+        "Bến xe Nước Ngầm",
+        "Bến xe Giáp Bát",
+        "Vành đai 3"
+      ],
+      "dropoffPoints": [
+        "Bến xe Lạc Long",
+        "Nhà hát TP Hải Phòng",
+        "Cầu Bính"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX002-C3",
+      "tripId": "CX002",
+      "seatNumber": "C3",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T07:00:58.221481900Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 216000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T06:57:58.224648700Z",
+    "expiresAt": "2026-08-18T07:00:58.221481900Z",
+    "paidAt": "2026-08-18T06:57:59.211047Z"
+  },
+  {
+    "ticketId": "VE-HPHN0830-B2-6956",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX008",
+      "tripCode": "HP-HN-0830",
+      "departure": "Hải Phòng (BX Vĩnh Niệm)",
+      "destination": "Hà Nội (BX Giáp Bát)",
+      "departureTime": "08:30",
+      "arrivalTime": "10:00",
+      "licensePlate": "15B-666.99",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Bùi Đức Long (0936.555.777)",
+      "pickupPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Nhà Hát Lớn Hải Phòng",
+        "Quán Mau"
+      ],
+      "dropoffPoints": [
+        "Khuất Duy Tiến",
+        "Bến xe Giáp Bát",
+        "Hoàn Kiếm"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX008-B2",
+      "tripId": "CX008",
+      "seatNumber": "B2",
+      "seatType": "VIP",
+      "surcharge": 50000.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T13:32:57.646390700Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 232000.0,
+    "status": "PAID",
+    "paymentMethod": "E_WALLET",
+    "createdAt": "2026-08-18T13:29:57.668635100Z",
+    "expiresAt": "2026-08-18T13:32:57.646390700Z",
+    "paidAt": "2026-08-18T13:29:58.878385800Z"
+  },
+  {
+    "ticketId": "VE-HPHN0830-C2-9081",
+    "customer": {
+      "customerType": "MEMBER",
+      "id": "KH002",
+      "fullName": "Trần Thị Mai",
+      "phone": "0987654321",
+      "email": "mai.tran@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX008",
+      "tripCode": "HP-HN-0830",
+      "departure": "Hải Phòng (BX Vĩnh Niệm)",
+      "destination": "Hà Nội (BX Giáp Bát)",
+      "departureTime": "08:30",
+      "arrivalTime": "10:00",
+      "licensePlate": "15B-666.99",
+      "busType": "Limousine Luxury 12 Chỗ",
+      "basePrice": 240000.0,
+      "totalSeats": 12,
+      "driverName": "Bùi Đức Long (0936.555.777)",
+      "pickupPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Nhà Hát Lớn Hải Phòng",
+        "Quán Mau"
+      ],
+      "dropoffPoints": [
+        "Khuất Duy Tiến",
+        "Bến xe Giáp Bát",
+        "Hoàn Kiếm"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX008-C2",
+      "tripId": "CX008",
+      "seatNumber": "C2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T13:33:27.514988Z",
+      "holdingCustomerId": "0987654321"
+    },
+    "price": 216000.0,
+    "status": "HOLDING",
+    "paymentMethod": "BANK_TRANSFER",
+    "createdAt": "2026-08-18T13:30:27.525982700Z",
+    "expiresAt": "2026-08-18T13:33:27.514988Z"
+  },
+  {
+    "ticketId": "VE-HNHP0630-C2-3341",
+    "customer": {
+      "customerType": "VIP",
+      "id": "KH001",
+      "fullName": "Nguyễn Văn Hùng",
+      "phone": "0912345678",
+      "email": "hung.nguyen@gmail.com"
+    },
+    "trip": {
+      "tripId": "CX001",
+      "tripCode": "HN-HP-0630",
+      "departure": "Hà Nội (BX Mỹ Đình)",
+      "destination": "Hải Phòng (BX Vĩnh Niệm)",
+      "departureTime": "06:30",
+      "arrivalTime": "08:00",
+      "licensePlate": "29B-688.88",
+      "busType": "Limousine VIP 9 Chỗ",
+      "basePrice": 230000.0,
+      "totalSeats": 9,
+      "driverName": "Nguyễn Thành Long (0912.888.111)",
+      "pickupPoints": [
+        "Bến xe Mỹ Đình",
+        "Đại học Ngoại Ngữ",
+        "Cổ Linh - Long Biên"
+      ],
+      "dropoffPoints": [
+        "Bến xe Vĩnh Niệm",
+        "Bến xe Cầu Rào",
+        "Ngã 4 Cơ Điện"
+      ],
+      "seats": []
+    },
+    "seat": {
+      "seatId": "CX001-S08",
+      "tripId": "CX001",
+      "seatNumber": "C2",
+      "seatType": "NORMAL",
+      "surcharge": 0.0,
+      "status": "HOLDING",
+      "holdingExpiresAt": "2026-08-18T13:35:10.228673Z",
+      "holdingCustomerId": "0912345678"
+    },
+    "price": 184000.0,
+    "status": "PAID",
+    "paymentMethod": "CASH",
+    "createdAt": "2026-08-18T13:32:10.234801300Z",
+    "expiresAt": "2026-08-18T13:35:10.228673Z",
+    "paidAt": "2026-08-18T13:32:12.052816Z"
   }
 ]

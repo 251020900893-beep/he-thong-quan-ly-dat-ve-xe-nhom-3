@@ -1,6 +1,6 @@
 package com.example.hethongquanlydatvexe.service;
 
-import com.example.hethongquanlydatvexe.Customer;
+import com.example.hethongquanlydatvexe.model.Customer;
 import com.example.hethongquanlydatvexe.repository.CustomerRepository;
 import com.example.hethongquanlydatvexe.utils.Constants;
 

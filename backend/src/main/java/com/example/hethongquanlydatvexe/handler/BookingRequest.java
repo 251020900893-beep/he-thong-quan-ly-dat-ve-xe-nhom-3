@@ -1,8 +1,8 @@
 package com.example.hethongquanlydatvexe.handler;
 
-import com.example.hethongquanlydatvexe.BusTrip;
-import com.example.hethongquanlydatvexe.Customer;
-import com.example.hethongquanlydatvexe.Seat;
+import com.example.hethongquanlydatvexe.model.BusTrip;
+import com.example.hethongquanlydatvexe.model.Customer;
+import com.example.hethongquanlydatvexe.model.Seat;
 
 public class BookingRequest {
 
