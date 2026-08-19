@@ -1,18 +1,12 @@
 import { BusTrip, Ticket, CustomerType } from '../types';
 
-// Trỏ thẳng trực tiếp vào Backend Java Spring Boot cổng 8080
 const BASE_URL = 'http://localhost:8080/api';
-const ROOT_URL = 'http://localhost:8080';
 
 export const tripApi = {
-    // 1. Lấy danh sách chuyến xe (Thử cả 2 đường dẫn /api/trips và /trips)
+    // 1. Lấy danh sách chuyến xe
     async getTrips(): Promise<BusTrip[]> {
         try {
-            let res = await fetch(`${BASE_URL}/trips`).catch(() => null);
-            if (!res || !res.ok) {
-                res = await fetch(`${ROOT_URL}/trips`).catch(() => null);
-            }
-            if (!res || !res.ok) throw new Error('Không thể tải danh sách chuyến xe');
+            const res = await fetch(`${BASE_URL}/trips`);
             const json = await res.json();
             const data = json.data || json;
             return Array.isArray(data) ? data : [];
@@ -22,7 +16,7 @@ export const tripApi = {
         }
     },
 
-    // 2. Giữ chỗ 3 phút
+    // 2. Giữ chỗ 3 phút (Bắt đúng message lỗi từ Backend)
     async holdBooking(payload: {
         tripId: string;
         seatNumber: string;
@@ -33,23 +27,22 @@ export const tripApi = {
         dropoffPoint?: string;
         paymentMethod?: string;
     }): Promise<Ticket> {
-        let res = await fetch(`${BASE_URL}/booking/hold`, {
+        const res = await fetch(`${BASE_URL}/booking/hold`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
-        }).catch(() => null);
+        });
 
-        if (!res || !res.ok) {
-            res = await fetch(`${ROOT_URL}/booking/hold`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).catch(() => null);
+        const json = await res.json().catch(() => null);
+
+        if (!res.ok) {
+            const errMsg = json?.message || 'Ghế này vừa có người đặt hoặc đang giữ chỗ!';
+            throw new Error(errMsg);
         }
 
-        if (!res) throw new Error('Không thể kết nối Backend!');
-        const json = await res.json();
-        if (!json.success && json.message) throw new Error(json.message);
+        if (!json.success && json.message) {
+            throw new Error(json.message);
+        }
         return json.data || json;
     },
 
@@ -59,43 +52,35 @@ export const tripApi = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ticketId })
-        }).catch(() => fetch(`${ROOT_URL}/booking/cancel-hold`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ticketId })
-        }));
+        }).catch(() => null);
     },
 
     // 4. Thanh toán
     async processPayment(payload: { ticketId: string; paymentMethod: string }): Promise<{ ticket: Ticket }> {
-        let res = await fetch(`${BASE_URL}/payment/process`, {
+        const res = await fetch(`${BASE_URL}/payment/process`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
-        }).catch(() => null);
+        });
 
-        if (!res || !res.ok) {
-            res = await fetch(`${ROOT_URL}/payment/process`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).catch(() => null);
+        const json = await res.json().catch(() => null);
+
+        if (!res.ok) {
+            const errMsg = json?.message || 'Thanh toán không thành công!';
+            throw new Error(errMsg);
         }
 
-        if (!res) throw new Error('Không thể kết nối Backend thanh toán!');
-        const json = await res.json();
-        if (!json.success && json.message) throw new Error(json.message);
+        if (!json.success && json.message) {
+            throw new Error(json.message);
+        }
         return { ticket: json.data || json };
     },
 
     // 5. Tra cứu vé
     async lookupTickets(query: string): Promise<Ticket[]> {
         try {
-            let res = await fetch(`${BASE_URL}/tickets/search?query=${encodeURIComponent(query)}`).catch(() => null);
-            if (!res || !res.ok) {
-                res = await fetch(`${ROOT_URL}/tickets/search?query=${encodeURIComponent(query)}`).catch(() => null);
-            }
-            if (!res) return [];
+            const res = await fetch(`${BASE_URL}/tickets/search?query=${encodeURIComponent(query)}`);
+            if (!res.ok) return [];
             const data = await res.json();
             return Array.isArray(data) ? data : (data.data || []);
         } catch {
