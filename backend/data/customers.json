@@ -19,5 +19,26 @@
     "fullName": "Lê Hoàng Nam",
     "phone": "0905123456",
     "email": "nam.le@gmail.com"
+  },
+  {
+    "customerType": "NORMAL",
+    "id": "KH006",
+    "fullName": "shghgfdhg",
+    "phone": "0868102434",
+    "email": ""
+  },
+  {
+    "customerType": "NORMAL",
+    "id": "KH007",
+    "fullName": "yugeriouetwytruhtr",
+    "phone": "0935465465",
+    "email": ""
+  },
+  {
+    "customerType": "NORMAL",
+    "id": "KH008",
+    "fullName": "rtjuyt",
+    "phone": "0934634653",
+    "email": "251020900948@gmail.com"
   }
 ]
