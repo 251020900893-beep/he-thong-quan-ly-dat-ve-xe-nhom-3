@@ -17,9 +17,13 @@ const statusLabels: Record<Seat['status'], string> = {
 
 export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, onToggle }) => {
     const isAvailable = seat.status === 'AVAILABLE';
+    const isSelected = selected && isAvailable;
     const isVip = seat.seatType === 'VIP';
-    const surcharge = seat.surcharge ?? 0;
-    const totalPrice = basePrice !== undefined ? basePrice + surcharge : undefined;
+    const surchargeValue = Number(seat.surcharge);
+    const surcharge = Number.isFinite(surchargeValue) ? surchargeValue : 0;
+    const basePriceValue = Number(basePrice);
+    const validBasePrice = basePrice !== undefined && Number.isFinite(basePriceValue) ? basePriceValue : undefined;
+    const totalPrice = validBasePrice !== undefined ? validBasePrice + surcharge : undefined;
     const priceLabel = totalPrice !== undefined
         ? `${totalPrice.toLocaleString('vi-VN')} đ`
         : `Phụ thu ${surcharge.toLocaleString('vi-VN')} đ`;
@@ -28,7 +32,7 @@ export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, o
         ? 'bg-gradient-to-b from-amber-950/40 to-slate-900 border-amber-500/70 text-amber-200 hover:border-amber-300'
         : 'bg-slate-900 border-slate-600 text-slate-200 hover:border-blue-400';
 
-    if (selected) {
+    if (isSelected) {
         seatStyle = 'bg-gradient-to-b from-blue-600 to-indigo-700 border-blue-300 text-white ring-2 ring-blue-400 shadow-lg shadow-blue-600/40';
     } else if (seat.status === 'HOLDING') {
         seatStyle = 'bg-amber-950/70 border-amber-500/70 text-amber-300 opacity-80 cursor-not-allowed';
@@ -42,7 +46,7 @@ export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, o
                 type="button"
                 disabled={!isAvailable}
                 onClick={() => onToggle(seat.seatNumber)}
-                aria-pressed={selected}
+                aria-pressed={isSelected}
                 aria-label={`${seat.seatNumber}, ${isVip ? 'ghế VIP' : 'ghế thường'}, ${statusLabels[seat.status]}, ${priceLabel}`}
                 className={`relative w-full min-h-[88px] rounded-2xl border-2 p-2.5 transition-all duration-200 flex flex-col items-center justify-between ${seatStyle}`}
             >
@@ -56,7 +60,7 @@ export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, o
                 <span className="text-[9px] font-bold uppercase tracking-wide flex items-center gap-1">
                     {seat.status === 'HOLDING' && <Clock className="w-3 h-3" />}
                     {seat.status === 'BOOKED' && <LockKeyhole className="w-3 h-3" />}
-                    {selected ? 'Đang chọn' : statusLabels[seat.status]}
+                    {isSelected ? 'Đang chọn' : statusLabels[seat.status]}
                 </span>
             </button>
 

@@ -31,7 +31,7 @@ export const StaffDashboard: React.FC<StaffDashboardProps> = ({
             await fetch('http://localhost:8080/tickets/reset-data', { method: 'POST' });
             alert('Đã khôi phục dữ liệu gốc thành công!');
             window.location.reload();
-        } catch (err) {
+        } catch {
             alert('Lỗi khi kết nối Backend để khôi phục dữ liệu!');
         } finally {
             setIsResetting(false);

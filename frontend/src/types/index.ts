@@ -40,6 +40,7 @@ export interface BusTrip {
     tripId: string;
 
     tripCode?: string;
+    route?: string;
 
     departure?: string;
     destination?: string;

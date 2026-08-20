@@ -13,19 +13,41 @@ interface SeatMapProps {
 }
 
 export const SeatMap: React.FC<SeatMapProps> = ({ seats = [], selectedSeatNumber, onSelectSeat, busType = '', basePrice }) => {
-    const safeSeats = useMemo(() => Array.isArray(seats) ? seats : [], [seats]);
+    const safeSeats = useMemo(() => {
+        if (!Array.isArray(seats)) return [];
+
+        return seats.map(seat => {
+            const rawStatus = String(seat.status || '').toUpperCase();
+            const status: Seat['status'] = rawStatus === 'AVAILABLE'
+                ? 'AVAILABLE'
+                : rawStatus === 'HOLDING'
+                    ? 'HOLDING'
+                    : 'BOOKED';
+
+            return seat.status === status ? seat : { ...seat, status };
+        });
+    }, [seats]);
     const [selectedSeatNumbers, setSelectedSeatNumbers] = useState<string[]>(selectedSeatNumber ? [selectedSeatNumber] : []);
 
     useEffect(() => {
-        setSelectedSeatNumbers(current => current.filter(seatNumber =>
-            safeSeats.some(seat => seat.seatNumber === seatNumber && seat.status === 'AVAILABLE')
-        ));
-    }, [safeSeats]);
+        setSelectedSeatNumbers(current => {
+            const validSelection = current.filter(seatNumber =>
+                safeSeats.some(seat => seat.seatNumber === seatNumber && seat.status === 'AVAILABLE')
+            );
+            const externalSeatIsAvailable = selectedSeatNumber
+                ? safeSeats.some(seat => seat.seatNumber === selectedSeatNumber && seat.status === 'AVAILABLE')
+                : false;
 
-    const is9Seats = safeSeats.length <= 9;
-    const frontSeats = safeSeats.length >= 2 ? safeSeats.slice(0, 2) : safeSeats;
-    const vipCabinSeats = is9Seats ? safeSeats.slice(2, 6) : safeSeats.slice(2, 8);
-    const backSeats = is9Seats ? safeSeats.slice(6, 9) : safeSeats.slice(8, 12);
+            return externalSeatIsAvailable && selectedSeatNumber && !validSelection.includes(selectedSeatNumber)
+                ? [...validSelection, selectedSeatNumber]
+                : validSelection;
+        });
+    }, [safeSeats, selectedSeatNumber]);
+
+    const normalSeats = safeSeats.filter(seat => seat.seatType !== 'VIP');
+    const frontSeats = normalSeats.slice(0, 2);
+    const vipCabinSeats = safeSeats.filter(seat => seat.seatType === 'VIP');
+    const backSeats = normalSeats.slice(2);
     const counts = useMemo(() => ({
         available: safeSeats.filter(seat => seat.status === 'AVAILABLE').length,
         holding: safeSeats.filter(seat => seat.status === 'HOLDING').length,

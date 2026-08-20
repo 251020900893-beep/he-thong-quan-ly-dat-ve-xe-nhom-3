@@ -2,17 +2,10 @@ import React, { useState } from 'react';
 import {
     Search,
     Ticket as TicketIcon,
-    Phone,
-    User,
-    Calendar,
     Clock,
-    MapPin,
     CheckCircle2,
     AlertCircle,
-    QrCode,
-    Eye,
-    Bus,
-    FileText
+    Eye
 } from 'lucide-react';
 
 interface TicketLookupViewProps {

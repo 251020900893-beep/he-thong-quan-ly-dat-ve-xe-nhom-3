@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BookingProvider, useBooking } from './context/BookingContext';
 import { DynamicHeroBanner } from './components/DynamicHeroBanner';
 import { TopHoldingBanner } from './components/TopHoldingBanner';

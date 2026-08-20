@@ -1,6 +1,6 @@
 // frontend/src/context/BookingContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { BusTrip, Seat, Ticket } from '../types';
+import { BusTrip, Ticket } from '../types';
 import { tripApi } from '../api/tripApi';
 
 interface BookingContextType {
