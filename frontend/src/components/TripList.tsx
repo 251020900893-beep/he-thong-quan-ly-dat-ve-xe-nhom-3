@@ -74,7 +74,7 @@ export const TripList: React.FC<TripListProps> = ({
                 onExpandTrip(firstTripId);
             }
         }
-    }, [externalExpandedId, filteredTrips]);
+    }, [externalExpandedId, filteredTrips, onExpandTrip]);
 
     return (
         <div id="trip-list-section" className="space-y-4 font-sans">
@@ -188,7 +188,7 @@ export const TripList: React.FC<TripListProps> = ({
                                             </div>
                                             <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
                                                 <span className="flex items-center gap-1">
-                                                    <Bus className="w-3.5 h-3.5 text-blue-600" /> {trip.busType} ({trip.busPlate || (trip as any).licensePlate})
+                                                    <Bus className="w-3.5 h-3.5 text-blue-600" /> {trip.busType} ({trip.busPlate || trip.licensePlate})
                                                 </span>
                                                 <span>•</span>
                                                 <span className="flex items-center gap-1 text-emerald-600 font-bold">
@@ -231,6 +231,7 @@ export const TripList: React.FC<TripListProps> = ({
                                             selectedSeatNumber={null}
                                             onSelectSeat={(seat) => onSelectSeat(trip, seat)}
                                             busType={trip.busType}
+                                            basePrice={trip.basePrice}
                                         />
                                     </div>
                                 )}
