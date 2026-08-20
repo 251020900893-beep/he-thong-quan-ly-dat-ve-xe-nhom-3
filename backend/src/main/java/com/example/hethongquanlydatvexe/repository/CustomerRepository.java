@@ -54,43 +54,33 @@ public class CustomerRepository {
     }
 
     public void save(Customer customer) {
-        List<Customer> customers = findAll();
-
-        customers.add(customer);
-
-        fileManager.writeList(FILE_PATH, customers);
+        fileManager.<Customer, Void>updateList(FILE_PATH, FileManager.getListType(Customer.class), customers -> {
+            boolean duplicate = customers.stream().anyMatch(existing ->
+                    existing.getId().equals(customer.getId())
+                            || existing.getPhone().equals(customer.getPhone()));
+            if (duplicate) {
+                throw new IllegalArgumentException("Mã hoặc số điện thoại khách hàng đã tồn tại");
+            }
+            customers.add(customer);
+            return null;
+        });
     }
 
     public boolean update(Customer customer) {
-        List<Customer> customers = findAll();
-
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId().equals(customer.getId())) {
-                customers.set(i, customer);
-
-                fileManager.writeList(FILE_PATH, customers);
-
-                return true;
+        return fileManager.<Customer, Boolean>updateList(FILE_PATH, FileManager.getListType(Customer.class), customers -> {
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getId().equals(customer.getId())) {
+                    customers.set(i, customer);
+                    return true;
+                }
             }
-        }
-
-        return false;
+            return false;
+        });
     }
 
     public boolean delete(String customerId) {
-        List<Customer> customers = findAll();
-
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId().equals(customerId)) {
-                customers.remove(i);
-
-                fileManager.writeList(FILE_PATH, customers);
-
-                return true;
-            }
-        }
-
-        return false;
+        return fileManager.<Customer, Boolean>updateList(FILE_PATH, FileManager.getListType(Customer.class), customers ->
+                customers.removeIf(customer -> customer.getId().equals(customerId)));
     }
 
     public boolean exists(String customerId) {

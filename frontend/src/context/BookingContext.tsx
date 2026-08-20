@@ -1,6 +1,6 @@
 // frontend/src/context/BookingContext.tsx
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { BusTrip, Seat, Ticket } from '../types';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
+import { BusTrip, Ticket } from '../types';
 import { tripApi } from '../api/tripApi';
 
 interface BookingContextType {
@@ -20,11 +20,13 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     const [trips, setTrips] = useState<BusTrip[]>([]);
     const [loadingTrips, setLoadingTrips] = useState<boolean>(true);
     const [activeHoldingTicket, setActiveHoldingTicket] = useState<Ticket | null>(null);
+    const latestTripsRequest = useRef(0);
 
     const refreshTrips = async () => {
+        const requestId = ++latestTripsRequest.current;
         try {
             const data = await tripApi.getTrips();
-            if (Array.isArray(data)) {
+            if (requestId === latestTripsRequest.current && Array.isArray(data)) {
                 setTrips([...data]); // Tạo mảng tham chiếu mới để trigger React re-render
             }
         } catch (err) {
@@ -79,6 +81,8 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
                 }
             } catch (err) {
                 console.error('Lỗi khi hủy giữ chỗ:', err);
+                await refreshTrips();
+                return;
             }
         }
         setActiveHoldingTicket(null);

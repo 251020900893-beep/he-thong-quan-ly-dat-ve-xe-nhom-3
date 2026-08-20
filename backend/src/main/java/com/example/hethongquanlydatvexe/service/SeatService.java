@@ -4,6 +4,7 @@ import com.example.hethongquanlydatvexe.model.Seat;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
 import com.example.hethongquanlydatvexe.utils.Constants;
+import com.example.hethongquanlydatvexe.utils.BookingLock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,7 @@ public class SeatService {
     }
 
     public void createSeat(Seat seat) {
+        synchronized (BookingLock.LOCK) {
         if (seat == null) {
             // Sửa tên Exception cho chuẩn OOP
             throw new IllegalArgumentException("Ghế không được để trống");
@@ -134,9 +136,11 @@ public class SeatService {
         }
 
         seatRepository.save(seat);
+        }
     }
 
     public boolean updateSeat(Seat seat) {
+        synchronized (BookingLock.LOCK) {
         if (!seatRepository.exists(seat.getSeatId())) {
             throw new SeatNotFoundException(
                     "Ghế không tồn tại"
@@ -144,9 +148,11 @@ public class SeatService {
         }
 
         return seatRepository.update(seat);
+        }
     }
 
     public boolean deleteSeat(String seatId) {
+        synchronized (BookingLock.LOCK) {
         if (!seatRepository.exists(seatId)) {
             throw new SeatNotFoundException(
                     "Ghế không tồn tại"
@@ -154,5 +160,6 @@ public class SeatService {
         }
 
         return seatRepository.delete(seatId);
+        }
     }
 }

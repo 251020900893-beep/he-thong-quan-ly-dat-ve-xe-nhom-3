@@ -6,6 +6,8 @@ import com.example.hethongquanlydatvexe.model.Ticket;
 import com.example.hethongquanlydatvexe.repository.BusTripRepository;
 import com.example.hethongquanlydatvexe.repository.SeatRepository;
 import com.example.hethongquanlydatvexe.repository.TicketRepository;
+import com.example.hethongquanlydatvexe.exception.BusinessRuleException;
+import com.example.hethongquanlydatvexe.utils.BookingLock;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -21,8 +23,9 @@ public class TicketService {
     private final BusTripRepository tripRepo = new BusTripRepository();
 
     public List<Ticket> searchTickets(String query) {
-        List<Ticket> allTickets = ticketRepo.findAll();
-        List<Ticket> expiredTickets = new ArrayList<>();
+        synchronized (BookingLock.LOCK) {
+            List<Ticket> allTickets = ticketRepo.findAll();
+            List<Ticket> expiredTickets = new ArrayList<>();
 
         for (Ticket t : allTickets) {
             if ("HOLDING".equalsIgnoreCase(t.getStatus())) {
@@ -40,9 +43,10 @@ public class TicketService {
                 if (t.getSeat() != null && t.getTrip() != null) {
                     Seat seat = seatRepo.findByTripIdAndSeatNumber(t.getTrip().getTripId(), t.getSeat().getSeatNumber());
                     if (seat != null) {
-                        if (seat.checkAndAutoReleaseHold() || !"HOLDING".equalsIgnoreCase(seat.getStatus())) {
+                        boolean owned = seat.isHeldBy(t.getTicketId());
+                        if (!owned || seat.checkAndAutoReleaseHold() || !"HOLDING".equalsIgnoreCase(seat.getStatus())) {
                             isExpired = true;
-                            seatRepo.update(seat);
+                            if (owned) seatRepo.update(seat);
                         }
                     }
                 }
@@ -58,17 +62,19 @@ public class TicketService {
             ticketRepo.update(t);
         }
 
-        String q = (query != null) ? query.trim().toLowerCase() : "";
-        return allTickets.stream()
+            String q = (query != null) ? query.trim().toLowerCase() : "";
+            return allTickets.stream()
                 .filter(t -> q.isEmpty() ||
                         (t.getTicketId() != null && t.getTicketId().toLowerCase().contains(q)) ||
                         (t.getCustomer() != null && t.getCustomer().getPhone() != null && t.getCustomer().getPhone().contains(q)) ||
                         (t.getCustomer() != null && t.getCustomer().getFullName() != null && t.getCustomer().getFullName().toLowerCase().contains(q)))
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
+        }
     }
 
     public Ticket getTicketById(String id) {
-        Ticket ticket = ticketRepo.findById(id);
+        synchronized (BookingLock.LOCK) {
+            Ticket ticket = ticketRepo.findById(id);
         if (ticket == null) return null;
         if (!"HOLDING".equalsIgnoreCase(ticket.getStatus())) return ticket;
 
@@ -86,9 +92,10 @@ public class TicketService {
 
         if (!expired && ticket.getSeat() != null && ticket.getTrip() != null) {
             Seat seat = seatRepo.findByTripIdAndSeatNumber(ticket.getTrip().getTripId(), ticket.getSeat().getSeatNumber());
-            if (seat == null || seat.checkAndAutoReleaseHold() || !"HOLDING".equalsIgnoreCase(seat.getStatus())) {
+            boolean owned = seat != null && seat.isHeldBy(ticket.getTicketId());
+            if (!owned || seat.checkAndAutoReleaseHold() || !"HOLDING".equalsIgnoreCase(seat.getStatus())) {
                 expired = true;
-                if (seat != null) seatRepo.update(seat);
+                if (owned) seatRepo.update(seat);
             }
         }
 
@@ -97,23 +104,45 @@ public class TicketService {
             ticketRepo.update(ticket);
             if (ticket.getSeat() != null && ticket.getTrip() != null) {
                 Seat seat = seatRepo.findByTripIdAndSeatNumber(ticket.getTrip().getTripId(), ticket.getSeat().getSeatNumber());
-                if (seat != null) {
-                    seat.releaseHold();
+                if (seat != null && seat.isHeldBy(ticket.getTicketId())) {
+                    seat.releaseHold(ticket.getTicketId());
                     seatRepo.update(seat);
                 }
             }
         }
-        return ticket;
+            return ticket;
+        }
     }
 
     public void resetAllData() {
-        List<Seat> allSeats = seatRepo.findAll();
-        for (Seat s : allSeats) {
-            s.setStatus("AVAILABLE");
-            s.releaseHold();
-            seatRepo.update(s);
+        synchronized (BookingLock.LOCK) {
+            List<Ticket> tickets = ticketRepo.findDefaults();
+            List<Seat> seats = seatRepo.findDefaults();
+            Map<String, Long> paidPerSeat = tickets.stream()
+                    .filter(t -> "PAID".equalsIgnoreCase(t.getStatus()) && t.getTrip() != null && t.getSeat() != null)
+                    .collect(Collectors.groupingBy(
+                            t -> t.getTrip().getTripId() + "|" + t.getSeat().getSeatNumber(),
+                            Collectors.counting()));
+            if (paidPerSeat.values().stream().anyMatch(count -> count > 1)) {
+                throw new BusinessRuleException("Dữ liệu mặc định có nhiều vé PAID trùng ghế!");
+            }
+
+            for (Ticket ticket : tickets) {
+                if ("PAID".equalsIgnoreCase(ticket.getStatus())
+                        && ticket.getTrip() != null && ticket.getSeat() != null) {
+                    Seat seat = seats.stream().filter(candidate ->
+                                    candidate.getTripId().equals(ticket.getTrip().getTripId())
+                                            && candidate.getSeatNumber().equals(ticket.getSeat().getSeatNumber()))
+                            .findFirst()
+                            .orElseThrow(() -> new BusinessRuleException("Vé PAID mặc định tham chiếu ghế không tồn tại!"));
+                    if (!"BOOKED".equalsIgnoreCase(seat.getStatus())
+                            || !ticket.getTicketId().equalsIgnoreCase(seat.getBookedTicketId())) {
+                        throw new BusinessRuleException("Dữ liệu mặc định Ticket/Seat không nhất quán!");
+                    }
+                }
+            }
+            seatRepo.restoreDefaultsWithTickets(seats, tickets);
         }
-        ticketRepo.initSampleTicketsIfEmpty();
     }
 
     public Map<String, Object> getStaffDashboardStats() {
@@ -132,7 +161,7 @@ public class TicketService {
         Map<String, Object> stats = new HashMap<>();
         stats.put("totalRevenue", totalRevenue);
         stats.put("totalTicketsBooked", paidCount);
-        stats.put("occupancyRate", occupancyRate > 0 ? occupancyRate : 85.5);
+        stats.put("occupancyRate", occupancyRate);
         return stats;
     }
 }

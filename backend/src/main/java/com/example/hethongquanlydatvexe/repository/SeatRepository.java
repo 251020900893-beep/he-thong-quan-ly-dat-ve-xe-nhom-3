@@ -8,6 +8,7 @@ import java.util.List;
 public class SeatRepository {
 
     private static final String FILE_PATH = "data/seats.json";
+    private static final String DEFAULT_RESOURCE = "/default-data/seats.json";
 
     private final FileManager fileManager = new FileManager();
 
@@ -60,62 +61,60 @@ public class SeatRepository {
     }
 
     public void save(Seat seat) {
-        List<Seat> seats = findAll();
-
-        seats.add(seat);
-
-        fileManager.writeList(FILE_PATH, seats);
+        fileManager.<Seat, Void>updateList(FILE_PATH, FileManager.getListType(Seat.class), seats -> {
+            seats.add(seat);
+            return null;
+        });
     }
 
     public boolean update(Seat seat) {
-        List<Seat> seats = findAll();
-
-        for (int i = 0; i < seats.size(); i++) {
-            if (seats.get(i).getSeatId().equals(seat.getSeatId())) {
-                seats.set(i, seat);
-
-                fileManager.writeList(FILE_PATH, seats);
-
-                return true;
+        return fileManager.<Seat, Boolean>updateList(FILE_PATH, FileManager.getListType(Seat.class), seats -> {
+            for (int i = 0; i < seats.size(); i++) {
+                if (seats.get(i).getSeatId().equals(seat.getSeatId())) {
+                    seats.set(i, seat);
+                    return true;
+                }
             }
-        }
-
-        return false;
+            return false;
+        });
     }
 
     public boolean updateStatus(
             String seatId,
             String status
     ) {
-        List<Seat> seats = findAll();
-
-        for (Seat seat : seats) {
-            if (seat.getSeatId().equals(seatId)) {
-                seat.setStatus(status);
-
-                fileManager.writeList(FILE_PATH, seats);
-
-                return true;
+        return fileManager.<Seat, Boolean>updateList(FILE_PATH, FileManager.getListType(Seat.class), seats -> {
+            for (Seat seat : seats) {
+                if (seat.getSeatId().equals(seatId)) {
+                    seat.setStatus(status);
+                    return true;
+                }
             }
-        }
-
-        return false;
+            return false;
+        });
     }
 
     public boolean delete(String seatId) {
-        List<Seat> seats = findAll();
+        return fileManager.<Seat, Boolean>updateList(FILE_PATH, FileManager.getListType(Seat.class), seats ->
+                seats.removeIf(existing -> existing.getSeatId().equals(seatId)));
+    }
 
-        for (int i = 0; i < seats.size(); i++) {
-            if (seats.get(i).getSeatId().equals(seatId)) {
-                seats.remove(i);
+    public List<Seat> findDefaults() {
+        return fileManager.readResourceList(
+                DEFAULT_RESOURCE,
+                FileManager.getListType(Seat.class)
+        );
+    }
 
-                fileManager.writeList(FILE_PATH, seats);
+    public void restoreDefaultsWithTickets(List<Seat> seats, List<com.example.hethongquanlydatvexe.model.Ticket> tickets) {
+        fileManager.replaceTwoLists(
+                FILE_PATH, new ArrayList<>(seats),
+                "data/tickets.json", new ArrayList<>(tickets)
+        );
+    }
 
-                return true;
-            }
-        }
-
-        return false;
+    public void replaceAll(List<Seat> seats) {
+        fileManager.writeList(FILE_PATH, new ArrayList<>(seats));
     }
 
     public boolean exists(String seatId) {

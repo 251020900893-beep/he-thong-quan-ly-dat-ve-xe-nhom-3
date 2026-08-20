@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Flame, Clock, ArrowRight, ShieldCheck,
   Wifi, Zap, ChevronLeft, ChevronRight,
-  CheckCircle2, Sparkles, Radio, Award,
+  CheckCircle2, Radio, Award,
   Bus
 } from 'lucide-react';
 
@@ -85,8 +85,7 @@ interface DynamicHeroBannerProps {
 export const DynamicHeroBanner: React.FC<DynamicHeroBannerProps> = ({
                                                                       onSelectRouteFilter,
                                                                       onQuickBookClick,
-                                                                      onViewScheduleClick,
-                                                                      currentRouteFilter = 'ALL'
+                                                                      onViewScheduleClick
                                                                     }) => {
   const tickerMessages = [
     { icon: '🔥', text: 'Hơn 1.250 vé đã được đặt thành công trong hôm nay' },

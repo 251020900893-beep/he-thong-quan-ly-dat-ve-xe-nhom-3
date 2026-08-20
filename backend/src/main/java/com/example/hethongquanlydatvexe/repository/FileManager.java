@@ -6,8 +6,15 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +70,61 @@ public class FileManager {
     ) {
         synchronized (FILE_LOCK) {
             return readListUnsafe(filePath, type);
+        }
+    }
+
+    public <T> List<T> readResourceList(String resourcePath, Type type) {
+        synchronized (FILE_LOCK) {
+            try (InputStream stream = FileManager.class.getResourceAsStream(resourcePath)) {
+                if (stream == null) {
+                    throw new IllegalStateException("Không tìm thấy dữ liệu mặc định: " + resourcePath);
+                }
+                try (InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+                    List<T> data = gson.fromJson(reader, type);
+                    return data != null ? data : new ArrayList<>();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Lỗi đọc dữ liệu mặc định: " + resourcePath, e);
+            }
+        }
+    }
+
+    public <A, B> void replaceTwoLists(
+            String firstPath, List<A> firstData,
+            String secondPath, List<B> secondData) {
+        synchronized (FILE_LOCK) {
+            File firstFile = resolveFile(firstPath);
+            File secondFile = resolveFile(secondPath);
+            byte[] firstBackup = readExistingBytes(firstFile);
+            byte[] secondBackup = readExistingBytes(secondFile);
+            try {
+                writeListUnsafe(firstPath, firstData);
+                writeListUnsafe(secondPath, secondData);
+            } catch (RuntimeException failure) {
+                restoreBytes(firstFile, firstBackup);
+                restoreBytes(secondFile, secondBackup);
+                throw failure;
+            }
+        }
+    }
+
+    private byte[] readExistingBytes(File file) {
+        try {
+            return file.exists() ? Files.readAllBytes(file.toPath()) : null;
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi sao lưu file database: " + file, e);
+        }
+    }
+
+    private void restoreBytes(File file, byte[] backup) {
+        try {
+            if (backup == null) {
+                Files.deleteIfExists(file.toPath());
+            } else {
+                Files.write(file.toPath(), backup);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi rollback file database: " + file, e);
         }
     }
 
@@ -175,10 +237,21 @@ public class FileManager {
                 parent.mkdirs();
             }
 
-            try (FileWriter writer =
-                         new FileWriter(file)) {
-
+            Path target = file.toPath().toAbsolutePath();
+            Path directory = target.getParent();
+            Path temporary = Files.createTempFile(directory, file.getName(), ".tmp");
+            try (BufferedWriter writer = Files.newBufferedWriter(temporary, StandardCharsets.UTF_8)) {
                 gson.toJson(data, writer);
+            }
+
+            try {
+                Files.move(temporary, target,
+                        StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (AtomicMoveNotSupportedException ex) {
+                Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING);
+            } finally {
+                Files.deleteIfExists(temporary);
             }
 
         } catch (IOException e) {

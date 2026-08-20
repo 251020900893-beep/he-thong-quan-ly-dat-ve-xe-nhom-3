@@ -32,6 +32,8 @@ export interface Seat {
 
     holdingCustomerId?: string | null;
 
+    holdingTicketId?: string | null;
+
     bookedTicketId?: string | null;
 }
 
@@ -40,6 +42,7 @@ export interface BusTrip {
     tripId: string;
 
     tripCode?: string;
+    route?: string;
 
     departure?: string;
     destination?: string;

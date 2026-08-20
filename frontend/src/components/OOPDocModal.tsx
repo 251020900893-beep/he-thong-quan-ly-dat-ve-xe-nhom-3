@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     X, Layers, Monitor, Server, Database,
-    Code2, Clock, ShieldCheck
+    Code2, Clock
 } from 'lucide-react';
 
 interface OOPDocModalProps {

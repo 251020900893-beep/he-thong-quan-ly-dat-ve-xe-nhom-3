@@ -1,6 +1,8 @@
 package com.example.hethongquanlydatvexe.utils;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Collection;
+import com.example.hethongquanlydatvexe.model.Customer;
 
 public final class IdGenerator {
 
@@ -24,6 +26,17 @@ public final class IdGenerator {
                 "KH%03d",
                 CUSTOMER_SEQ.incrementAndGet()
         );
+    }
+
+    public static synchronized String nextCustomerId(Collection<Customer> existingCustomers) {
+        int maxExisting = existingCustomers == null ? 0 : existingCustomers.stream()
+                .map(Customer::getId)
+                .filter(id -> id != null && id.matches("KH\\d+"))
+                .mapToInt(id -> Integer.parseInt(id.substring(2)))
+                .max()
+                .orElse(0);
+        CUSTOMER_SEQ.updateAndGet(current -> Math.max(current, maxExisting));
+        return nextCustomerId();
     }
 
     public static String nextBookingId() {

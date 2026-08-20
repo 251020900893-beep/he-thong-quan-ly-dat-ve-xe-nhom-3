@@ -52,9 +52,9 @@ export const TripList: React.FC<TripListProps> = ({
 
         let matchRoute = true;
         if (routeFilter === 'HN_HP') {
-            matchRoute = dep.includes('ha noi') || dest.includes('hai phong');
+            matchRoute = dep.includes('ha noi') && dest.includes('hai phong');
         } else if (routeFilter === 'HP_HN') {
-            matchRoute = dep.includes('hai phong') || dest.includes('ha noi');
+            matchRoute = dep.includes('hai phong') && dest.includes('ha noi');
         }
 
         let matchType = true;
@@ -69,12 +69,17 @@ export const TripList: React.FC<TripListProps> = ({
 
     useEffect(() => {
         if (externalExpandedId === 'AUTO_FIRST' && filteredTrips.length > 0) {
-            const firstTripId = filteredTrips[0].id || filteredTrips[0].tripId;
+            const firstAvailableTrip = filteredTrips.find((trip) =>
+                Array.isArray(trip.seats)
+                && trip.seats.some((seat) => (seat?.status || '').toUpperCase() === 'AVAILABLE')
+            );
+            const targetTrip = firstAvailableTrip || filteredTrips[0];
+            const firstTripId = targetTrip.id || targetTrip.tripId;
             if (onExpandTrip && firstTripId) {
                 onExpandTrip(firstTripId);
             }
         }
-    }, [externalExpandedId, filteredTrips]);
+    }, [externalExpandedId, filteredTrips, onExpandTrip]);
 
     return (
         <div id="trip-list-section" className="space-y-4 font-sans">
@@ -188,7 +193,7 @@ export const TripList: React.FC<TripListProps> = ({
                                             </div>
                                             <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
                                                 <span className="flex items-center gap-1">
-                                                    <Bus className="w-3.5 h-3.5 text-blue-600" /> {trip.busType} ({trip.busPlate || (trip as any).licensePlate})
+                                                    <Bus className="w-3.5 h-3.5 text-blue-600" /> {trip.busType} ({trip.busPlate || trip.licensePlate})
                                                 </span>
                                                 <span>•</span>
                                                 <span className="flex items-center gap-1 text-emerald-600 font-bold">
@@ -231,6 +236,7 @@ export const TripList: React.FC<TripListProps> = ({
                                             selectedSeatNumber={null}
                                             onSelectSeat={(seat) => onSelectSeat(trip, seat)}
                                             busType={trip.busType}
+                                            basePrice={trip.basePrice}
                                         />
                                     </div>
                                 )}

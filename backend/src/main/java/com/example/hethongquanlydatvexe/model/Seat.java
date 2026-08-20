@@ -35,6 +35,11 @@ public class Seat {
     private String holdingCustomerId;
 
     /**
+     * Ticket duy nhất sở hữu lượt giữ hiện tại.
+     */
+    private String holdingTicketId;
+
+    /**
      * Ticket id sau khi thanh toán.
      */
     private String bookedTicketId;
@@ -96,6 +101,7 @@ public class Seat {
             this.status = "AVAILABLE";
             this.holdingExpiresAt = null;
             this.holdingCustomerId = null;
+            this.holdingTicketId = null;
             this.bookedTicketId = null;
 
             return true;
@@ -108,6 +114,7 @@ public class Seat {
                 this.status = "AVAILABLE";
                 this.holdingExpiresAt = null;
                 this.holdingCustomerId = null;
+                this.holdingTicketId = null;
                 this.bookedTicketId = null;
 
                 return true;
@@ -120,6 +127,7 @@ public class Seat {
             this.status = "AVAILABLE";
             this.holdingExpiresAt = null;
             this.holdingCustomerId = null;
+            this.holdingTicketId = null;
             this.bookedTicketId = null;
 
             return true;
@@ -133,6 +141,14 @@ public class Seat {
      */
     public String holdSeat(
             String customerId,
+            int durationSeconds
+    ) {
+        return holdSeat(customerId, null, durationSeconds);
+    }
+
+    public String holdSeat(
+            String customerId,
+            String ticketId,
             int durationSeconds
     ) {
 
@@ -157,13 +173,10 @@ public class Seat {
             );
         }
 
-        if ("HOLDING".equalsIgnoreCase(this.status)
-                && this.holdingCustomerId != null
-                && !this.holdingCustomerId.equals(customerId)) {
-
+        if ("HOLDING".equalsIgnoreCase(this.status)) {
             throw new BusinessRuleException(
                     "Ghế [" + this.seatNumber
-                            + "] hiện đang được một khách hàng khác giữ chỗ!"
+                            + "] hiện đang có một lượt giữ chỗ hợp lệ!"
             );
         }
 
@@ -173,6 +186,7 @@ public class Seat {
 
         this.status = "HOLDING";
         this.holdingCustomerId = customerId;
+        this.holdingTicketId = ticketId;
         this.holdingExpiresAt = expiresAt;
         this.bookedTicketId = null;
 
@@ -191,9 +205,23 @@ public class Seat {
         if ("HOLDING".equalsIgnoreCase(this.status)) {
             this.status = "AVAILABLE";
             this.holdingCustomerId = null;
+            this.holdingTicketId = null;
             this.holdingExpiresAt = null;
             this.bookedTicketId = null;
         }
+    }
+
+    public void releaseHold(String ticketId) {
+        if (!isHeldBy(ticketId)) {
+            throw new BusinessRuleException("Vé không sở hữu lượt giữ ghế hiện tại!");
+        }
+        releaseHold();
+    }
+
+    public boolean isHeldBy(String ticketId) {
+        return "HOLDING".equalsIgnoreCase(this.status)
+                && ticketId != null
+                && ticketId.equals(this.holdingTicketId);
     }
 
     /**
@@ -211,6 +239,16 @@ public class Seat {
         this.bookedTicketId = ticketId;
         this.holdingExpiresAt = null;
         this.holdingCustomerId = null;
+        this.holdingTicketId = null;
+    }
+
+    public void confirmBooking(String ticketId, String customerId) {
+        if (!isHeldBy(ticketId)
+                || customerId == null
+                || !customerId.equals(this.holdingCustomerId)) {
+            throw new BusinessRuleException("Vé không sở hữu lượt giữ ghế hiện tại!");
+        }
+        confirmBooking(ticketId);
     }
 
     // =========================================================
@@ -280,6 +318,14 @@ public class Seat {
 
     public void setHoldingCustomerId(String holdingCustomerId) {
         this.holdingCustomerId = holdingCustomerId;
+    }
+
+    public String getHoldingTicketId() {
+        return holdingTicketId;
+    }
+
+    public void setHoldingTicketId(String holdingTicketId) {
+        this.holdingTicketId = holdingTicketId;
     }
 
     public String getBookedTicketId() {

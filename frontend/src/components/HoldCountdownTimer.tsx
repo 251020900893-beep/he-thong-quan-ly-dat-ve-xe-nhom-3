@@ -46,6 +46,8 @@ export const HoldCountdownTimer: React.FC<HoldCountdownTimerProps> = ({
         }, 1000);
 
         return () => clearInterval(timer);
+    // Keep the interval lifecycle tied only to the hold deadline.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetValue]);
 
     const mins = Math.floor(secondsLeft / 60);

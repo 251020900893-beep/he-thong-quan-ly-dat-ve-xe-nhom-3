@@ -33,7 +33,11 @@ public class TicketHandler {
     }
 
     @PostMapping("/reset-data")
-    public ResponseEntity<ApiResponse<Void>> resetData() {
+    public ResponseEntity<ApiResponse<Void>> resetData(
+            @RequestHeader(value = "X-Reset-Confirm", required = false) String confirmation) {
+        if (!"RESET-DEMO-DATA".equals(confirmation)) {
+            throw new IllegalArgumentException("Thiếu xác nhận reset dữ liệu hợp lệ");
+        }
         ticketService.resetAllData();
         return ResponseEntity.ok(ApiResponse.ok(null, "Đã khôi phục dữ liệu gốc thành công!"));
     }
