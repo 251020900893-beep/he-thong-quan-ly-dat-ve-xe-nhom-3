@@ -52,9 +52,9 @@ export const TripList: React.FC<TripListProps> = ({
 
         let matchRoute = true;
         if (routeFilter === 'HN_HP') {
-            matchRoute = dep.includes('ha noi') || dest.includes('hai phong');
+            matchRoute = dep.includes('ha noi') && dest.includes('hai phong');
         } else if (routeFilter === 'HP_HN') {
-            matchRoute = dep.includes('hai phong') || dest.includes('ha noi');
+            matchRoute = dep.includes('hai phong') && dest.includes('ha noi');
         }
 
         let matchType = true;
@@ -69,7 +69,12 @@ export const TripList: React.FC<TripListProps> = ({
 
     useEffect(() => {
         if (externalExpandedId === 'AUTO_FIRST' && filteredTrips.length > 0) {
-            const firstTripId = filteredTrips[0].id || filteredTrips[0].tripId;
+            const firstAvailableTrip = filteredTrips.find((trip) =>
+                Array.isArray(trip.seats)
+                && trip.seats.some((seat) => (seat?.status || '').toUpperCase() === 'AVAILABLE')
+            );
+            const targetTrip = firstAvailableTrip || filteredTrips[0];
+            const firstTripId = targetTrip.id || targetTrip.tripId;
             if (onExpandTrip && firstTripId) {
                 onExpandTrip(firstTripId);
             }

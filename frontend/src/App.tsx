@@ -35,7 +35,7 @@ function MainApp() {
     const [staffAdminName, setStaffAdminName] = useState<string>('Nguyễn Quản Trị (Điều hành xe)');
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
-    const { activeHoldingTicket, refreshTrips } = useBooking();
+    const { trips, activeHoldingTicket, refreshTrips } = useBooking();
 
     // Tải danh sách vé từ Backend
     const loadTickets = async () => {
@@ -190,7 +190,11 @@ function MainApp() {
                 {activeTab === 'STAFF' && isStaffLoggedIn && (
                     <StaffDashboard
                         tickets={allTickets}
+                        totalSeats={trips.reduce((sum, trip) => sum + trip.totalSeats, 0)}
                         onViewTicketDetail={setViewingTicket}
+                        onDataRestored={async () => {
+                            await Promise.all([loadTickets(), refreshTrips()]);
+                        }}
                         onLogout={() => {
                             setIsStaffLoggedIn(false);
                             setActiveTab('BOOKING');

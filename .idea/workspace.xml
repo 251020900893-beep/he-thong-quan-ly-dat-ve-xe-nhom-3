@@ -5,17 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c255f94e-7a6d-43fa-bf5f-dc804f280a19" name="Changes" comment="tv3">
-      <change beforePath="$PROJECT_DIR$/frontend/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/customers.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/customers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/seats.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/seats.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/tickets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/tickets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/handler/BookingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/handler/BookingHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/handler/TicketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/handler/TicketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/model/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/model/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/SeatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/SeatRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/TicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/repository/TicketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/SeatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/SeatService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/service/TicketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/utils/IdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/hethongquanlydatvexe/utils/IdGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/example/hethongquanlydatvexe/service/BookingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/example/hethongquanlydatvexe/service/BookingServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DynamicHeroBanner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DynamicHeroBanner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/HoldCountdownTimer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HoldCountdownTimer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/OOPDocModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/OOPDocModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SeatItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SeatItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SeatMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SeatMap.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/TicketDetailModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TicketDetailModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/tripApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/tripApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/TripList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TripList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/context/BookingContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/context/BookingContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/StaffDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/StaffDashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/TicketLookupView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/TicketLookupView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -6,15 +6,19 @@ import {
 
 interface StaffDashboardProps {
     tickets: any[];
+    totalSeats: number;
     onViewTicketDetail?: (ticket: any) => void;
     onLogout?: () => void;
+    onDataRestored?: () => Promise<void>;
     currentAdminName?: string;
 }
 
 export const StaffDashboard: React.FC<StaffDashboardProps> = ({
                                                                   tickets,
+                                                                  totalSeats,
                                                                   onViewTicketDetail,
                                                                   onLogout,
+                                                                  onDataRestored,
                                                                   currentAdminName = 'Nguyễn Quản Trị (Điều hành xe)'
                                                               }) => {
     const [filterStatus, setFilterStatus] = useState<'ALL' | 'PAID' | 'HOLDING' | 'CANCELLED'>('ALL');
@@ -28,9 +32,16 @@ export const StaffDashboard: React.FC<StaffDashboardProps> = ({
         }
         setIsResetting(true);
         try {
-            await fetch('http://localhost:8080/tickets/reset-data', { method: 'POST' });
+            const response = await fetch('http://localhost:8080/tickets/reset-data', {
+                method: 'POST',
+                headers: { 'X-Reset-Confirm': 'RESET-DEMO-DATA' }
+            });
+            if (!response.ok) {
+                const payload = await response.json().catch(() => null);
+                throw new Error(payload?.message || 'Không thể khôi phục dữ liệu');
+            }
+            await onDataRestored?.();
             alert('Đã khôi phục dữ liệu gốc thành công!');
-            window.location.reload();
         } catch {
             alert('Lỗi khi kết nối Backend để khôi phục dữ liệu!');
         } finally {
@@ -167,7 +178,7 @@ export const StaffDashboard: React.FC<StaffDashboardProps> = ({
                             {paidTickets.length} vé
                         </div>
                         <div className="text-xs text-slate-400 mt-2">
-                            Tỷ lệ lấp đầy: <strong className="text-slate-700 font-bold">{Math.round((paidTickets.length / 80) * 100)}%</strong>
+                            Tỷ lệ lấp đầy: <strong className="text-slate-700 font-bold">{totalSeats > 0 ? Math.round((paidTickets.length / totalSeats) * 100) : 0}%</strong>
                         </div>
                     </div>
                     <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">

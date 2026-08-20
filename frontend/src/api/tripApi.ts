@@ -5,15 +5,12 @@ const BASE_URL = 'http://localhost:8080/api';
 export const tripApi = {
     // 1. Lấy danh sách chuyến xe
     async getTrips(): Promise<BusTrip[]> {
-        try {
-            const res = await fetch(`${BASE_URL}/trips`);
-            const json = await res.json();
-            const data = json.data || json;
-            return Array.isArray(data) ? data : [];
-        } catch (err) {
-            console.error('Lỗi API getTrips:', err);
-            return [];
-        }
+        const res = await fetch(`${BASE_URL}/trips`);
+        if (!res.ok) throw new Error(`Không thể tải chuyến xe (${res.status})`);
+        const json = await res.json();
+        const data = json.data || json;
+        if (!Array.isArray(data)) throw new Error('Dữ liệu chuyến xe không hợp lệ');
+        return data;
     },
 
     // 2. Giữ chỗ 3 phút (Bắt đúng message lỗi từ Backend)
@@ -48,11 +45,15 @@ export const tripApi = {
 
     // 3. Hủy giữ chỗ
     async cancelHold(ticketId: string): Promise<void> {
-        await fetch(`${BASE_URL}/booking/cancel-hold`, {
+        const res = await fetch(`${BASE_URL}/booking/cancel-hold`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ticketId })
-        }).catch(() => null);
+        });
+        const json = await res.json().catch(() => null);
+        if (!res.ok || json?.success === false) {
+            throw new Error(json?.message || 'Không thể hủy giữ chỗ');
+        }
     },
 
     // 4. Thanh toán

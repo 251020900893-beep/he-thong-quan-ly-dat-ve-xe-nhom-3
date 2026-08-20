@@ -32,6 +32,8 @@ export interface Seat {
 
     holdingCustomerId?: string | null;
 
+    holdingTicketId?: string | null;
+
     bookedTicketId?: string | null;
 }
 
