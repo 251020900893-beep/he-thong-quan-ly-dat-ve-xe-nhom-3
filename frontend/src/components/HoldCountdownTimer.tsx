@@ -16,7 +16,6 @@ export const HoldCountdownTimer: React.FC<HoldCountdownTimerProps> = ({
 
     const calculateRemaining = () => {
         if (!targetValue) {
-            // Mặc định đếm 3 phút (180s) nếu chưa nhận được thời gian từ BE
             return 180;
         }
         let targetMs = 0;
@@ -33,21 +32,35 @@ export const HoldCountdownTimer: React.FC<HoldCountdownTimerProps> = ({
     const [secondsLeft, setSecondsLeft] = useState<number>(calculateRemaining);
 
     useEffect(() => {
-        setSecondsLeft(calculateRemaining());
-        const timer = setInterval(() => {
-            setSecondsLeft(prev => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    onExpire();
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
+        const updateCountdown = () => {
+            const remaining = calculateRemaining();
+            setSecondsLeft(remaining);
 
-        return () => clearInterval(timer);
-    // Keep the interval lifecycle tied only to the hold deadline.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+            if (remaining <= 0) {
+                onExpire();
+            }
+        };
+
+        // Chạy cập nhật ngay lập tức
+        updateCountdown();
+
+        // Đồng bộ thời gian thực mỗi giây
+        const timer = setInterval(updateCountdown, 1000);
+
+        // Bắt sự kiện quay lại tab để cập nhật ngay lập tức mà không bị delay
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                updateCountdown();
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            clearInterval(timer);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetValue]);
 
     const mins = Math.floor(secondsLeft / 60);
