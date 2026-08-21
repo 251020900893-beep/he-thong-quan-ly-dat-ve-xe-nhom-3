@@ -8,14 +8,14 @@ interface TopHoldingBannerProps {
 }
 
 export const TopHoldingBanner: React.FC<TopHoldingBannerProps> = ({ onOpenPayment }) => {
-    const { activeHoldingTicket, releaseHold } = useBooking();
+    const { activeHoldingTicket, releaseHold, setActiveHoldingTicket } = useBooking();
 
     if (!activeHoldingTicket) return null;
 
     // Chuẩn hóa dữ liệu ghế và tuyến xe
     const seatName = activeHoldingTicket.seatNumber
         || (activeHoldingTicket.seat && activeHoldingTicket.seat.seatNumber)
-        || 'B1';
+        || 'A1';
 
     const routeName = activeHoldingTicket.route
         || (activeHoldingTicket.trip && activeHoldingTicket.trip.route)
@@ -23,9 +23,28 @@ export const TopHoldingBanner: React.FC<TopHoldingBannerProps> = ({ onOpenPaymen
         || activeHoldingTicket.tripCode
         || 'Hà Nội ➔ Hải Phòng';
 
-    const expireTime = activeHoldingTicket.expiresAt
-        || (activeHoldingTicket.seat && activeHoldingTicket.seat.holdingExpiresAt)
-        || Date.now() + 180 * 1000;
+    const expireTime = (activeHoldingTicket as any).holdExpiresAt
+        || (activeHoldingTicket as any).expiresAt
+        || (activeHoldingTicket.seat && (activeHoldingTicket.seat as any).holdingExpiresAt)
+        || (Date.now() + 180 * 1000);
+
+    // Khi hết giờ: Tự động gọi hàm giải phóng ghế và ẩn banner ngay lập tức
+    const handleTimeExpire = async () => {
+        try {
+            await releaseHold();
+        } finally {
+            setActiveHoldingTicket(null);
+        }
+    };
+
+    // Khi bấm nút X: Giải phóng ghế và tắt banner
+    const handleClose = async () => {
+        try {
+            await releaseHold();
+        } finally {
+            setActiveHoldingTicket(null);
+        }
+    };
 
     return (
         <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white px-4 py-2 shadow-md sticky top-0 z-40">
@@ -45,7 +64,7 @@ export const TopHoldingBanner: React.FC<TopHoldingBannerProps> = ({ onOpenPaymen
                 <div className="flex items-center gap-2">
                     <HoldCountdownTimer
                         expiresAt={expireTime}
-                        onExpire={releaseHold}
+                        onExpire={handleTimeExpire}
                     />
                     <button
                         type="button"
@@ -57,7 +76,7 @@ export const TopHoldingBanner: React.FC<TopHoldingBannerProps> = ({ onOpenPaymen
                     </button>
                     <button
                         type="button"
-                        onClick={releaseHold}
+                        onClick={handleClose}
                         className="p-1.5 hover:bg-black/10 rounded-lg text-white/80 hover:text-white transition-colors cursor-pointer"
                         title="Hủy giữ ghế"
                     >

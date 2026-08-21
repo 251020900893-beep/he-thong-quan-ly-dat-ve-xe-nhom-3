@@ -36,7 +36,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                                                               onSuccessPayment,
                                                               ticket: propTicket
                                                           }) => {
-    const { confirmPayment, releaseHold } = useBooking();
+    const { confirmPayment, releaseHold, activeHoldingTicket } = useBooking();
 
     const ticketData = propTicket || {
         ticketId: `VE-HPHN0800-B2-${Math.floor(1000 + Math.random() * 9000)}`,
@@ -57,11 +57,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     const customerPhone = ticketData.customer?.phone || ticketData.customerPhone || '0912345678';
     const price = ticketData.finalPrice || ticketData.price || finalPrice;
 
+    // Lấy mốc thời gian hết hạn cố định từ props hoặc Context chung
+    const targetExpireAt = holdExpireAt || (activeHoldingTicket as any)?.holdExpiresAt;
+
     const [timeLeft, setTimeLeft] = useState<number>(() => {
-        if (holdExpireAt) {
-            return Math.max(0, Math.floor((holdExpireAt - Date.now()) / 1000));
+        if (targetExpireAt) {
+            return Math.max(0, Math.floor((targetExpireAt - Date.now()) / 1000));
         }
-        return 177;
+        return 180;
     });
 
     const [mainMethod, setMainMethod] = useState<'BANKING' | 'E_WALLET' | 'CASH'>('E_WALLET');
@@ -70,18 +73,20 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    if (onExpire) onExpire();
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
+        if (!targetExpireAt) return;
+
+        const updateTimer = () => {
+            const remaining = Math.max(0, Math.floor((targetExpireAt - Date.now()) / 1000));
+            setTimeLeft(remaining);
+            if (remaining <= 0) {
+                if (onExpire) onExpire();
+            }
+        };
+
+        updateTimer();
+        const timer = setInterval(updateTimer, 1000);
         return () => clearInterval(timer);
-    }, [onExpire]);
+    }, [targetExpireAt, onExpire]);
 
     const mins = Math.floor(timeLeft / 60);
     const secs = timeLeft % 60;

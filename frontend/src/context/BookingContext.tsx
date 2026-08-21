@@ -6,12 +6,12 @@ import { tripApi } from '../api/tripApi';
 interface BookingContextType {
     trips: BusTrip[];
     loadingTrips: boolean;
-    activeHoldingTicket: Ticket | null;
+    activeHoldingTicket: (Ticket & { holdExpiresAt?: number }) | null;
     refreshTrips: () => Promise<void>;
     holdSeat: (tripId: string, seatNumber: string, customerData: any) => Promise<Ticket>;
     releaseHold: () => Promise<void>;
     confirmPayment: (ticketId: string, paymentMethod: any, extraData?: any) => Promise<Ticket>;
-    setActiveHoldingTicket: (ticket: Ticket | null) => void;
+    setActiveHoldingTicket: (ticket: (Ticket & { holdExpiresAt?: number }) | null) => void;
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -19,7 +19,7 @@ const BookingContext = createContext<BookingContextType | undefined>(undefined);
 export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [trips, setTrips] = useState<BusTrip[]>([]);
     const [loadingTrips, setLoadingTrips] = useState<boolean>(true);
-    const [activeHoldingTicket, setActiveHoldingTicket] = useState<Ticket | null>(null);
+    const [activeHoldingTicket, setActiveHoldingTicket] = useState<(Ticket & { holdExpiresAt?: number }) | null>(null);
     const latestTripsRequest = useRef(0);
 
     const refreshTrips = async () => {
@@ -27,7 +27,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
         try {
             const data = await tripApi.getTrips();
             if (requestId === latestTripsRequest.current && Array.isArray(data)) {
-                setTrips([...data]); // Tạo mảng tham chiếu mới để trigger React re-render
+                setTrips([...data]);
             }
         } catch (err) {
             console.error('Lỗi refresh danh sách chuyến:', err);
@@ -44,13 +44,32 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     }, []);
 
     const holdSeat = async (tripId: string, seatNumber: string, customerData: any) => {
+        // Tự động giải phóng ghế cũ nếu khách hàng đang giữ ghế trước đó
+        if (activeHoldingTicket) {
+            try {
+                const oldTicketId = (activeHoldingTicket as any).ticketId || activeHoldingTicket.id;
+                if (oldTicketId) {
+                    await tripApi.cancelHold(oldTicketId);
+                }
+            } catch (err) {
+                console.warn('Lỗi khi tự động hủy ghế cũ:', err);
+            }
+        }
+
         const ticket = await tripApi.holdBooking({
             tripId,
             seatNumber,
             ...customerData
         });
 
-        setActiveHoldingTicket(ticket);
+        // TÍNH MỐC HẾT HẠN CỐ ĐỊNH TẠI ĐÂY (Hiện tại + 3 phút)
+        const holdExpiresAt = Date.now() + 3 * 60 * 1000;
+        const ticketWithExpiry = {
+            ...ticket,
+            holdExpiresAt
+        };
+
+        setActiveHoldingTicket(ticketWithExpiry);
 
         // Optimistic UI Update: Khóa tạm thời ghế trên UI ngay lập tức
         setTrips(prevTrips =>
@@ -69,7 +88,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
         );
 
         await refreshTrips();
-        return ticket;
+        return ticketWithExpiry;
     };
 
     const releaseHold = async () => {
