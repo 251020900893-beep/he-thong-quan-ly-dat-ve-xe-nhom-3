@@ -131,4 +131,27 @@ public class BookingServiceTest {
 
         assertEquals("KH126", IdGenerator.nextCustomerId(existing));
     }
+    @Test
+    @DisplayName("Tình huống 7: Tự động hủy lượt giữ chỗ cũ khi khách đặt giữ ghế mới")
+    void testAutoReleaseOldHoldWhenBookingNewSeat() {
+        String customerPhone = "0912345678";
+
+        // 1. Khách giữ ghế B1 lần đầu
+        Seat seat1 = new Seat("CX001-B1", "CX001", "B1", "VIP", 50000.0, "AVAILABLE", null, null, null);
+        String ticketId1 = "TICKET-OLD";
+        seat1.holdSeat(customerPhone, ticketId1, 180);
+        assertEquals("HOLDING", seat1.getStatus(), "Ghế B1 ban đầu phải ở trạng thái HOLDING");
+
+        // 2. Khách đổi ý, giữ sang ghế B2 -> Ghế B1 cũ được giải phóng
+        seat1.releaseHold(ticketId1);
+        assertEquals("AVAILABLE", seat1.getStatus(), "Ghế B1 cũ phải được nhả về AVAILABLE ngay lập tức");
+
+        // 3. Ghế B2 mới chuyển sang HOLDING
+        Seat seat2 = new Seat("CX001-B2", "CX001", "B2", "VIP", 50000.0, "AVAILABLE", null, null, null);
+        String ticketId2 = "TICKET-NEW";
+        seat2.holdSeat(customerPhone, ticketId2, 180);
+
+        assertEquals("HOLDING", seat2.getStatus(), "Ghế B2 mới phải chuyển sang trạng thái HOLDING");
+        assertEquals(customerPhone, seat2.getHoldingCustomerId(), "Người giữ ghế B2 mới phải là khách hàng này");
+    }
 }

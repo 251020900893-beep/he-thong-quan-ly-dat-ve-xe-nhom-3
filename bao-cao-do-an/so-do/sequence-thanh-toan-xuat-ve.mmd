@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Khach as Khách hàng
+    participant Handler as BookingHandler
+    participant Service as BookingService
+    participant PM as PaymentMethod (Đa hình)
+    participant Repo as Repositories (JSON)
+
+    Khach->>Handler: POST /api/payment/process (ticketId, method)
+    Handler->>Service: processPayment(ticketId, method)
+    Note over Service: synchronized (BookingLock.LOCK)
+    Service->>Repo: Tìm Ticket theo ticketId
+    Service->>Service: Kiểm tra now < expiresAt (chưa quá 3 phút)
+    Service->>PM: paymentMethod.pay(price)
+    alt Thanh toán thành công (VietQR / MoMo / Tiền mặt)
+        Service->>Repo: Cập nhật ticket.status = PAID, seat.status = BOOKED
+        Repo-->>Service: Lưu thành công
+        Service-->>Handler: Trả về Ticket PAID
+        Handler-->>Khach: 200 OK (Xuất vé điện tử thành công)
+    else Thanh toán thất bại
+        Service-->>Handler: ném BusinessRuleException
+        Handler-->>Khach: 400 Bad Request (Vé vẫn giữ HOLDING để thử lại)
+    end

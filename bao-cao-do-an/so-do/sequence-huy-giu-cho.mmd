@@ -1,0 +1,16 @@
+sequenceDiagram
+    actor Khach as Khách hàng
+    participant Handler as BookingHandler
+    participant Service as BookingService
+    participant Seat as Thực thể Seat
+    participant Repo as Repositories (JSON)
+
+    Khach->>Handler: POST /api/booking/cancel-hold (ticketId)
+    Handler->>Service: cancelHold(ticketId)
+    Note over Service: synchronized (BookingLock.LOCK)
+    Service->>Seat: seat.releaseHold(ticketId)
+    Note over Seat: status = AVAILABLE, xóa metadata giữ
+    Service->>Repo: Cập nhật ticket.status = CANCELLED & lưu Seat
+    Repo-->>Service: Ghi JSON thành công
+    Service-->>Handler: Phản hồi thành công
+    Handler-->>Khach: 200 OK (Ghế đã được giải phóng cho người khác)
