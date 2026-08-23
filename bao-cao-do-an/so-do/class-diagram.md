@@ -1,0 +1,80 @@
+# Sơ đồ Lớp Hệ thống (Class Diagram)
+
+```mermaid
+classDiagram
+    class User {
+        <<abstract>>
+        #String id
+        #String fullName
+        #String phone
+        #String email
+        +getId() String
+        +getFullName() String
+    }
+    class Customer {
+        -String customerType
+        +getCustomerType() String
+    }
+    class Staff {
+        -String role
+        +getRole() String
+    }
+    User <|-- Customer
+    User <|-- Staff
+
+    class DiscountPolicy {
+        <<interface>>
+        +calculateDiscount(double basePrice) double
+    }
+    class VipDiscount { +calculateDiscount(double basePrice) double }
+    class MemberDiscount { +calculateDiscount(double basePrice) double }
+    class StandardDiscount { +calculateDiscount(double basePrice) double }
+    DiscountPolicy <|.. VipDiscount
+    DiscountPolicy <|.. MemberDiscount
+    DiscountPolicy <|.. StandardDiscount
+
+    class PaymentMethod {
+        <<interface>>
+        +pay(double amount) boolean
+    }
+    class BankingPayment { +pay(double amount) boolean }
+    class EWalletPayment { +pay(double amount) boolean }
+    class CashPayment { +pay(double amount) boolean }
+    PaymentMethod <|.. BankingPayment
+    PaymentMethod <|.. EWalletPayment
+    PaymentMethod <|.. CashPayment
+
+    class BusTrip {
+        -String tripId
+        -String departure
+        -String destination
+        -double basePrice
+        -int totalSeats
+        -List~Seat~ seats
+    }
+    class Seat {
+        -String seatId
+        -String seatNumber
+        -String seatType
+        -double surcharge
+        -String status
+        -String holdingExpiresAt
+        +holdSeat(customerId, ticketId, duration)
+        +releaseHold()
+        +confirmBooking()
+    }
+    class Ticket {
+        -String ticketId
+        -Customer customer
+        -BusTrip trip
+        -Seat seat
+        -double price
+        -String status
+        -String paymentMethod
+    }
+
+    Ticket "1" --> "1" Customer
+    Ticket "1" --> "1" BusTrip
+    Ticket "1" --> "1" Seat
+    BusTrip "1" *-- "*" Seat
+```

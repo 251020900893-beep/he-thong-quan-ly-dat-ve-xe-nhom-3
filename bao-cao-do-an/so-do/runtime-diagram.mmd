@@ -1,0 +1,18 @@
+flowchart TD
+    subgraph JVM_Memory [Bộ nhớ JVM Runtime - Thread-safe]
+        Lock["Khóa luồng tĩnh: synchronized (BookingLock.LOCK)"]
+        Cache["Bộ nhớ đệm Object Domain Model: BusTrip, Seat, Ticket"]
+        HoldTimer["Cơ chế Auto-Release Timer: checkAndAutoReleaseHold()"]
+        Lock --- Cache
+        Cache --- HoldTimer
+    end
+
+    subgraph OS_Disk_IO [Hệ điều hành & Lưu trữ Đĩa cứng]
+        TempFile["Ghi file tạm: .tmp (Atomic Write)"]
+        AtomicMove["Lệnh OS: StandardCopyOption.ATOMIC_MOVE"]
+        FinalJSON[("File chính: backend/data/*.json")]
+
+        TempFile --> AtomicMove --> FinalJSON
+    end
+
+    JVM_Memory ==>|Đồng bộ dữ liệu an toàn| OS_Disk_IO

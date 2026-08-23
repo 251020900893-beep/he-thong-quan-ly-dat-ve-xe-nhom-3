@@ -1,0 +1,32 @@
+flowchart TD
+    subgraph Frontend_Client [Frontend React 18 + Vite]
+        UI_Components["UI Components: SeatMap, BookingModal, StaffDashboard"]
+        API_Layer["tripApi.ts - Axios REST Client"]
+        UI_Components --> API_Layer
+    end
+
+    subgraph Backend_Server [Backend Spring Boot 3.3.x]
+        Handlers["Handler Layer: BookingHandler, TripHandler, SeatHandler, StaffHandler"]
+        Services["Service Layer: BookingService, TripService, SeatService, TicketService"]
+        OOP_Policies["Strategy Policies: DiscountPolicy, PaymentMethod"]
+        Repos["Repository Layer: BusTripRepo, SeatRepo, TicketRepo, CustomerRepo"]
+        FileManager["FileManager.java - Atomic File I/O Engine"]
+
+        Handlers --> Services
+        Services --> OOP_Policies
+        Services --> Repos
+        Repos --> FileManager
+    end
+
+    subgraph Data_Storage [JSON Data Files]
+        J1[("busTrips.json")]
+        J2[("seats.json")]
+        J3[("customers.json")]
+        J4[("tickets.json")]
+        FileManager --> J1
+        FileManager --> J2
+        FileManager --> J3
+        FileManager --> J4
+    end
+
+    API_Layer ==>|HTTP REST API JSON| Handlers
