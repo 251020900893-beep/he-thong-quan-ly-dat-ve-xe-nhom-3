@@ -12,7 +12,7 @@ interface SeatMapProps {
     basePrice?: number;
 }
 
-export const SeatMap: React.FC<SeatMapProps> = ({ seats = [], selectedSeatNumber, onSelectSeat, busType = '', basePrice }) => {
+export const SeatMap: React.FC<SeatMapProps> = ({ seats = [], selectedSeatNumber, onSelectSeat, busType = '', basePrice = 230000 }) => {
     const safeSeats = useMemo(() => {
         if (!Array.isArray(seats)) return [];
 
