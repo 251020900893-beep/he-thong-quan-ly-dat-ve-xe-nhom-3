@@ -236,7 +236,7 @@ export const TripList: React.FC<TripListProps> = ({
                                             selectedSeatNumber={null}
                                             onSelectSeat={(seat) => onSelectSeat(trip, seat)}
                                             busType={trip.busType}
-                                            basePrice={trip.basePrice}
+                                            basePrice={trip.basePrice || 230000}
                                         />
                                     </div>
                                 )}

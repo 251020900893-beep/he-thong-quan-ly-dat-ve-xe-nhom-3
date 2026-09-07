@@ -20,13 +20,11 @@ export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, o
     const isSelected = selected && isAvailable;
     const isVip = seat.seatType === 'VIP';
     const surchargeValue = Number(seat.surcharge);
-    const surcharge = Number.isFinite(surchargeValue) ? surchargeValue : 0;
+    const surcharge = Number.isFinite(surchargeValue) ? surchargeValue : (isVip ? 50000 : 0);
     const basePriceValue = Number(basePrice);
-    const validBasePrice = basePrice !== undefined && Number.isFinite(basePriceValue) ? basePriceValue : undefined;
-    const totalPrice = validBasePrice !== undefined ? validBasePrice + surcharge : undefined;
-    const priceLabel = totalPrice !== undefined
-        ? `${totalPrice.toLocaleString('vi-VN')} đ`
-        : `Phụ thu ${surcharge.toLocaleString('vi-VN')} đ`;
+    const validBasePrice = basePrice !== undefined && Number.isFinite(basePriceValue) ? basePriceValue : 230000;
+    const totalPrice = validBasePrice + surcharge;
+    const priceLabel = `${totalPrice.toLocaleString('vi-VN')} đ`;
 
     let seatStyle = isVip
         ? 'bg-gradient-to-b from-amber-950/40 to-slate-900 border-amber-500/70 text-amber-200 hover:border-amber-300'
@@ -68,12 +66,10 @@ export const SeatItem: React.FC<SeatItemProps> = ({ seat, selected, basePrice, o
                 <div className="font-black text-white text-xs mb-1.5">Ghế {seat.seatNumber}</div>
                 <div>Loại: {isVip ? 'Ghế VIP' : 'Ghế thường'}</div>
                 <div>Trạng thái: {statusLabels[seat.status]}</div>
-                {totalPrice !== undefined ? (
-                    <>
-                        <div>Giá vé: {totalPrice.toLocaleString('vi-VN')} đ</div>
-                        <div>Phụ thu: {surcharge.toLocaleString('vi-VN')} đ</div>
-                    </>
-                ) : <div>Phụ thu: {surcharge.toLocaleString('vi-VN')} đ</div>}
+                {/* 👉 Giá vé mặc định của chuyến xe (chưa cộng phụ thu) */}
+                <div>Giá vé: {validBasePrice.toLocaleString('vi-VN')} đ</div>
+                {/* 👉 Phụ thu riêng của loại ghế */}
+                <div>Phụ thu: {surcharge.toLocaleString('vi-VN')} đ</div>
                 <span className="absolute left-1/2 top-full -translate-x-1/2 border-8 border-transparent border-t-slate-950" />
             </div>
         </div>
