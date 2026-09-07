@@ -86,21 +86,24 @@ export const StaffDashboard: React.FC<StaffDashboardProps> = ({
         })
         .reduce((sum, t) => sum + getTicketPrice(t), 0);
 
-    // Lọc bảng vé
-    const filteredTickets = tickets.filter(t => {
-        if (filterStatus === 'PAID' && !isPaidStatus(t.status)) return false;
-        if (filterStatus === 'HOLDING' && !isHoldingStatus(t.status)) return false;
-        if (filterStatus === 'CANCELLED' && !isCancelledStatus(t.status)) return false;
+    // Lọc bảng vé và đảo ngược để vé mới nhất lên đầu bảng
+    const filteredTickets = tickets
+        .filter(t => {
+            if (filterStatus === 'PAID' && !isPaidStatus(t.status)) return false;
+            if (filterStatus === 'HOLDING' && !isHoldingStatus(t.status)) return false;
+            if (filterStatus === 'CANCELLED' && !isCancelledStatus(t.status)) return false;
 
-        if (searchQuery.trim()) {
-            const q = searchQuery.toLowerCase();
-            const tId = (t.ticketId || t.id || '').toLowerCase();
-            const cName = (t.customer?.fullName || t.customer?.name || t.customerName || '').toLowerCase();
-            const cPhone = (t.customer?.phone || t.customerPhone || '').toLowerCase();
-            return tId.includes(q) || cName.includes(q) || cPhone.includes(q);
-        }
-        return true;
-    });
+            if (searchQuery.trim()) {
+                const q = searchQuery.toLowerCase();
+                const tId = (t.ticketId || t.id || '').toLowerCase();
+                const cName = (t.customer?.fullName || t.customer?.name || t.customerName || '').toLowerCase();
+                const cPhone = (t.customer?.phone || t.customerPhone || '').toLowerCase();
+                return tId.includes(q) || cName.includes(q) || cPhone.includes(q);
+            }
+            return true;
+        })
+        .slice()
+        .reverse(); // 👈 Đưa vé mới nhất lên dòng đầu tiên của bảng
 
     return (
         <div className="space-y-6 max-w-6xl mx-auto py-4 font-sans">

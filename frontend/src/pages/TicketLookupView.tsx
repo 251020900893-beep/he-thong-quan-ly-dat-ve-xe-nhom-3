@@ -19,18 +19,21 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                                                                   }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
 
-    // Tìm kiếm vé linh hoạt bằng Mã vé (VE-...), Số điện thoại hoặc Tên hành khách
-    const filteredTickets = tickets.filter(ticket => {
-        const query = searchQuery.trim().toLowerCase();
-        if (!query) return true;
+    // Tìm kiếm vé linh hoạt và đảo ngược để vé mới nhất lên đầu
+    const filteredTickets = tickets
+        .filter(ticket => {
+            const query = searchQuery.trim().toLowerCase();
+            if (!query) return true;
 
-        const ticketId = (ticket.ticketId || ticket.id || '').toLowerCase();
-        const phone = (ticket.customerPhone || ticket.customer?.phone || '').toLowerCase();
-        const name = (ticket.customerName || ticket.customer?.fullName || ticket.customer?.name || '').toLowerCase();
-        const seat = (ticket.seatNumber || ticket.seat?.seatNumber || '').toLowerCase();
+            const ticketId = (ticket.ticketId || ticket.id || '').toLowerCase();
+            const phone = (ticket.customerPhone || ticket.customer?.phone || '').toLowerCase();
+            const name = (ticket.customerName || ticket.customer?.name || '').toLowerCase();
+            const seat = (ticket.seatNumber || ticket.seat?.seatNumber || '').toLowerCase();
 
-        return ticketId.includes(query) || phone.includes(query) || name.includes(query) || seat.includes(query);
-    });
+            return ticketId.includes(query) || phone.includes(query) || name.includes(query) || seat.includes(query);
+        })
+        .slice()
+        .reverse(); // 👈 Vé mới đặt ở cuối danh sách sẽ được lộn ngược lên đầu tiên
 
     return (
         <div className="space-y-6">
