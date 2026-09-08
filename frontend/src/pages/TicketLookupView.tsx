@@ -22,12 +22,21 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
     const [searchQuery, setSearchQuery] = useState<string>('');
     const trimmedQuery = searchQuery.trim().toLowerCase();
 
-    // Lấy thử 1 mã vé & 1 số điện thoại thực tế có trong hệ thống để làm nút bấm mẫu
+    // 🚀 Tự động lấy 2 số điện thoại KHÁC NHAU từ dữ liệu vé thực tế
+    const uniquePhones = Array.from(
+        new Set(
+            tickets
+                .map(t => t.customerPhone || t.customer?.phone)
+                .filter(Boolean)
+        )
+    );
+    const phone1 = uniquePhones[0] || '0987654321';
+    const phone2 = uniquePhones.find(p => p !== phone1) || '0912345678';
+
     const sampleTicket = tickets.length > 0 ? tickets[tickets.length - 1] : null;
     const sampleTicketId = sampleTicket?.ticketId || sampleTicket?.id || 'VE-0001';
-    const samplePhone = sampleTicket?.customerPhone || sampleTicket?.customer?.phone || '0987654321';
 
-    // 🚀 CHỈ LỌC KHI NGƯỜI DÙNG ĐÃ NHẬP TÌM KIẾM, CHƯA NHẬP THÌ DANH SÁCH LÀ RỖNG []
+    // Chỉ lọc khi người dùng đã nhập tìm kiếm
     const filteredTickets = trimmedQuery
         ? tickets
             .filter(ticket => {
@@ -39,7 +48,7 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                 return ticketId.includes(trimmedQuery) || phone.includes(trimmedQuery) || name.includes(trimmedQuery) || seat.includes(trimmedQuery);
             })
             .slice()
-            .reverse() // Vé mới đặt sẽ nổi lên đầu
+            .reverse()
         : [];
 
     return (
@@ -78,31 +87,31 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                             )}
                         </div>
 
-                        {/* 👉 CÁC NÚT BẤM NHẬP NHANH MẪU (CLICK VÀO LÀ TỰ ĐIỀN VÀ TÌM KIẾM) */}
+                        {/* 👉 CÁC NÚT BẤM NHẬP NHANH MẪU (2 SĐT KHÁC NHAU + 1 MÃ VÉ) */}
                         <div className="flex flex-wrap items-center gap-2 text-xs text-blue-100 pt-1">
                             <span className="flex items-center gap-1 font-semibold text-blue-200">
                                 <Sparkles className="w-3.5 h-3.5 text-amber-300" /> Thử tra cứu nhanh:
                             </span>
 
-                            {/* Nút nhập số điện thoại mẫu 1 */}
+                            {/* Nút SĐT 1 */}
                             <button
                                 type="button"
-                                onClick={() => setSearchQuery(samplePhone)}
+                                onClick={() => setSearchQuery(phone1)}
                                 className="px-2.5 py-1 rounded-xl bg-white/15 hover:bg-white/25 border border-white/20 text-white font-mono font-bold transition-all cursor-pointer backdrop-blur-sm shadow-xs active:scale-95"
                             >
-                                SĐT: {samplePhone}
+                                SĐT: {phone1}
                             </button>
 
-                            {/* Nút nhập số điện thoại mẫu 2 */}
+                            {/* Nút SĐT 2 (Luôn khác SĐT 1) */}
                             <button
                                 type="button"
-                                onClick={() => setSearchQuery('0987654321')}
+                                onClick={() => setSearchQuery(phone2)}
                                 className="px-2.5 py-1 rounded-xl bg-white/15 hover:bg-white/25 border border-white/20 text-white font-mono font-bold transition-all cursor-pointer backdrop-blur-sm shadow-xs active:scale-95"
                             >
-                                SĐT: 0987654321
+                                SĐT: {phone2}
                             </button>
 
-                            {/* Nút nhập Mã vé mẫu */}
+                            {/* Nút Mã vé mẫu */}
                             <button
                                 type="button"
                                 onClick={() => setSearchQuery(sampleTicketId)}
@@ -117,7 +126,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
 
             {/* Khu vực kết quả tra cứu */}
             {!trimmedQuery ? (
-                /* TRƯỜNG HỢP 1: CHƯA NHẬP GÌ -> HIỆN KHUNG HƯỚNG DẪN BẢO MẬT */
                 <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center max-w-xl mx-auto shadow-xs space-y-3">
                     <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto border border-blue-100 shadow-inner">
                         <TicketIcon className="w-8 h-8" />
@@ -133,7 +141,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                     </div>
                 </div>
             ) : filteredTickets.length === 0 ? (
-                /* TRƯỜNG HỢP 2: ĐÃ NHẬP TÌM KIẾM NHƯNG KHÔNG CÓ VÉ NÀO KHỚP */
                 <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-3 shadow-xs max-w-xl mx-auto">
                     <div className="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
                         <AlertCircle className="w-8 h-8" />
@@ -144,7 +151,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                     </p>
                 </div>
             ) : (
-                /* TRƯỜNG HỢP 3: TÌM THẤY VÉ -> HIỂN THỊ DANH SÁCH VÉ CỦA KHÁCH */
                 <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs px-1">
                         <span className="font-bold text-slate-700">
@@ -158,7 +164,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                             const ticketId = ticket.ticketId || ticket.id || 'VE-0001';
                             const tripCode = ticket.tripCode || ticket.trip?.tripCode || ticket.trip?.tripId || 'HN-HP-0600';
 
-                            // Xử lý tuyến đường linh hoạt
                             const dep = ticket.trip?.departureLocation || ticket.trip?.departure || 'Hà Nội';
                             const des = ticket.trip?.destinationLocation || ticket.trip?.destination || 'Hải Phòng';
                             const route = ticket.trip?.route || `${dep.split('(')[0].trim()} ➔ ${des.split('(')[0].trim()}`;
@@ -180,7 +185,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                                     className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4"
                                 >
                                     <div className="space-y-3">
-                                        {/* Header Thẻ Vé */}
                                         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                                             <div className="flex items-center gap-2">
                                                 <span className="font-mono font-black text-sm text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
@@ -204,7 +208,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                                             )}
                                         </div>
 
-                                        {/* Chi tiết lộ trình & Hành khách */}
                                         <div className="space-y-2 text-xs">
                                             <div className="flex items-center justify-between">
                                                 <span className="text-slate-500">Tuyến đường:</span>
@@ -233,7 +236,6 @@ export const TicketLookupView: React.FC<TicketLookupViewProps> = ({
                                         </div>
                                     </div>
 
-                                    {/* Nút Xem chi tiết vé điện tử */}
                                     <button
                                         type="button"
                                         onClick={() => onSelectTicket(ticket)}
